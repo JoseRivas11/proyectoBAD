@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a8ad3b9a7ee7411e835f957ffc58b4fc" Name="Diagram1" ZoomLevel="47">
+        <EntityTypeShape EntityType="proyectoBADModel.BITACORAINSTALACION" Width="1.5" PointX="12.75" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="proyectoBADModel.BITACORAMANTENIMIENTO" Width="1.5" PointX="13.5" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="proyectoBADModel.CATEGORIAEQUIPO" Width="1.5" PointX="5.25" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="proyectoBADModel.COMPRA" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="proyectoBADModel.EMPRESA" Width="1.5" PointX="6" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="proyectoBADModel.EQUIPO" Width="1.5" PointX="7.5" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="proyectoBADModel.ESPECIFICACIONEQUIPO" Width="1.5" PointX="5.25" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="proyectoBADModel.INSTITUCION" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="proyectoBADModel.LINECOMPRA" Width="1.5" PointX="5.25" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="proyectoBADModel.MENU" Width="1.5" PointX="0.5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="proyectoBADModel.PERFIL" Width="1.5" PointX="8.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="proyectoBADModel.PERFILPERMISO" Width="1.5" PointX="10.5" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="proyectoBADModel.PERFILUSUARIO" Width="1.5" PointX="10.5" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="proyectoBADModel.PROCINSTALACION" Width="1.5" PointX="10.5" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="proyectoBADModel.RECPASSWORD" Width="1.5" PointX="10.5" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="proyectoBADModel.TIPOEMPRESA" Width="1.5" PointX="3.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="proyectoBADModel.USUARIO" Width="1.5" PointX="8.25" PointY="8.125" IsExpanded="true" />
+        <AssociationConnector Association="proyectoBADModel.FK_BITACORA_TIENE_PROCINST" ManuallyRouted="false" />
+        <AssociationConnector Association="proyectoBADModel.FK_BITACORA_LE_REALIZ_EQUIPO" ManuallyRouted="false" />
+        <AssociationConnector Association="proyectoBADModel.FK_BITACORA_PUEDE_REA_USUARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="proyectoBADModel.FK_EQUIPO_POSEE_4_CATEGORI" ManuallyRouted="false" />
+        <AssociationConnector Association="proyectoBADModel.FK_COMPRA_RELATIONS_EMPRESA" ManuallyRouted="false" />
+        <AssociationConnector Association="proyectoBADModel.FK_COMPRA_RELATIONS_INSTITUC" ManuallyRouted="false" />
+        <AssociationConnector Association="proyectoBADModel.FK_LINECOMP_RELATIONS_COMPRA" ManuallyRouted="false" />
+        <AssociationConnector Association="proyectoBADModel.FK_EMPRESA_POSEE_TIPOEMPR" ManuallyRouted="false" />
+        <AssociationConnector Association="proyectoBADModel.FK_USUARIO_PERTENECE_EMPRESA" ManuallyRouted="false" />
+        <AssociationConnector Association="proyectoBADModel.FK_EQUIPO_TIENE_3_LINECOMP" ManuallyRouted="false" />
+        <AssociationConnector Association="proyectoBADModel.FK_EQUIPO_TIENE_5_ESPECIFI" ManuallyRouted="false" />
+        <AssociationConnector Association="proyectoBADModel.FK_PROCINST_LE_REALIZ_EQUIPO" ManuallyRouted="false" />
+        <AssociationConnector Association="proyectoBADModel.FK_USUARIO_RELATIONS_INSTITUC" ManuallyRouted="false" />
+        <AssociationConnector Association="proyectoBADModel.FK_MENU_SUBMENU_D_MENU" ManuallyRouted="false" />
+        <AssociationConnector Association="proyectoBADModel.FK_PERMISO" ManuallyRouted="false" />
+        <AssociationConnector Association="proyectoBADModel.FK_PERFIL" ManuallyRouted="false" />
+        <AssociationConnector Association="proyectoBADModel.FK_PERFIL_PERMIT" ManuallyRouted="false" />
+        <AssociationConnector Association="proyectoBADModel.FK_USUARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="proyectoBADModel.FK_PROCINST_PUEDE_REA_USUARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="proyectoBADModel.FK_RECPASSW_REALIZA_USUARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="proyectoBADModel.BLOQUEA" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

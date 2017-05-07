@@ -1,0 +1,1361 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="proyectoBADModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BITACORAINSTALACION">
+          <Key>
+            <PropertyRef Name="IDBITACORAINSTALACION" />
+          </Key>
+          <Property Name="IDBITACORAINSTALACION" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDPROCINSTALACION" Type="int" />
+          <Property Name="FECHABITACORAIN" Type="datetime" />
+          <Property Name="DETALLES" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="BITACORAMANTENIMIENTO">
+          <Key>
+            <PropertyRef Name="IDBITACORAMANTENIMIENTO" />
+          </Key>
+          <Property Name="IDBITACORAMANTENIMIENTO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDEQUIPO" Type="int" />
+          <Property Name="IDUSUARIO" Type="int" />
+          <Property Name="FECHABITACORAM" Type="datetime" />
+          <Property Name="TIPOMANTENIMIENTO" Type="int" />
+          <Property Name="HORAINI" Type="datetime" />
+          <Property Name="HORAFIN" Type="datetime" />
+          <Property Name="ESTADOINI" Type="varchar" MaxLength="250" />
+          <Property Name="ESTADOFIN" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="BLOQUEA">
+          <Key>
+            <PropertyRef Name="IDINST" />
+            <PropertyRef Name="IDEMP" />
+          </Key>
+          <Property Name="IDINST" Type="int" Nullable="false" />
+          <Property Name="IDEMP" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CATEGORIAEQUIPO">
+          <Key>
+            <PropertyRef Name="IDCATEQUIPO" />
+          </Key>
+          <Property Name="IDCATEQUIPO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CATEQUIPO" Type="varchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="COMPRA">
+          <Key>
+            <PropertyRef Name="IDCOMPRA" />
+          </Key>
+          <Property Name="IDCOMPRA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDINST" Type="int" />
+          <Property Name="IDEMP" Type="int" />
+          <Property Name="TOTALCOMPRA" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="FECHACOMPRA" Type="datetime" />
+          <Property Name="DEPSOLICITANTES" Type="varchar" MaxLength="25" />
+          <Property Name="TIPOCONTRATACION" Type="int" />
+        </EntityType>
+        <EntityType Name="EMPRESA">
+          <Key>
+            <PropertyRef Name="IDEMP" />
+          </Key>
+          <Property Name="IDEMP" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDTIPO" Type="int" />
+          <Property Name="NOMBREEMP" Type="varchar" MaxLength="50" />
+          <Property Name="DIRECCIONEMP" Type="varchar" MaxLength="100" />
+          <Property Name="TELEFONOCONTACTO" Type="varchar" MaxLength="10" />
+          <Property Name="EMAILCONTACTO" Type="varchar" MaxLength="25" />
+          <Property Name="NITEMP" Type="varchar" MaxLength="20" />
+          <Property Name="NOMBRERESPEMP" Type="varchar" MaxLength="50" />
+          <Property Name="DUIRESPEMP" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="EQUIPO">
+          <Key>
+            <PropertyRef Name="IDEQUIPO" />
+          </Key>
+          <Property Name="IDEQUIPO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDESEQUIPO" Type="int" />
+          <Property Name="IDCATEQUIPO" Type="int" />
+          <Property Name="IDLINEACOMPRA" Type="int" />
+          <Property Name="NUMEROSERIAL" Type="varchar" MaxLength="25" />
+          <Property Name="ANOGARANTIA" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="DETALLEGARANTIA" Type="varchar" MaxLength="250" />
+          <Property Name="ESTADOGARANTIA" Type="int" />
+        </EntityType>
+        <EntityType Name="ESPECIFICACIONEQUIPO">
+          <Key>
+            <PropertyRef Name="IDESEQUIPO" />
+          </Key>
+          <Property Name="IDESEQUIPO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MARCA" Type="varchar" MaxLength="25" />
+          <Property Name="MODELO" Type="varchar" MaxLength="25" />
+          <Property Name="POTENCIA" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="CAPACIDADBTU" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="CORRIENTEOPERACION" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="ANIOFABRICACION" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="INSTITUCION">
+          <Key>
+            <PropertyRef Name="IDINST" />
+          </Key>
+          <Property Name="IDINST" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TELEFONOINST" Type="varchar" MaxLength="10" />
+          <Property Name="NOMBREINST" Type="varchar" MaxLength="50" />
+          <Property Name="DIRECCIONINST" Type="varchar" MaxLength="150" />
+          <Property Name="COMPRAMAXPROVEEDOR" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="EMAILCONTACTOINST" Type="varchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="LINECOMPRA">
+          <Key>
+            <PropertyRef Name="IDLINEACOMPRA" />
+          </Key>
+          <Property Name="IDLINEACOMPRA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDCOMPRA" Type="int" />
+          <Property Name="CANTIDAD" Type="int" />
+          <Property Name="SUBTOTAL" Type="decimal" Precision="8" Scale="2" />
+        </EntityType>
+        <EntityType Name="MENU">
+          <Key>
+            <PropertyRef Name="IDENTMENU" />
+          </Key>
+          <Property Name="IDENTMENU" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MEN_IDENTMENU" Type="int" />
+          <Property Name="NOMBREOPCION" Type="varchar" MaxLength="25" />
+          <Property Name="RUTAACCESO" Type="varchar" MaxLength="100" />
+          <Property Name="PORDEFECTO" Type="int" />
+          <Property Name="ESTADO" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PERFIL">
+          <Key>
+            <PropertyRef Name="IDPERFIL" />
+          </Key>
+          <Property Name="IDPERFIL" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PERFIL" Type="varchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="PERFILPERMISO">
+          <Key>
+            <PropertyRef Name="IDPERFIL" />
+            <PropertyRef Name="IDMENU" />
+          </Key>
+          <Property Name="IDPERFIL" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDMENU" Type="int" Nullable="false" />
+          <Property Name="ESTADO" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PERFILUSUARIO">
+          <Key>
+            <PropertyRef Name="IDUSUARIO" />
+            <PropertyRef Name="IDPERFIL" />
+          </Key>
+          <Property Name="IDUSUARIO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDPERFIL" Type="int" Nullable="false" />
+          <Property Name="ESTADO" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PROCINSTALACION">
+          <Key>
+            <PropertyRef Name="IDPROCINSTALACION" />
+          </Key>
+          <Property Name="IDPROCINSTALACION" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDUSUARIO" Type="int" />
+          <Property Name="IDEQUIPO" Type="int" />
+          <Property Name="FECHAINICIO" Type="datetime" />
+          <Property Name="ESTADO" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RECPASSWORD">
+          <Key>
+            <PropertyRef Name="IDRECPASSWORD" />
+          </Key>
+          <Property Name="IDRECPASSWORD" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDUSUARIO" Type="int" />
+          <Property Name="FECHAFIN" Type="datetime" />
+          <Property Name="KEY" Type="varchar" MaxLength="50" />
+          <Property Name="ESTADO" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TIPOEMPRESA">
+          <Key>
+            <PropertyRef Name="IDTIPO" />
+          </Key>
+          <Property Name="IDTIPO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TIPO" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="IDUSUARIO" />
+          </Key>
+          <Property Name="IDUSUARIO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDEMP" Type="int" />
+          <Property Name="IDINST" Type="int" />
+          <Property Name="NOMBRECOMPLETO" Type="varchar" MaxLength="250" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="50" />
+          <Property Name="PASSWORD" Type="varchar" MaxLength="100" />
+          <Property Name="ESTADO" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_BITACORA_LE_REALIZ_EQUIPO">
+          <End Role="EQUIPO" Type="Self.EQUIPO" Multiplicity="0..1" />
+          <End Role="BITACORAMANTENIMIENTO" Type="Self.BITACORAMANTENIMIENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EQUIPO">
+              <PropertyRef Name="IDEQUIPO" />
+            </Principal>
+            <Dependent Role="BITACORAMANTENIMIENTO">
+              <PropertyRef Name="IDEQUIPO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BITACORA_PUEDE_REA_USUARIO">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="BITACORAMANTENIMIENTO" Type="Self.BITACORAMANTENIMIENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="IDUSUARIO" />
+            </Principal>
+            <Dependent Role="BITACORAMANTENIMIENTO">
+              <PropertyRef Name="IDUSUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BITACORA_TIENE_PROCINST">
+          <End Role="PROCINSTALACION" Type="Self.PROCINSTALACION" Multiplicity="0..1" />
+          <End Role="BITACORAINSTALACION" Type="Self.BITACORAINSTALACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROCINSTALACION">
+              <PropertyRef Name="IDPROCINSTALACION" />
+            </Principal>
+            <Dependent Role="BITACORAINSTALACION">
+              <PropertyRef Name="IDPROCINSTALACION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BLOQUEA_BLOQUEA_INSTITUC">
+          <End Role="INSTITUCION" Type="Self.INSTITUCION" Multiplicity="1" />
+          <End Role="BLOQUEA" Type="Self.BLOQUEA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INSTITUCION">
+              <PropertyRef Name="IDINST" />
+            </Principal>
+            <Dependent Role="BLOQUEA">
+              <PropertyRef Name="IDINST" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BLOQUEA_BLOQUEA2_EMPRESA">
+          <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="1" />
+          <End Role="BLOQUEA" Type="Self.BLOQUEA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESA">
+              <PropertyRef Name="IDEMP" />
+            </Principal>
+            <Dependent Role="BLOQUEA">
+              <PropertyRef Name="IDEMP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COMPRA_RELATIONS_EMPRESA">
+          <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="0..1" />
+          <End Role="COMPRA" Type="Self.COMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESA">
+              <PropertyRef Name="IDEMP" />
+            </Principal>
+            <Dependent Role="COMPRA">
+              <PropertyRef Name="IDEMP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COMPRA_RELATIONS_INSTITUC">
+          <End Role="INSTITUCION" Type="Self.INSTITUCION" Multiplicity="0..1" />
+          <End Role="COMPRA" Type="Self.COMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INSTITUCION">
+              <PropertyRef Name="IDINST" />
+            </Principal>
+            <Dependent Role="COMPRA">
+              <PropertyRef Name="IDINST" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMPRESA_POSEE_TIPOEMPR">
+          <End Role="TIPOEMPRESA" Type="Self.TIPOEMPRESA" Multiplicity="0..1" />
+          <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPOEMPRESA">
+              <PropertyRef Name="IDTIPO" />
+            </Principal>
+            <Dependent Role="EMPRESA">
+              <PropertyRef Name="IDTIPO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EQUIPO_POSEE_4_CATEGORI">
+          <End Role="CATEGORIAEQUIPO" Type="Self.CATEGORIAEQUIPO" Multiplicity="0..1" />
+          <End Role="EQUIPO" Type="Self.EQUIPO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIAEQUIPO">
+              <PropertyRef Name="IDCATEQUIPO" />
+            </Principal>
+            <Dependent Role="EQUIPO">
+              <PropertyRef Name="IDCATEQUIPO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EQUIPO_TIENE_3_LINECOMP">
+          <End Role="LINECOMPRA" Type="Self.LINECOMPRA" Multiplicity="0..1" />
+          <End Role="EQUIPO" Type="Self.EQUIPO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LINECOMPRA">
+              <PropertyRef Name="IDLINEACOMPRA" />
+            </Principal>
+            <Dependent Role="EQUIPO">
+              <PropertyRef Name="IDLINEACOMPRA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EQUIPO_TIENE_5_ESPECIFI">
+          <End Role="ESPECIFICACIONEQUIPO" Type="Self.ESPECIFICACIONEQUIPO" Multiplicity="0..1" />
+          <End Role="EQUIPO" Type="Self.EQUIPO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESPECIFICACIONEQUIPO">
+              <PropertyRef Name="IDESEQUIPO" />
+            </Principal>
+            <Dependent Role="EQUIPO">
+              <PropertyRef Name="IDESEQUIPO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LINECOMP_RELATIONS_COMPRA">
+          <End Role="COMPRA" Type="Self.COMPRA" Multiplicity="0..1" />
+          <End Role="LINECOMPRA" Type="Self.LINECOMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMPRA">
+              <PropertyRef Name="IDCOMPRA" />
+            </Principal>
+            <Dependent Role="LINECOMPRA">
+              <PropertyRef Name="IDCOMPRA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MENU_SUBMENU_D_MENU">
+          <End Role="MENU" Type="Self.MENU" Multiplicity="0..1" />
+          <End Role="MENU1" Type="Self.MENU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MENU">
+              <PropertyRef Name="IDENTMENU" />
+            </Principal>
+            <Dependent Role="MENU1">
+              <PropertyRef Name="MEN_IDENTMENU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PERFIL">
+          <End Role="PERFIL" Type="Self.PERFIL" Multiplicity="1" />
+          <End Role="PERFILUSUARIO" Type="Self.PERFILUSUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERFIL">
+              <PropertyRef Name="IDPERFIL" />
+            </Principal>
+            <Dependent Role="PERFILUSUARIO">
+              <PropertyRef Name="IDPERFIL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PERFIL_PERMIT">
+          <End Role="PERFIL" Type="Self.PERFIL" Multiplicity="1" />
+          <End Role="PERFILPERMISO" Type="Self.PERFILPERMISO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERFIL">
+              <PropertyRef Name="IDPERFIL" />
+            </Principal>
+            <Dependent Role="PERFILPERMISO">
+              <PropertyRef Name="IDPERFIL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PERMISO">
+          <End Role="MENU" Type="Self.MENU" Multiplicity="1" />
+          <End Role="PERFILPERMISO" Type="Self.PERFILPERMISO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MENU">
+              <PropertyRef Name="IDENTMENU" />
+            </Principal>
+            <Dependent Role="PERFILPERMISO">
+              <PropertyRef Name="IDMENU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PROCINST_LE_REALIZ_EQUIPO">
+          <End Role="EQUIPO" Type="Self.EQUIPO" Multiplicity="0..1" />
+          <End Role="PROCINSTALACION" Type="Self.PROCINSTALACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EQUIPO">
+              <PropertyRef Name="IDEQUIPO" />
+            </Principal>
+            <Dependent Role="PROCINSTALACION">
+              <PropertyRef Name="IDEQUIPO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PROCINST_PUEDE_REA_USUARIO">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="PROCINSTALACION" Type="Self.PROCINSTALACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="IDUSUARIO" />
+            </Principal>
+            <Dependent Role="PROCINSTALACION">
+              <PropertyRef Name="IDUSUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RECPASSW_REALIZA_USUARIO">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="RECPASSWORD" Type="Self.RECPASSWORD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="IDUSUARIO" />
+            </Principal>
+            <Dependent Role="RECPASSWORD">
+              <PropertyRef Name="IDUSUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USUARIO">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+          <End Role="PERFILUSUARIO" Type="Self.PERFILUSUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="IDUSUARIO" />
+            </Principal>
+            <Dependent Role="PERFILUSUARIO">
+              <PropertyRef Name="IDUSUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USUARIO_PERTENECE_EMPRESA">
+          <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="0..1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESA">
+              <PropertyRef Name="IDEMP" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="IDEMP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USUARIO_RELATIONS_INSTITUC">
+          <End Role="INSTITUCION" Type="Self.INSTITUCION" Multiplicity="0..1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INSTITUCION">
+              <PropertyRef Name="IDINST" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="IDINST" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="proyectoBADModelStoreContainer">
+          <EntitySet Name="BITACORAINSTALACION" EntityType="Self.BITACORAINSTALACION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BITACORAMANTENIMIENTO" EntityType="Self.BITACORAMANTENIMIENTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BLOQUEA" EntityType="Self.BLOQUEA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CATEGORIAEQUIPO" EntityType="Self.CATEGORIAEQUIPO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COMPRA" EntityType="Self.COMPRA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EMPRESA" EntityType="Self.EMPRESA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EQUIPO" EntityType="Self.EQUIPO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ESPECIFICACIONEQUIPO" EntityType="Self.ESPECIFICACIONEQUIPO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="INSTITUCION" EntityType="Self.INSTITUCION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LINECOMPRA" EntityType="Self.LINECOMPRA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MENU" EntityType="Self.MENU" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PERFIL" EntityType="Self.PERFIL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PERFILPERMISO" EntityType="Self.PERFILPERMISO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PERFILUSUARIO" EntityType="Self.PERFILUSUARIO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PROCINSTALACION" EntityType="Self.PROCINSTALACION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RECPASSWORD" EntityType="Self.RECPASSWORD" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TIPOEMPRESA" EntityType="Self.TIPOEMPRESA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BITACORA_LE_REALIZ_EQUIPO" Association="Self.FK_BITACORA_LE_REALIZ_EQUIPO">
+            <End Role="EQUIPO" EntitySet="EQUIPO" />
+            <End Role="BITACORAMANTENIMIENTO" EntitySet="BITACORAMANTENIMIENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BITACORA_PUEDE_REA_USUARIO" Association="Self.FK_BITACORA_PUEDE_REA_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="BITACORAMANTENIMIENTO" EntitySet="BITACORAMANTENIMIENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BITACORA_TIENE_PROCINST" Association="Self.FK_BITACORA_TIENE_PROCINST">
+            <End Role="PROCINSTALACION" EntitySet="PROCINSTALACION" />
+            <End Role="BITACORAINSTALACION" EntitySet="BITACORAINSTALACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BLOQUEA_BLOQUEA_INSTITUC" Association="Self.FK_BLOQUEA_BLOQUEA_INSTITUC">
+            <End Role="INSTITUCION" EntitySet="INSTITUCION" />
+            <End Role="BLOQUEA" EntitySet="BLOQUEA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BLOQUEA_BLOQUEA2_EMPRESA" Association="Self.FK_BLOQUEA_BLOQUEA2_EMPRESA">
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
+            <End Role="BLOQUEA" EntitySet="BLOQUEA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COMPRA_RELATIONS_EMPRESA" Association="Self.FK_COMPRA_RELATIONS_EMPRESA">
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
+            <End Role="COMPRA" EntitySet="COMPRA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COMPRA_RELATIONS_INSTITUC" Association="Self.FK_COMPRA_RELATIONS_INSTITUC">
+            <End Role="INSTITUCION" EntitySet="INSTITUCION" />
+            <End Role="COMPRA" EntitySet="COMPRA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMPRESA_POSEE_TIPOEMPR" Association="Self.FK_EMPRESA_POSEE_TIPOEMPR">
+            <End Role="TIPOEMPRESA" EntitySet="TIPOEMPRESA" />
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EQUIPO_POSEE_4_CATEGORI" Association="Self.FK_EQUIPO_POSEE_4_CATEGORI">
+            <End Role="CATEGORIAEQUIPO" EntitySet="CATEGORIAEQUIPO" />
+            <End Role="EQUIPO" EntitySet="EQUIPO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EQUIPO_TIENE_3_LINECOMP" Association="Self.FK_EQUIPO_TIENE_3_LINECOMP">
+            <End Role="LINECOMPRA" EntitySet="LINECOMPRA" />
+            <End Role="EQUIPO" EntitySet="EQUIPO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EQUIPO_TIENE_5_ESPECIFI" Association="Self.FK_EQUIPO_TIENE_5_ESPECIFI">
+            <End Role="ESPECIFICACIONEQUIPO" EntitySet="ESPECIFICACIONEQUIPO" />
+            <End Role="EQUIPO" EntitySet="EQUIPO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LINECOMP_RELATIONS_COMPRA" Association="Self.FK_LINECOMP_RELATIONS_COMPRA">
+            <End Role="COMPRA" EntitySet="COMPRA" />
+            <End Role="LINECOMPRA" EntitySet="LINECOMPRA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MENU_SUBMENU_D_MENU" Association="Self.FK_MENU_SUBMENU_D_MENU">
+            <End Role="MENU" EntitySet="MENU" />
+            <End Role="MENU1" EntitySet="MENU" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PERFIL" Association="Self.FK_PERFIL">
+            <End Role="PERFIL" EntitySet="PERFIL" />
+            <End Role="PERFILUSUARIO" EntitySet="PERFILUSUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PERFIL_PERMIT" Association="Self.FK_PERFIL_PERMIT">
+            <End Role="PERFIL" EntitySet="PERFIL" />
+            <End Role="PERFILPERMISO" EntitySet="PERFILPERMISO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PERMISO" Association="Self.FK_PERMISO">
+            <End Role="MENU" EntitySet="MENU" />
+            <End Role="PERFILPERMISO" EntitySet="PERFILPERMISO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PROCINST_LE_REALIZ_EQUIPO" Association="Self.FK_PROCINST_LE_REALIZ_EQUIPO">
+            <End Role="EQUIPO" EntitySet="EQUIPO" />
+            <End Role="PROCINSTALACION" EntitySet="PROCINSTALACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PROCINST_PUEDE_REA_USUARIO" Association="Self.FK_PROCINST_PUEDE_REA_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="PROCINSTALACION" EntitySet="PROCINSTALACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RECPASSW_REALIZA_USUARIO" Association="Self.FK_RECPASSW_REALIZA_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="RECPASSWORD" EntitySet="RECPASSWORD" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USUARIO" Association="Self.FK_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="PERFILUSUARIO" EntitySet="PERFILUSUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USUARIO_PERTENECE_EMPRESA" Association="Self.FK_USUARIO_PERTENECE_EMPRESA">
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USUARIO_RELATIONS_INSTITUC" Association="Self.FK_USUARIO_RELATIONS_INSTITUC">
+            <End Role="INSTITUCION" EntitySet="INSTITUCION" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="proyectoBADModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BITACORAINSTALACION">
+          <Key>
+            <PropertyRef Name="IDBITACORAINSTALACION" />
+          </Key>
+          <Property Name="IDBITACORAINSTALACION" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDPROCINSTALACION" Type="Int32" />
+          <Property Name="FECHABITACORAIN" Type="DateTime" Precision="3" />
+          <Property Name="DETALLES" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PROCINSTALACION" Relationship="Self.FK_BITACORA_TIENE_PROCINST" FromRole="BITACORAINSTALACION" ToRole="PROCINSTALACION" />
+        </EntityType>
+        <EntityType Name="BITACORAMANTENIMIENTO">
+          <Key>
+            <PropertyRef Name="IDBITACORAMANTENIMIENTO" />
+          </Key>
+          <Property Name="IDBITACORAMANTENIMIENTO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDEQUIPO" Type="Int32" />
+          <Property Name="IDUSUARIO" Type="Int32" />
+          <Property Name="FECHABITACORAM" Type="DateTime" Precision="3" />
+          <Property Name="TIPOMANTENIMIENTO" Type="Int32" />
+          <Property Name="HORAINI" Type="DateTime" Precision="3" />
+          <Property Name="HORAFIN" Type="DateTime" Precision="3" />
+          <Property Name="ESTADOINI" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ESTADOFIN" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="EQUIPO" Relationship="Self.FK_BITACORA_LE_REALIZ_EQUIPO" FromRole="BITACORAMANTENIMIENTO" ToRole="EQUIPO" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.FK_BITACORA_PUEDE_REA_USUARIO" FromRole="BITACORAMANTENIMIENTO" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="CATEGORIAEQUIPO">
+          <Key>
+            <PropertyRef Name="IDCATEQUIPO" />
+          </Key>
+          <Property Name="IDCATEQUIPO" Type="Int32" Nullable="false" />
+          <Property Name="CATEQUIPO" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="EQUIPOes" Relationship="Self.FK_EQUIPO_POSEE_4_CATEGORI" FromRole="CATEGORIAEQUIPO" ToRole="EQUIPO" />
+        </EntityType>
+        <EntityType Name="COMPRA">
+          <Key>
+            <PropertyRef Name="IDCOMPRA" />
+          </Key>
+          <Property Name="IDCOMPRA" Type="Int32" Nullable="false" />
+          <Property Name="IDINST" Type="Int32" />
+          <Property Name="IDEMP" Type="Int32" />
+          <Property Name="TOTALCOMPRA" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="FECHACOMPRA" Type="DateTime" Precision="3" />
+          <Property Name="DEPSOLICITANTES" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="TIPOCONTRATACION" Type="Int32" />
+          <NavigationProperty Name="EMPRESA" Relationship="Self.FK_COMPRA_RELATIONS_EMPRESA" FromRole="COMPRA" ToRole="EMPRESA" />
+          <NavigationProperty Name="INSTITUCION" Relationship="Self.FK_COMPRA_RELATIONS_INSTITUC" FromRole="COMPRA" ToRole="INSTITUCION" />
+          <NavigationProperty Name="LINECOMPRAs" Relationship="Self.FK_LINECOMP_RELATIONS_COMPRA" FromRole="COMPRA" ToRole="LINECOMPRA" />
+        </EntityType>
+        <EntityType Name="EMPRESA">
+          <Key>
+            <PropertyRef Name="IDEMP" />
+          </Key>
+          <Property Name="IDEMP" Type="Int32" Nullable="false" />
+          <Property Name="IDTIPO" Type="Int32" />
+          <Property Name="NOMBREEMP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DIRECCIONEMP" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TELEFONOCONTACTO" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="EMAILCONTACTO" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="NITEMP" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NOMBRERESPEMP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DUIRESPEMP" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="COMPRAs" Relationship="Self.FK_COMPRA_RELATIONS_EMPRESA" FromRole="EMPRESA" ToRole="COMPRA" />
+          <NavigationProperty Name="TIPOEMPRESA" Relationship="Self.FK_EMPRESA_POSEE_TIPOEMPR" FromRole="EMPRESA" ToRole="TIPOEMPRESA" />
+          <NavigationProperty Name="USUARIOs" Relationship="Self.FK_USUARIO_PERTENECE_EMPRESA" FromRole="EMPRESA" ToRole="USUARIO" />
+          <NavigationProperty Name="INSTITUCIONs" Relationship="Self.BLOQUEA" FromRole="EMPRESA" ToRole="INSTITUCION" />
+        </EntityType>
+        <EntityType Name="EQUIPO">
+          <Key>
+            <PropertyRef Name="IDEQUIPO" />
+          </Key>
+          <Property Name="IDEQUIPO" Type="Int32" Nullable="false" />
+          <Property Name="IDESEQUIPO" Type="Int32" />
+          <Property Name="IDCATEQUIPO" Type="Int32" />
+          <Property Name="IDLINEACOMPRA" Type="Int32" />
+          <Property Name="NUMEROSERIAL" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="ANOGARANTIA" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="DETALLEGARANTIA" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ESTADOGARANTIA" Type="Int32" />
+          <NavigationProperty Name="BITACORAMANTENIMIENTOes" Relationship="Self.FK_BITACORA_LE_REALIZ_EQUIPO" FromRole="EQUIPO" ToRole="BITACORAMANTENIMIENTO" />
+          <NavigationProperty Name="CATEGORIAEQUIPO" Relationship="Self.FK_EQUIPO_POSEE_4_CATEGORI" FromRole="EQUIPO" ToRole="CATEGORIAEQUIPO" />
+          <NavigationProperty Name="LINECOMPRA" Relationship="Self.FK_EQUIPO_TIENE_3_LINECOMP" FromRole="EQUIPO" ToRole="LINECOMPRA" />
+          <NavigationProperty Name="ESPECIFICACIONEQUIPO" Relationship="Self.FK_EQUIPO_TIENE_5_ESPECIFI" FromRole="EQUIPO" ToRole="ESPECIFICACIONEQUIPO" />
+          <NavigationProperty Name="PROCINSTALACIONs" Relationship="Self.FK_PROCINST_LE_REALIZ_EQUIPO" FromRole="EQUIPO" ToRole="PROCINSTALACION" />
+        </EntityType>
+        <EntityType Name="ESPECIFICACIONEQUIPO">
+          <Key>
+            <PropertyRef Name="IDESEQUIPO" />
+          </Key>
+          <Property Name="IDESEQUIPO" Type="Int32" Nullable="false" />
+          <Property Name="MARCA" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="MODELO" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="POTENCIA" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="CAPACIDADBTU" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="CORRIENTEOPERACION" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="ANIOFABRICACION" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="EQUIPOes" Relationship="Self.FK_EQUIPO_TIENE_5_ESPECIFI" FromRole="ESPECIFICACIONEQUIPO" ToRole="EQUIPO" />
+        </EntityType>
+        <EntityType Name="INSTITUCION">
+          <Key>
+            <PropertyRef Name="IDINST" />
+          </Key>
+          <Property Name="IDINST" Type="Int32" Nullable="false" />
+          <Property Name="TELEFONOINST" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="NOMBREINST" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DIRECCIONINST" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="COMPRAMAXPROVEEDOR" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="EMAILCONTACTOINST" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="COMPRAs" Relationship="Self.FK_COMPRA_RELATIONS_INSTITUC" FromRole="INSTITUCION" ToRole="COMPRA" />
+          <NavigationProperty Name="USUARIOs" Relationship="Self.FK_USUARIO_RELATIONS_INSTITUC" FromRole="INSTITUCION" ToRole="USUARIO" />
+          <NavigationProperty Name="EMPRESAs" Relationship="Self.BLOQUEA" FromRole="INSTITUCION" ToRole="EMPRESA" />
+        </EntityType>
+        <EntityType Name="LINECOMPRA">
+          <Key>
+            <PropertyRef Name="IDLINEACOMPRA" />
+          </Key>
+          <Property Name="IDLINEACOMPRA" Type="Int32" Nullable="false" />
+          <Property Name="IDCOMPRA" Type="Int32" />
+          <Property Name="CANTIDAD" Type="Int32" />
+          <Property Name="SUBTOTAL" Type="Decimal" Precision="8" Scale="2" />
+          <NavigationProperty Name="COMPRA" Relationship="Self.FK_LINECOMP_RELATIONS_COMPRA" FromRole="LINECOMPRA" ToRole="COMPRA" />
+          <NavigationProperty Name="EQUIPOes" Relationship="Self.FK_EQUIPO_TIENE_3_LINECOMP" FromRole="LINECOMPRA" ToRole="EQUIPO" />
+        </EntityType>
+        <EntityType Name="MENU">
+          <Key>
+            <PropertyRef Name="IDENTMENU" />
+          </Key>
+          <Property Name="IDENTMENU" Type="Int32" Nullable="false" />
+          <Property Name="MEN_IDENTMENU" Type="Int32" />
+          <Property Name="NOMBREOPCION" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="RUTAACCESO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PORDEFECTO" Type="Int32" />
+          <Property Name="ESTADO" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="MENU1" Relationship="Self.FK_MENU_SUBMENU_D_MENU" FromRole="MENU" ToRole="MENU1" />
+          <NavigationProperty Name="MENU2" Relationship="Self.FK_MENU_SUBMENU_D_MENU" FromRole="MENU1" ToRole="MENU" />
+          <NavigationProperty Name="PERFILPERMISOes" Relationship="Self.FK_PERMISO" FromRole="MENU" ToRole="PERFILPERMISO" />
+        </EntityType>
+        <EntityType Name="PERFIL">
+          <Key>
+            <PropertyRef Name="IDPERFIL" />
+          </Key>
+          <Property Name="IDPERFIL" Type="Int32" Nullable="false" />
+          <Property Name="PERFIL1" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PERFILUSUARIOs" Relationship="Self.FK_PERFIL" FromRole="PERFIL" ToRole="PERFILUSUARIO" />
+          <NavigationProperty Name="PERFILPERMISOes" Relationship="Self.FK_PERFIL_PERMIT" FromRole="PERFIL" ToRole="PERFILPERMISO" />
+        </EntityType>
+        <EntityType Name="PERFILPERMISO">
+          <Key>
+            <PropertyRef Name="IDPERFIL" />
+            <PropertyRef Name="IDMENU" />
+          </Key>
+          <Property Name="IDPERFIL" Type="Int32" Nullable="false" />
+          <Property Name="IDMENU" Type="Int32" Nullable="false" />
+          <Property Name="ESTADO" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="MENU" Relationship="Self.FK_PERMISO" FromRole="PERFILPERMISO" ToRole="MENU" />
+          <NavigationProperty Name="PERFIL" Relationship="Self.FK_PERFIL_PERMIT" FromRole="PERFILPERMISO" ToRole="PERFIL" />
+        </EntityType>
+        <EntityType Name="PERFILUSUARIO">
+          <Key>
+            <PropertyRef Name="IDUSUARIO" />
+            <PropertyRef Name="IDPERFIL" />
+          </Key>
+          <Property Name="IDUSUARIO" Type="Int32" Nullable="false" />
+          <Property Name="IDPERFIL" Type="Int32" Nullable="false" />
+          <Property Name="ESTADO" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="PERFIL" Relationship="Self.FK_PERFIL" FromRole="PERFILUSUARIO" ToRole="PERFIL" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.FK_USUARIO" FromRole="PERFILUSUARIO" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="PROCINSTALACION">
+          <Key>
+            <PropertyRef Name="IDPROCINSTALACION" />
+          </Key>
+          <Property Name="IDPROCINSTALACION" Type="Int32" Nullable="false" />
+          <Property Name="IDUSUARIO" Type="Int32" />
+          <Property Name="IDEQUIPO" Type="Int32" />
+          <Property Name="FECHAINICIO" Type="DateTime" Precision="3" />
+          <Property Name="ESTADO" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="BITACORAINSTALACIONs" Relationship="Self.FK_BITACORA_TIENE_PROCINST" FromRole="PROCINSTALACION" ToRole="BITACORAINSTALACION" />
+          <NavigationProperty Name="EQUIPO" Relationship="Self.FK_PROCINST_LE_REALIZ_EQUIPO" FromRole="PROCINSTALACION" ToRole="EQUIPO" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.FK_PROCINST_PUEDE_REA_USUARIO" FromRole="PROCINSTALACION" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="RECPASSWORD">
+          <Key>
+            <PropertyRef Name="IDRECPASSWORD" />
+          </Key>
+          <Property Name="IDRECPASSWORD" Type="Int32" Nullable="false" />
+          <Property Name="IDUSUARIO" Type="Int32" />
+          <Property Name="FECHAFIN" Type="DateTime" Precision="3" />
+          <Property Name="KEY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ESTADO" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.FK_RECPASSW_REALIZA_USUARIO" FromRole="RECPASSWORD" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="TIPOEMPRESA">
+          <Key>
+            <PropertyRef Name="IDTIPO" />
+          </Key>
+          <Property Name="IDTIPO" Type="Int32" Nullable="false" />
+          <Property Name="TIPO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="EMPRESAs" Relationship="Self.FK_EMPRESA_POSEE_TIPOEMPR" FromRole="TIPOEMPRESA" ToRole="EMPRESA" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="IDUSUARIO" />
+          </Key>
+          <Property Name="IDUSUARIO" Type="Int32" Nullable="false" />
+          <Property Name="IDEMP" Type="Int32" />
+          <Property Name="IDINST" Type="Int32" />
+          <Property Name="NOMBRECOMPLETO" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PASSWORD" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ESTADO" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="BITACORAMANTENIMIENTOes" Relationship="Self.FK_BITACORA_PUEDE_REA_USUARIO" FromRole="USUARIO" ToRole="BITACORAMANTENIMIENTO" />
+          <NavigationProperty Name="EMPRESA" Relationship="Self.FK_USUARIO_PERTENECE_EMPRESA" FromRole="USUARIO" ToRole="EMPRESA" />
+          <NavigationProperty Name="INSTITUCION" Relationship="Self.FK_USUARIO_RELATIONS_INSTITUC" FromRole="USUARIO" ToRole="INSTITUCION" />
+          <NavigationProperty Name="PERFILUSUARIOs" Relationship="Self.FK_USUARIO" FromRole="USUARIO" ToRole="PERFILUSUARIO" />
+          <NavigationProperty Name="PROCINSTALACIONs" Relationship="Self.FK_PROCINST_PUEDE_REA_USUARIO" FromRole="USUARIO" ToRole="PROCINSTALACION" />
+          <NavigationProperty Name="RECPASSWORDs" Relationship="Self.FK_RECPASSW_REALIZA_USUARIO" FromRole="USUARIO" ToRole="RECPASSWORD" />
+        </EntityType>
+        <Association Name="FK_BITACORA_TIENE_PROCINST">
+          <End Role="PROCINSTALACION" Type="Self.PROCINSTALACION" Multiplicity="0..1" />
+          <End Role="BITACORAINSTALACION" Type="Self.BITACORAINSTALACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROCINSTALACION">
+              <PropertyRef Name="IDPROCINSTALACION" />
+            </Principal>
+            <Dependent Role="BITACORAINSTALACION">
+              <PropertyRef Name="IDPROCINSTALACION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BITACORA_LE_REALIZ_EQUIPO">
+          <End Role="EQUIPO" Type="Self.EQUIPO" Multiplicity="0..1" />
+          <End Role="BITACORAMANTENIMIENTO" Type="Self.BITACORAMANTENIMIENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EQUIPO">
+              <PropertyRef Name="IDEQUIPO" />
+            </Principal>
+            <Dependent Role="BITACORAMANTENIMIENTO">
+              <PropertyRef Name="IDEQUIPO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BITACORA_PUEDE_REA_USUARIO">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="BITACORAMANTENIMIENTO" Type="Self.BITACORAMANTENIMIENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="IDUSUARIO" />
+            </Principal>
+            <Dependent Role="BITACORAMANTENIMIENTO">
+              <PropertyRef Name="IDUSUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EQUIPO_POSEE_4_CATEGORI">
+          <End Role="CATEGORIAEQUIPO" Type="Self.CATEGORIAEQUIPO" Multiplicity="0..1" />
+          <End Role="EQUIPO" Type="Self.EQUIPO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIAEQUIPO">
+              <PropertyRef Name="IDCATEQUIPO" />
+            </Principal>
+            <Dependent Role="EQUIPO">
+              <PropertyRef Name="IDCATEQUIPO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COMPRA_RELATIONS_EMPRESA">
+          <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="0..1" />
+          <End Role="COMPRA" Type="Self.COMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESA">
+              <PropertyRef Name="IDEMP" />
+            </Principal>
+            <Dependent Role="COMPRA">
+              <PropertyRef Name="IDEMP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COMPRA_RELATIONS_INSTITUC">
+          <End Role="INSTITUCION" Type="Self.INSTITUCION" Multiplicity="0..1" />
+          <End Role="COMPRA" Type="Self.COMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INSTITUCION">
+              <PropertyRef Name="IDINST" />
+            </Principal>
+            <Dependent Role="COMPRA">
+              <PropertyRef Name="IDINST" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LINECOMP_RELATIONS_COMPRA">
+          <End Role="COMPRA" Type="Self.COMPRA" Multiplicity="0..1" />
+          <End Role="LINECOMPRA" Type="Self.LINECOMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMPRA">
+              <PropertyRef Name="IDCOMPRA" />
+            </Principal>
+            <Dependent Role="LINECOMPRA">
+              <PropertyRef Name="IDCOMPRA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMPRESA_POSEE_TIPOEMPR">
+          <End Role="TIPOEMPRESA" Type="Self.TIPOEMPRESA" Multiplicity="0..1" />
+          <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPOEMPRESA">
+              <PropertyRef Name="IDTIPO" />
+            </Principal>
+            <Dependent Role="EMPRESA">
+              <PropertyRef Name="IDTIPO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USUARIO_PERTENECE_EMPRESA">
+          <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="0..1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESA">
+              <PropertyRef Name="IDEMP" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="IDEMP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EQUIPO_TIENE_3_LINECOMP">
+          <End Role="LINECOMPRA" Type="Self.LINECOMPRA" Multiplicity="0..1" />
+          <End Role="EQUIPO" Type="Self.EQUIPO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LINECOMPRA">
+              <PropertyRef Name="IDLINEACOMPRA" />
+            </Principal>
+            <Dependent Role="EQUIPO">
+              <PropertyRef Name="IDLINEACOMPRA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EQUIPO_TIENE_5_ESPECIFI">
+          <End Role="ESPECIFICACIONEQUIPO" Type="Self.ESPECIFICACIONEQUIPO" Multiplicity="0..1" />
+          <End Role="EQUIPO" Type="Self.EQUIPO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESPECIFICACIONEQUIPO">
+              <PropertyRef Name="IDESEQUIPO" />
+            </Principal>
+            <Dependent Role="EQUIPO">
+              <PropertyRef Name="IDESEQUIPO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PROCINST_LE_REALIZ_EQUIPO">
+          <End Role="EQUIPO" Type="Self.EQUIPO" Multiplicity="0..1" />
+          <End Role="PROCINSTALACION" Type="Self.PROCINSTALACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EQUIPO">
+              <PropertyRef Name="IDEQUIPO" />
+            </Principal>
+            <Dependent Role="PROCINSTALACION">
+              <PropertyRef Name="IDEQUIPO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USUARIO_RELATIONS_INSTITUC">
+          <End Role="INSTITUCION" Type="Self.INSTITUCION" Multiplicity="0..1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INSTITUCION">
+              <PropertyRef Name="IDINST" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="IDINST" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MENU_SUBMENU_D_MENU">
+          <End Role="MENU" Type="Self.MENU" Multiplicity="0..1" />
+          <End Role="MENU1" Type="Self.MENU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MENU">
+              <PropertyRef Name="IDENTMENU" />
+            </Principal>
+            <Dependent Role="MENU1">
+              <PropertyRef Name="MEN_IDENTMENU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PERMISO">
+          <End Role="MENU" Type="Self.MENU" Multiplicity="1" />
+          <End Role="PERFILPERMISO" Type="Self.PERFILPERMISO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MENU">
+              <PropertyRef Name="IDENTMENU" />
+            </Principal>
+            <Dependent Role="PERFILPERMISO">
+              <PropertyRef Name="IDMENU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PERFIL">
+          <End Role="PERFIL" Type="Self.PERFIL" Multiplicity="1" />
+          <End Role="PERFILUSUARIO" Type="Self.PERFILUSUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERFIL">
+              <PropertyRef Name="IDPERFIL" />
+            </Principal>
+            <Dependent Role="PERFILUSUARIO">
+              <PropertyRef Name="IDPERFIL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PERFIL_PERMIT">
+          <End Role="PERFIL" Type="Self.PERFIL" Multiplicity="1" />
+          <End Role="PERFILPERMISO" Type="Self.PERFILPERMISO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERFIL">
+              <PropertyRef Name="IDPERFIL" />
+            </Principal>
+            <Dependent Role="PERFILPERMISO">
+              <PropertyRef Name="IDPERFIL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USUARIO">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+          <End Role="PERFILUSUARIO" Type="Self.PERFILUSUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="IDUSUARIO" />
+            </Principal>
+            <Dependent Role="PERFILUSUARIO">
+              <PropertyRef Name="IDUSUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PROCINST_PUEDE_REA_USUARIO">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="PROCINSTALACION" Type="Self.PROCINSTALACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="IDUSUARIO" />
+            </Principal>
+            <Dependent Role="PROCINSTALACION">
+              <PropertyRef Name="IDUSUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RECPASSW_REALIZA_USUARIO">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="RECPASSWORD" Type="Self.RECPASSWORD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="IDUSUARIO" />
+            </Principal>
+            <Dependent Role="RECPASSWORD">
+              <PropertyRef Name="IDUSUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BLOQUEA">
+          <End Role="INSTITUCION" Type="Self.INSTITUCION" Multiplicity="*" />
+          <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="proyectoBADCon" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BITACORAINSTALACIONs" EntityType="Self.BITACORAINSTALACION" />
+          <EntitySet Name="BITACORAMANTENIMIENTOes" EntityType="Self.BITACORAMANTENIMIENTO" />
+          <EntitySet Name="CATEGORIAEQUIPOes" EntityType="Self.CATEGORIAEQUIPO" />
+          <EntitySet Name="COMPRAs" EntityType="Self.COMPRA" />
+          <EntitySet Name="EMPRESAs" EntityType="Self.EMPRESA" />
+          <EntitySet Name="EQUIPOes" EntityType="Self.EQUIPO" />
+          <EntitySet Name="ESPECIFICACIONEQUIPOes" EntityType="Self.ESPECIFICACIONEQUIPO" />
+          <EntitySet Name="INSTITUCIONs" EntityType="Self.INSTITUCION" />
+          <EntitySet Name="LINECOMPRAs" EntityType="Self.LINECOMPRA" />
+          <EntitySet Name="MENUs" EntityType="Self.MENU" />
+          <EntitySet Name="PERFILs" EntityType="Self.PERFIL" />
+          <EntitySet Name="PERFILPERMISOes" EntityType="Self.PERFILPERMISO" />
+          <EntitySet Name="PERFILUSUARIOs" EntityType="Self.PERFILUSUARIO" />
+          <EntitySet Name="PROCINSTALACIONs" EntityType="Self.PROCINSTALACION" />
+          <EntitySet Name="RECPASSWORDs" EntityType="Self.RECPASSWORD" />
+          <EntitySet Name="TIPOEMPRESAs" EntityType="Self.TIPOEMPRESA" />
+          <EntitySet Name="USUARIOs" EntityType="Self.USUARIO" />
+          <AssociationSet Name="FK_BITACORA_TIENE_PROCINST" Association="Self.FK_BITACORA_TIENE_PROCINST">
+            <End Role="PROCINSTALACION" EntitySet="PROCINSTALACIONs" />
+            <End Role="BITACORAINSTALACION" EntitySet="BITACORAINSTALACIONs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BITACORA_LE_REALIZ_EQUIPO" Association="Self.FK_BITACORA_LE_REALIZ_EQUIPO">
+            <End Role="EQUIPO" EntitySet="EQUIPOes" />
+            <End Role="BITACORAMANTENIMIENTO" EntitySet="BITACORAMANTENIMIENTOes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BITACORA_PUEDE_REA_USUARIO" Association="Self.FK_BITACORA_PUEDE_REA_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIOs" />
+            <End Role="BITACORAMANTENIMIENTO" EntitySet="BITACORAMANTENIMIENTOes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EQUIPO_POSEE_4_CATEGORI" Association="Self.FK_EQUIPO_POSEE_4_CATEGORI">
+            <End Role="CATEGORIAEQUIPO" EntitySet="CATEGORIAEQUIPOes" />
+            <End Role="EQUIPO" EntitySet="EQUIPOes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COMPRA_RELATIONS_EMPRESA" Association="Self.FK_COMPRA_RELATIONS_EMPRESA">
+            <End Role="EMPRESA" EntitySet="EMPRESAs" />
+            <End Role="COMPRA" EntitySet="COMPRAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COMPRA_RELATIONS_INSTITUC" Association="Self.FK_COMPRA_RELATIONS_INSTITUC">
+            <End Role="INSTITUCION" EntitySet="INSTITUCIONs" />
+            <End Role="COMPRA" EntitySet="COMPRAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LINECOMP_RELATIONS_COMPRA" Association="Self.FK_LINECOMP_RELATIONS_COMPRA">
+            <End Role="COMPRA" EntitySet="COMPRAs" />
+            <End Role="LINECOMPRA" EntitySet="LINECOMPRAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMPRESA_POSEE_TIPOEMPR" Association="Self.FK_EMPRESA_POSEE_TIPOEMPR">
+            <End Role="TIPOEMPRESA" EntitySet="TIPOEMPRESAs" />
+            <End Role="EMPRESA" EntitySet="EMPRESAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USUARIO_PERTENECE_EMPRESA" Association="Self.FK_USUARIO_PERTENECE_EMPRESA">
+            <End Role="EMPRESA" EntitySet="EMPRESAs" />
+            <End Role="USUARIO" EntitySet="USUARIOs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EQUIPO_TIENE_3_LINECOMP" Association="Self.FK_EQUIPO_TIENE_3_LINECOMP">
+            <End Role="LINECOMPRA" EntitySet="LINECOMPRAs" />
+            <End Role="EQUIPO" EntitySet="EQUIPOes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EQUIPO_TIENE_5_ESPECIFI" Association="Self.FK_EQUIPO_TIENE_5_ESPECIFI">
+            <End Role="ESPECIFICACIONEQUIPO" EntitySet="ESPECIFICACIONEQUIPOes" />
+            <End Role="EQUIPO" EntitySet="EQUIPOes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PROCINST_LE_REALIZ_EQUIPO" Association="Self.FK_PROCINST_LE_REALIZ_EQUIPO">
+            <End Role="EQUIPO" EntitySet="EQUIPOes" />
+            <End Role="PROCINSTALACION" EntitySet="PROCINSTALACIONs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USUARIO_RELATIONS_INSTITUC" Association="Self.FK_USUARIO_RELATIONS_INSTITUC">
+            <End Role="INSTITUCION" EntitySet="INSTITUCIONs" />
+            <End Role="USUARIO" EntitySet="USUARIOs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MENU_SUBMENU_D_MENU" Association="Self.FK_MENU_SUBMENU_D_MENU">
+            <End Role="MENU" EntitySet="MENUs" />
+            <End Role="MENU1" EntitySet="MENUs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PERMISO" Association="Self.FK_PERMISO">
+            <End Role="MENU" EntitySet="MENUs" />
+            <End Role="PERFILPERMISO" EntitySet="PERFILPERMISOes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PERFIL" Association="Self.FK_PERFIL">
+            <End Role="PERFIL" EntitySet="PERFILs" />
+            <End Role="PERFILUSUARIO" EntitySet="PERFILUSUARIOs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PERFIL_PERMIT" Association="Self.FK_PERFIL_PERMIT">
+            <End Role="PERFIL" EntitySet="PERFILs" />
+            <End Role="PERFILPERMISO" EntitySet="PERFILPERMISOes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USUARIO" Association="Self.FK_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIOs" />
+            <End Role="PERFILUSUARIO" EntitySet="PERFILUSUARIOs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PROCINST_PUEDE_REA_USUARIO" Association="Self.FK_PROCINST_PUEDE_REA_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIOs" />
+            <End Role="PROCINSTALACION" EntitySet="PROCINSTALACIONs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RECPASSW_REALIZA_USUARIO" Association="Self.FK_RECPASSW_REALIZA_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIOs" />
+            <End Role="RECPASSWORD" EntitySet="RECPASSWORDs" />
+          </AssociationSet>
+          <AssociationSet Name="BLOQUEA" Association="Self.BLOQUEA">
+            <End Role="INSTITUCION" EntitySet="INSTITUCIONs" />
+            <End Role="EMPRESA" EntitySet="EMPRESAs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="proyectoBADModelStoreContainer" CdmEntityContainer="proyectoBADCon">
+          <EntitySetMapping Name="BITACORAINSTALACIONs">
+            <EntityTypeMapping TypeName="proyectoBADModel.BITACORAINSTALACION">
+              <MappingFragment StoreEntitySet="BITACORAINSTALACION">
+                <ScalarProperty Name="IDBITACORAINSTALACION" ColumnName="IDBITACORAINSTALACION" />
+                <ScalarProperty Name="IDPROCINSTALACION" ColumnName="IDPROCINSTALACION" />
+                <ScalarProperty Name="FECHABITACORAIN" ColumnName="FECHABITACORAIN" />
+                <ScalarProperty Name="DETALLES" ColumnName="DETALLES" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BITACORAMANTENIMIENTOes">
+            <EntityTypeMapping TypeName="proyectoBADModel.BITACORAMANTENIMIENTO">
+              <MappingFragment StoreEntitySet="BITACORAMANTENIMIENTO">
+                <ScalarProperty Name="IDBITACORAMANTENIMIENTO" ColumnName="IDBITACORAMANTENIMIENTO" />
+                <ScalarProperty Name="IDEQUIPO" ColumnName="IDEQUIPO" />
+                <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
+                <ScalarProperty Name="FECHABITACORAM" ColumnName="FECHABITACORAM" />
+                <ScalarProperty Name="TIPOMANTENIMIENTO" ColumnName="TIPOMANTENIMIENTO" />
+                <ScalarProperty Name="HORAINI" ColumnName="HORAINI" />
+                <ScalarProperty Name="HORAFIN" ColumnName="HORAFIN" />
+                <ScalarProperty Name="ESTADOINI" ColumnName="ESTADOINI" />
+                <ScalarProperty Name="ESTADOFIN" ColumnName="ESTADOFIN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CATEGORIAEQUIPOes">
+            <EntityTypeMapping TypeName="proyectoBADModel.CATEGORIAEQUIPO">
+              <MappingFragment StoreEntitySet="CATEGORIAEQUIPO">
+                <ScalarProperty Name="IDCATEQUIPO" ColumnName="IDCATEQUIPO" />
+                <ScalarProperty Name="CATEQUIPO" ColumnName="CATEQUIPO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COMPRAs">
+            <EntityTypeMapping TypeName="proyectoBADModel.COMPRA">
+              <MappingFragment StoreEntitySet="COMPRA">
+                <ScalarProperty Name="IDCOMPRA" ColumnName="IDCOMPRA" />
+                <ScalarProperty Name="IDINST" ColumnName="IDINST" />
+                <ScalarProperty Name="IDEMP" ColumnName="IDEMP" />
+                <ScalarProperty Name="TOTALCOMPRA" ColumnName="TOTALCOMPRA" />
+                <ScalarProperty Name="FECHACOMPRA" ColumnName="FECHACOMPRA" />
+                <ScalarProperty Name="DEPSOLICITANTES" ColumnName="DEPSOLICITANTES" />
+                <ScalarProperty Name="TIPOCONTRATACION" ColumnName="TIPOCONTRATACION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EMPRESAs">
+            <EntityTypeMapping TypeName="proyectoBADModel.EMPRESA">
+              <MappingFragment StoreEntitySet="EMPRESA">
+                <ScalarProperty Name="IDEMP" ColumnName="IDEMP" />
+                <ScalarProperty Name="IDTIPO" ColumnName="IDTIPO" />
+                <ScalarProperty Name="NOMBREEMP" ColumnName="NOMBREEMP" />
+                <ScalarProperty Name="DIRECCIONEMP" ColumnName="DIRECCIONEMP" />
+                <ScalarProperty Name="TELEFONOCONTACTO" ColumnName="TELEFONOCONTACTO" />
+                <ScalarProperty Name="EMAILCONTACTO" ColumnName="EMAILCONTACTO" />
+                <ScalarProperty Name="NITEMP" ColumnName="NITEMP" />
+                <ScalarProperty Name="NOMBRERESPEMP" ColumnName="NOMBRERESPEMP" />
+                <ScalarProperty Name="DUIRESPEMP" ColumnName="DUIRESPEMP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EQUIPOes">
+            <EntityTypeMapping TypeName="proyectoBADModel.EQUIPO">
+              <MappingFragment StoreEntitySet="EQUIPO">
+                <ScalarProperty Name="IDEQUIPO" ColumnName="IDEQUIPO" />
+                <ScalarProperty Name="IDESEQUIPO" ColumnName="IDESEQUIPO" />
+                <ScalarProperty Name="IDCATEQUIPO" ColumnName="IDCATEQUIPO" />
+                <ScalarProperty Name="IDLINEACOMPRA" ColumnName="IDLINEACOMPRA" />
+                <ScalarProperty Name="NUMEROSERIAL" ColumnName="NUMEROSERIAL" />
+                <ScalarProperty Name="ANOGARANTIA" ColumnName="ANOGARANTIA" />
+                <ScalarProperty Name="DETALLEGARANTIA" ColumnName="DETALLEGARANTIA" />
+                <ScalarProperty Name="ESTADOGARANTIA" ColumnName="ESTADOGARANTIA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ESPECIFICACIONEQUIPOes">
+            <EntityTypeMapping TypeName="proyectoBADModel.ESPECIFICACIONEQUIPO">
+              <MappingFragment StoreEntitySet="ESPECIFICACIONEQUIPO">
+                <ScalarProperty Name="IDESEQUIPO" ColumnName="IDESEQUIPO" />
+                <ScalarProperty Name="MARCA" ColumnName="MARCA" />
+                <ScalarProperty Name="MODELO" ColumnName="MODELO" />
+                <ScalarProperty Name="POTENCIA" ColumnName="POTENCIA" />
+                <ScalarProperty Name="CAPACIDADBTU" ColumnName="CAPACIDADBTU" />
+                <ScalarProperty Name="CORRIENTEOPERACION" ColumnName="CORRIENTEOPERACION" />
+                <ScalarProperty Name="ANIOFABRICACION" ColumnName="ANIOFABRICACION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INSTITUCIONs">
+            <EntityTypeMapping TypeName="proyectoBADModel.INSTITUCION">
+              <MappingFragment StoreEntitySet="INSTITUCION">
+                <ScalarProperty Name="IDINST" ColumnName="IDINST" />
+                <ScalarProperty Name="TELEFONOINST" ColumnName="TELEFONOINST" />
+                <ScalarProperty Name="NOMBREINST" ColumnName="NOMBREINST" />
+                <ScalarProperty Name="DIRECCIONINST" ColumnName="DIRECCIONINST" />
+                <ScalarProperty Name="COMPRAMAXPROVEEDOR" ColumnName="COMPRAMAXPROVEEDOR" />
+                <ScalarProperty Name="EMAILCONTACTOINST" ColumnName="EMAILCONTACTOINST" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LINECOMPRAs">
+            <EntityTypeMapping TypeName="proyectoBADModel.LINECOMPRA">
+              <MappingFragment StoreEntitySet="LINECOMPRA">
+                <ScalarProperty Name="IDLINEACOMPRA" ColumnName="IDLINEACOMPRA" />
+                <ScalarProperty Name="IDCOMPRA" ColumnName="IDCOMPRA" />
+                <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+                <ScalarProperty Name="SUBTOTAL" ColumnName="SUBTOTAL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MENUs">
+            <EntityTypeMapping TypeName="proyectoBADModel.MENU">
+              <MappingFragment StoreEntitySet="MENU">
+                <ScalarProperty Name="IDENTMENU" ColumnName="IDENTMENU" />
+                <ScalarProperty Name="MEN_IDENTMENU" ColumnName="MEN_IDENTMENU" />
+                <ScalarProperty Name="NOMBREOPCION" ColumnName="NOMBREOPCION" />
+                <ScalarProperty Name="RUTAACCESO" ColumnName="RUTAACCESO" />
+                <ScalarProperty Name="PORDEFECTO" ColumnName="PORDEFECTO" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PERFILs">
+            <EntityTypeMapping TypeName="proyectoBADModel.PERFIL">
+              <MappingFragment StoreEntitySet="PERFIL">
+                <ScalarProperty Name="IDPERFIL" ColumnName="IDPERFIL" />
+                <ScalarProperty Name="PERFIL1" ColumnName="PERFIL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PERFILPERMISOes">
+            <EntityTypeMapping TypeName="proyectoBADModel.PERFILPERMISO">
+              <MappingFragment StoreEntitySet="PERFILPERMISO">
+                <ScalarProperty Name="IDPERFIL" ColumnName="IDPERFIL" />
+                <ScalarProperty Name="IDMENU" ColumnName="IDMENU" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PERFILUSUARIOs">
+            <EntityTypeMapping TypeName="proyectoBADModel.PERFILUSUARIO">
+              <MappingFragment StoreEntitySet="PERFILUSUARIO">
+                <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
+                <ScalarProperty Name="IDPERFIL" ColumnName="IDPERFIL" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PROCINSTALACIONs">
+            <EntityTypeMapping TypeName="proyectoBADModel.PROCINSTALACION">
+              <MappingFragment StoreEntitySet="PROCINSTALACION">
+                <ScalarProperty Name="IDPROCINSTALACION" ColumnName="IDPROCINSTALACION" />
+                <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
+                <ScalarProperty Name="IDEQUIPO" ColumnName="IDEQUIPO" />
+                <ScalarProperty Name="FECHAINICIO" ColumnName="FECHAINICIO" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RECPASSWORDs">
+            <EntityTypeMapping TypeName="proyectoBADModel.RECPASSWORD">
+              <MappingFragment StoreEntitySet="RECPASSWORD">
+                <ScalarProperty Name="IDRECPASSWORD" ColumnName="IDRECPASSWORD" />
+                <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
+                <ScalarProperty Name="FECHAFIN" ColumnName="FECHAFIN" />
+                <ScalarProperty Name="KEY" ColumnName="KEY" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPOEMPRESAs">
+            <EntityTypeMapping TypeName="proyectoBADModel.TIPOEMPRESA">
+              <MappingFragment StoreEntitySet="TIPOEMPRESA">
+                <ScalarProperty Name="IDTIPO" ColumnName="IDTIPO" />
+                <ScalarProperty Name="TIPO" ColumnName="TIPO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIOs">
+            <EntityTypeMapping TypeName="proyectoBADModel.USUARIO">
+              <MappingFragment StoreEntitySet="USUARIO">
+                <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
+                <ScalarProperty Name="IDEMP" ColumnName="IDEMP" />
+                <ScalarProperty Name="IDINST" ColumnName="IDINST" />
+                <ScalarProperty Name="NOMBRECOMPLETO" ColumnName="NOMBRECOMPLETO" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="BLOQUEA" TypeName="proyectoBADModel.BLOQUEA" StoreEntitySet="BLOQUEA">
+            <EndProperty Name="INSTITUCION">
+              <ScalarProperty Name="IDINST" ColumnName="IDINST" />
+            </EndProperty>
+            <EndProperty Name="EMPRESA">
+              <ScalarProperty Name="IDEMP" ColumnName="IDEMP" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,80 @@
+﻿@{
+    Layout = null;
+}
+
+@model proyectoBAD.ViewModels.CreateUserViewModel
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Crear Usuario - SCAEAV</title>
+
+    @Styles.Render("~/bundles/templateStyles")
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Crear Usuario</h3>
+                    </div>
+                   <div class="alert alert-warning alert-dismissable">
+                       <button class="close" aria-hidden="true" type="button" data-dismiss="alert">×</button>
+                       Por favor use su correo institucional para registrarse
+                   </div>
+                    <div class="panel-body">
+
+                        @if (ViewBag.successMessage != null)
+                        {
+                            <div class="alert alert-success alert dismissable">
+                                <button class="close" aria-hidden="true" type="button" data-dismiss="alert">×</button>
+                                @ViewBag.successMessage
+                            </div>
+                        }
+                        @using (Html.BeginForm("CreateUser", "Login", FormMethod.Post, new { role = "form", @class = "form" }))
+                        {
+                            @Html.ValidationSummary(excludePropertyErrors : true, message:"", htmlAttributes : new { @class = "alert alert-danger" })
+                            @Html.AntiForgeryToken()
+                            <fieldset>
+                                <div class="form-group">
+                                    @Html.TextBoxFor(model => model.name, htmlAttributes : new { placeholder = "Nombre Completo", @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.name)
+                                </div>
+                                <div class="form-group">
+                                    @Html.TextBoxFor(model => model.email, htmlAttributes: new { placeholder = "Dirección de Correo Electrónico", @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.email)
+                                </div>
+                                <div class="form-group">
+                                    @Html.PasswordFor(model => model.password, htmlAttributes: new { placeholder = "Contraseña", @class = "form-control" } )
+                                    @Html.ValidationMessageFor(model => model.password)
+                                </div>
+                                <div class="form-group">
+                                    @Html.PasswordFor(model => model.passwordConfirm, htmlAttributes: new { placeholder = "Confirmar Contraseña", @class = "form-control" } )
+                                    @Html.ValidationMessageFor(model => model.passwordConfirm)
+                                </div>
+                                <button type="submit" class="btn btn-lg btn-success btn-block">Crear Usuario</button>
+                            </fieldset>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/templateScripts")
+    @Scripts.Render("~/bundles/formValidationScripts")
+</body>
+</html>
