@@ -40,11 +40,11 @@
                         </a>
                         <ul class="dropdown-menu dropdown-user">
                             <li>
-                                Nombre Usuario
+                                <i class="fa fa-user-md fa-fw"></i>@User.Identity.Name
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                                <a href="@Url.Action("Logout", "Login")"><i class="fa fa-sign-out fa-fw"></i> Cerrar sesión</a>
                             </li>
                         </ul>
                         <!-- /.dropdown-user -->

@@ -4,8 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using proyectoBAD.ViewModels;
-using BCrypt.Net;
 using proyectoBAD.Models;
+using proyectoBAD.Authentication;
+using System.Security.Claims;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity;
+using Microsoft.Owin.Security;
+using Microsoft.Owin;
 
 namespace proyectoBAD.Controllers
 {
@@ -51,6 +56,43 @@ namespace proyectoBAD.Controllers
             }
 
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(LoginViewModel loginVM)
+        {
+
+            if (ModelState.IsValid)
+            {
+                USUARIO user = UserManager.isValid(loginVM.email, loginVM.password);
+                if (user == null)
+                {
+                    ModelState.AddModelError("", "Correo o contraseña incorrectos");
+                }
+                else
+                {
+                    //TODO: Agregar claims de los permisos
+                    var ident = new ClaimsIdentity(
+                        new[] {
+                            new Claim(ClaimTypes.Email, loginVM.email),
+                            new Claim(ClaimTypes.Name, user.NOMBRECOMPLETO),
+                            new Claim(ClaimTypes.NameIdentifier, user.IDUSUARIO.ToString(), ClaimValueTypes.Integer)
+                        }, DefaultAuthenticationTypes.ApplicationCookie);
+                    HttpContext.GetOwinContext().Authentication.SignIn(
+                        new AuthenticationProperties { IsPersistent = false }, ident);
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+
+            return View();
+        }
+
+        [Authorize]
+        public ActionResult Logout()
+        {
+            HttpContext.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            return RedirectToAction("Index", "Login");
         }
     }
 }
