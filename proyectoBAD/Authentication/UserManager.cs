@@ -9,17 +9,17 @@ namespace proyectoBAD.Authentication
 {
     public class UserManager
     {
-        public static USUARIO isValid(String email, String password)
+        public static usuarios isValid(String email, String password)
         {
-            USUARIO user = null;
-            using (var db = new proyectoBADCon())
+            usuarios user = null;
+            using (var db = new proyectoBADEntities())
             {
-                if (db.USUARIOs.Any(u => u.EMAIL == email))
+                if (db.usuarios.Any(u => u.email == email))
                 {
                     // TODO: Ver que el estado del usuario sea igual a 1(Activo)
-                    user = db.USUARIOs.First(u => u.EMAIL == email);
+                    user = db.usuarios.First(u => u.email == email);
 
-                    if(!BCrypt.Net.BCrypt.Verify(password, user.PASSWORD))
+                    if(!BCrypt.Net.BCrypt.Verify(password, user.password))
                     {
                         user = null;
                     }

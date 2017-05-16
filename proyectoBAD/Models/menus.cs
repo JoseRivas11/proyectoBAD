@@ -12,21 +12,25 @@ namespace proyectoBAD.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class PERFIL
+    public partial class menus
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PERFIL()
+        public menus()
         {
-            this.PERFILUSUARIOs = new HashSet<PERFILUSUARIO>();
-            this.PERFILPERMISOes = new HashSet<PERFILPERMISO>();
+            this.perfiles_permisos = new HashSet<perfiles_permisos>();
+            this.menus1 = new HashSet<menus>();
         }
     
-        public int IDPERFIL { get; set; }
-        public string PERFIL1 { get; set; }
+        public int id { get; set; }
+        public Nullable<int> super_opcion { get; set; }
+        public string nombre_opcion { get; set; }
+        public string ruta_acceso { get; set; }
+        public int estado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PERFILUSUARIO> PERFILUSUARIOs { get; set; }
+        public virtual ICollection<perfiles_permisos> perfiles_permisos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PERFILPERMISO> PERFILPERMISOes { get; set; }
+        public virtual ICollection<menus> menus1 { get; set; }
+        public virtual menus menus2 { get; set; }
     }
 }

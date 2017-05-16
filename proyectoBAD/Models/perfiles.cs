@@ -12,18 +12,21 @@ namespace proyectoBAD.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class CATEGORIAEQUIPO
+    public partial class perfiles
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CATEGORIAEQUIPO()
+        public perfiles()
         {
-            this.EQUIPOes = new HashSet<EQUIPO>();
+            this.perfiles_usuarios = new HashSet<perfiles_usuarios>();
+            this.perfiles_permisos = new HashSet<perfiles_permisos>();
         }
     
-        public int IDCATEQUIPO { get; set; }
-        public string CATEQUIPO { get; set; }
+        public int id { get; set; }
+        public string perfil { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EQUIPO> EQUIPOes { get; set; }
+        public virtual ICollection<perfiles_usuarios> perfiles_usuarios { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<perfiles_permisos> perfiles_permisos { get; set; }
     }
 }

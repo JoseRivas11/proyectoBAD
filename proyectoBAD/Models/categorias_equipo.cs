@@ -12,25 +12,18 @@ namespace proyectoBAD.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class COMPRA
+    public partial class categorias_equipo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public COMPRA()
+        public categorias_equipo()
         {
-            this.LINECOMPRAs = new HashSet<LINECOMPRA>();
+            this.equipos = new HashSet<equipos>();
         }
     
-        public int IDCOMPRA { get; set; }
-        public Nullable<int> IDINST { get; set; }
-        public Nullable<int> IDEMP { get; set; }
-        public Nullable<decimal> TOTALCOMPRA { get; set; }
-        public Nullable<System.DateTime> FECHACOMPRA { get; set; }
-        public string DEPSOLICITANTES { get; set; }
-        public Nullable<int> TIPOCONTRATACION { get; set; }
+        public int id { get; set; }
+        public string categoria { get; set; }
     
-        public virtual EMPRESA EMPRESA { get; set; }
-        public virtual INSTITUCION INSTITUCION { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LINECOMPRA> LINECOMPRAs { get; set; }
+        public virtual ICollection<equipos> equipos { get; set; }
     }
 }

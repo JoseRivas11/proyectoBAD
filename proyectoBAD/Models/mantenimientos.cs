@@ -12,28 +12,25 @@ namespace proyectoBAD.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class INSTITUCION
+    public partial class mantenimientos
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public INSTITUCION()
+        public mantenimientos()
         {
-            this.COMPRAs = new HashSet<COMPRA>();
-            this.USUARIOs = new HashSet<USUARIO>();
-            this.EMPRESAs = new HashSet<EMPRESA>();
+            this.bitacora_mantenimiento = new HashSet<bitacora_mantenimiento>();
+            this.usuarios = new HashSet<usuarios>();
         }
     
-        public int IDINST { get; set; }
-        public string TELEFONOINST { get; set; }
-        public string NOMBREINST { get; set; }
-        public string DIRECCIONINST { get; set; }
-        public Nullable<decimal> COMPRAMAXPROVEEDOR { get; set; }
-        public string EMAILCONTACTOINST { get; set; }
+        public int id { get; set; }
+        public Nullable<System.DateTime> fecha_ini { get; set; }
+        public Nullable<System.DateTime> fecha_fin { get; set; }
+        public int tipo { get; set; }
+        public string equipo_fisico { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<COMPRA> COMPRAs { get; set; }
+        public virtual ICollection<bitacora_mantenimiento> bitacora_mantenimiento { get; set; }
+        public virtual equipos_fisicos equipos_fisicos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<USUARIO> USUARIOs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EMPRESA> EMPRESAs { get; set; }
+        public virtual ICollection<usuarios> usuarios { get; set; }
     }
 }

@@ -12,34 +12,32 @@ namespace proyectoBAD.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class USUARIO
+    public partial class departamentos
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public USUARIO()
+        public departamentos()
         {
-            this.BITACORAMANTENIMIENTOes = new HashSet<BITACORAMANTENIMIENTO>();
-            this.PERFILUSUARIOs = new HashSet<PERFILUSUARIO>();
-            this.PROCINSTALACIONs = new HashSet<PROCINSTALACION>();
-            this.RECPASSWORDs = new HashSet<RECPASSWORD>();
+            this.usuarios = new HashSet<usuarios>();
+            this.equipos_fisicos = new HashSet<equipos_fisicos>();
+            this.solicitudes = new HashSet<solicitudes>();
+            this.usuarios1 = new HashSet<usuarios>();
         }
     
-        public int IDUSUARIO { get; set; }
-        public Nullable<int> IDEMP { get; set; }
-        public Nullable<int> IDINST { get; set; }
-        public string NOMBRECOMPLETO { get; set; }
-        public string EMAIL { get; set; }
-        public string PASSWORD { get; set; }
-        public byte ESTADO { get; set; }
+        public int id { get; set; }
+        public string nombre { get; set; }
+        public string email_contacto { get; set; }
+        public string telefono { get; set; }
+        public decimal max_compras { get; set; }
+        public int institucion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BITACORAMANTENIMIENTO> BITACORAMANTENIMIENTOes { get; set; }
-        public virtual EMPRESA EMPRESA { get; set; }
-        public virtual INSTITUCION INSTITUCION { get; set; }
+        public virtual ICollection<usuarios> usuarios { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PERFILUSUARIO> PERFILUSUARIOs { get; set; }
+        public virtual ICollection<equipos_fisicos> equipos_fisicos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PROCINSTALACION> PROCINSTALACIONs { get; set; }
+        public virtual ICollection<solicitudes> solicitudes { get; set; }
+        public virtual instituciones instituciones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RECPASSWORD> RECPASSWORDs { get; set; }
+        public virtual ICollection<usuarios> usuarios1 { get; set; }
     }
 }

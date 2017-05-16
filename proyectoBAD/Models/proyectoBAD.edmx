@@ -1,0 +1,1743 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="proyectoBADModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="bitacora_instalacion">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fecha" Type="date" Nullable="false" />
+          <Property Name="detalles" Type="varchar" MaxLength="500" />
+          <Property Name="proc_instalacion" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="bitacora_mantenimiento">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="detalles" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="mantenimiento" Type="int" Nullable="false" />
+          <Property Name="fecha" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="bloqueo_instalacion">
+          <Key>
+            <PropertyRef Name="usuario" />
+            <PropertyRef Name="departamento" />
+          </Key>
+          <Property Name="usuario" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="departamento" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="categorias_equipo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="categoria" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="compras">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fecha" Type="date" Nullable="false" />
+          <Property Name="tipo_contratacion" Type="int" Nullable="false" />
+          <Property Name="total_compra" Type="decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="institucion" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="departamentos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="email_contacto" Type="varchar" MaxLength="150" />
+          <Property Name="telefono" Type="varchar" MaxLength="15" />
+          <Property Name="max_compras" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="institucion" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="empleados_mantenimiento">
+          <Key>
+            <PropertyRef Name="empleado" />
+            <PropertyRef Name="mantenimiento" />
+          </Key>
+          <Property Name="empleado" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="mantenimiento" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="empresas">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tipo" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="direccion" Type="varchar" MaxLength="500" />
+          <Property Name="telefono" Type="varchar" MaxLength="15" />
+          <Property Name="email_contacto" Type="varchar" MaxLength="150" />
+          <Property Name="nit" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="nombre_responsable" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="dui_responsable" Type="varchar" MaxLength="17" Nullable="false" />
+        </EntityType>
+        <EntityType Name="equipos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="especificaciones" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="categoria" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="equipos_fisicos">
+          <Key>
+            <PropertyRef Name="num_serial" />
+          </Key>
+          <Property Name="num_serial" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="fecha_fabricacion" Type="date" Nullable="false" />
+          <Property Name="tiempo_garantia" Type="decimal" Precision="3" Scale="1" Nullable="false" />
+          <Property Name="detalles_garantia" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="estado_garantia" Type="int" Nullable="false" />
+          <Property Name="departamento" Type="int" Nullable="false" />
+          <Property Name="esp_equipo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="equipos_solicitud">
+          <Key>
+            <PropertyRef Name="equipo" />
+            <PropertyRef Name="solicitud" />
+          </Key>
+          <Property Name="equipo" Type="int" Nullable="false" />
+          <Property Name="solicitud" Type="int" Nullable="false" />
+          <Property Name="cantidad" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="esp_equipos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="marca" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="modelo" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="potencia" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="consumo_corriente" Type="decimal" Precision="7" Scale="2" Nullable="false" />
+          <Property Name="capacidad_btu" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="equipo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="instalacion_empleados">
+          <Key>
+            <PropertyRef Name="empleado" />
+            <PropertyRef Name="proc_instalacion" />
+          </Key>
+          <Property Name="empleado" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="proc_instalacion" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="instituciones">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="telefono" Type="varchar" MaxLength="15" />
+          <Property Name="email_contacto" Type="varchar" MaxLength="150" />
+          <Property Name="direccion" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="linea_compra">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cantidad" Type="int" Nullable="false" />
+          <Property Name="subtotal" Type="decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="compra" Type="int" Nullable="false" />
+          <Property Name="equipo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mantenimientos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fecha_ini" Type="date" />
+          <Property Name="fecha_fin" Type="date" />
+          <Property Name="tipo" Type="int" Nullable="false" />
+          <Property Name="equipo_fisico" Type="varchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="menus">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="super_opcion" Type="int" />
+          <Property Name="nombre_opcion" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="ruta_acceso" Type="varchar" MaxLength="350" />
+          <Property Name="estado" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="perfiles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="perfil" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="perfiles_permisos">
+          <Key>
+            <PropertyRef Name="perfil" />
+            <PropertyRef Name="menu" />
+            <PropertyRef Name="estado" />
+          </Key>
+          <Property Name="perfil" Type="int" Nullable="false" />
+          <Property Name="menu" Type="int" Nullable="false" />
+          <Property Name="estado" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="perfiles_usuarios">
+          <Key>
+            <PropertyRef Name="usuario" />
+            <PropertyRef Name="perfil" />
+          </Key>
+          <Property Name="usuario" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="perfil" Type="int" Nullable="false" />
+          <Property Name="estado" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="proc_instalacion">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="equipo" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="fecha_ini" Type="date" />
+          <Property Name="fecha_fin" Type="date" />
+        </EntityType>
+        <EntityType Name="rec_password">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="usuario" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="fecha_fin" Type="datetime" Nullable="false" />
+          <Property Name="ram_hash" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="estado" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="solicitudes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fecha_registro" Type="date" Nullable="false" />
+          <Property Name="departamento" Type="int" Nullable="false" />
+          <Property Name="estado" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tipos_empresa">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tipo" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="usuarios">
+          <Key>
+            <PropertyRef Name="email" />
+          </Key>
+          <Property Name="email" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="empresa" Type="int" />
+          <Property Name="departamento" Type="int" />
+          <Property Name="nombre_completo" Type="varchar" MaxLength="350" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="estado" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_bitacora_inst_equipo">
+          <End Role="proc_instalacion" Type="Self.proc_instalacion" Multiplicity="1" />
+          <End Role="bitacora_instalacion" Type="Self.bitacora_instalacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="proc_instalacion">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="bitacora_instalacion">
+              <PropertyRef Name="proc_instalacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_bitacora_mantenimiento">
+          <End Role="mantenimientos" Type="Self.mantenimientos" Multiplicity="1" />
+          <End Role="bitacora_mantenimiento" Type="Self.bitacora_mantenimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mantenimientos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="bitacora_mantenimiento">
+              <PropertyRef Name="mantenimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cat_equipo">
+          <End Role="categorias_equipo" Type="Self.categorias_equipo" Multiplicity="1" />
+          <End Role="equipos" Type="Self.equipos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categorias_equipo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="equipos">
+              <PropertyRef Name="categoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_compra">
+          <End Role="compras" Type="Self.compras" Multiplicity="1" />
+          <End Role="linea_compra" Type="Self.linea_compra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="compras">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="linea_compra">
+              <PropertyRef Name="compra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_depart">
+          <End Role="departamentos" Type="Self.departamentos" Multiplicity="0..1" />
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="departamentos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="usuarios">
+              <PropertyRef Name="departamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dept_bloqueado">
+          <End Role="departamentos" Type="Self.departamentos" Multiplicity="1" />
+          <End Role="bloqueo_instalacion" Type="Self.bloqueo_instalacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="departamentos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="bloqueo_instalacion">
+              <PropertyRef Name="departamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dept_equipo">
+          <End Role="departamentos" Type="Self.departamentos" Multiplicity="1" />
+          <End Role="equipos_fisicos" Type="Self.equipos_fisicos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="departamentos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="equipos_fisicos">
+              <PropertyRef Name="departamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dept_solicitud">
+          <End Role="departamentos" Type="Self.departamentos" Multiplicity="1" />
+          <End Role="solicitudes" Type="Self.solicitudes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="departamentos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="solicitudes">
+              <PropertyRef Name="departamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_empleado">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="1" />
+          <End Role="bloqueo_instalacion" Type="Self.bloqueo_instalacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="email" />
+            </Principal>
+            <Dependent Role="bloqueo_instalacion">
+              <PropertyRef Name="usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_empleado_instalacion">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="1" />
+          <End Role="instalacion_empleados" Type="Self.instalacion_empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="email" />
+            </Principal>
+            <Dependent Role="instalacion_empleados">
+              <PropertyRef Name="empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_empleado_mtto">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="1" />
+          <End Role="empleados_mantenimiento" Type="Self.empleados_mantenimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="email" />
+            </Principal>
+            <Dependent Role="empleados_mantenimiento">
+              <PropertyRef Name="empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_empresa">
+          <End Role="empresas" Type="Self.empresas" Multiplicity="0..1" />
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="usuarios">
+              <PropertyRef Name="empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_equipo">
+          <End Role="equipos" Type="Self.equipos" Multiplicity="1" />
+          <End Role="esp_equipos" Type="Self.esp_equipos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="equipos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="esp_equipos">
+              <PropertyRef Name="equipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_equipo_fisico">
+          <End Role="equipos_fisicos" Type="Self.equipos_fisicos" Multiplicity="1" />
+          <End Role="mantenimientos" Type="Self.mantenimientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="equipos_fisicos">
+              <PropertyRef Name="num_serial" />
+            </Principal>
+            <Dependent Role="mantenimientos">
+              <PropertyRef Name="equipo_fisico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_equipo_sol">
+          <End Role="equipos" Type="Self.equipos" Multiplicity="1" />
+          <End Role="equipos_solicitud" Type="Self.equipos_solicitud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="equipos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="equipos_solicitud">
+              <PropertyRef Name="equipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_equipos_compra">
+          <End Role="esp_equipos" Type="Self.esp_equipos" Multiplicity="1" />
+          <End Role="linea_compra" Type="Self.linea_compra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="esp_equipos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="linea_compra">
+              <PropertyRef Name="equipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_esp_equipo">
+          <End Role="esp_equipos" Type="Self.esp_equipos" Multiplicity="1" />
+          <End Role="equipos_fisicos" Type="Self.equipos_fisicos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="esp_equipos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="equipos_fisicos">
+              <PropertyRef Name="esp_equipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_inst_compra">
+          <End Role="instituciones" Type="Self.instituciones" Multiplicity="1" />
+          <End Role="compras" Type="Self.compras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="instituciones">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="compras">
+              <PropertyRef Name="institucion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_institucion">
+          <End Role="instituciones" Type="Self.instituciones" Multiplicity="1" />
+          <End Role="departamentos" Type="Self.departamentos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="instituciones">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="departamentos">
+              <PropertyRef Name="institucion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mantenimiento">
+          <End Role="mantenimientos" Type="Self.mantenimientos" Multiplicity="1" />
+          <End Role="empleados_mantenimiento" Type="Self.empleados_mantenimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mantenimientos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="empleados_mantenimiento">
+              <PropertyRef Name="mantenimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_menu_perfil">
+          <End Role="menus" Type="Self.menus" Multiplicity="1" />
+          <End Role="perfiles_permisos" Type="Self.perfiles_permisos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="menus">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="perfiles_permisos">
+              <PropertyRef Name="menu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_perfil">
+          <End Role="perfiles" Type="Self.perfiles" Multiplicity="1" />
+          <End Role="perfiles_usuarios" Type="Self.perfiles_usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="perfiles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="perfiles_usuarios">
+              <PropertyRef Name="perfil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_perfil_menu">
+          <End Role="perfiles" Type="Self.perfiles" Multiplicity="1" />
+          <End Role="perfiles_permisos" Type="Self.perfiles_permisos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="perfiles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="perfiles_permisos">
+              <PropertyRef Name="perfil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_proc_instalacion">
+          <End Role="equipos_fisicos" Type="Self.equipos_fisicos" Multiplicity="1" />
+          <End Role="proc_instalacion" Type="Self.proc_instalacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="equipos_fisicos">
+              <PropertyRef Name="num_serial" />
+            </Principal>
+            <Dependent Role="proc_instalacion">
+              <PropertyRef Name="equipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_proc_instalacion_emp">
+          <End Role="proc_instalacion" Type="Self.proc_instalacion" Multiplicity="1" />
+          <End Role="instalacion_empleados" Type="Self.instalacion_empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="proc_instalacion">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="instalacion_empleados">
+              <PropertyRef Name="proc_instalacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_solicitud">
+          <End Role="solicitudes" Type="Self.solicitudes" Multiplicity="1" />
+          <End Role="equipos_solicitud" Type="Self.equipos_solicitud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="solicitudes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="equipos_solicitud">
+              <PropertyRef Name="solicitud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_super_opcion">
+          <End Role="menus" Type="Self.menus" Multiplicity="0..1" />
+          <End Role="menus1" Type="Self.menus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="menus">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="menus1">
+              <PropertyRef Name="super_opcion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tipo_empresa">
+          <End Role="tipos_empresa" Type="Self.tipos_empresa" Multiplicity="1" />
+          <End Role="empresas" Type="Self.empresas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipos_empresa">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="empresas">
+              <PropertyRef Name="tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usuario">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="1" />
+          <End Role="perfiles_usuarios" Type="Self.perfiles_usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="email" />
+            </Principal>
+            <Dependent Role="perfiles_usuarios">
+              <PropertyRef Name="usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usuario_rec_password">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="1" />
+          <End Role="rec_password" Type="Self.rec_password" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="email" />
+            </Principal>
+            <Dependent Role="rec_password">
+              <PropertyRef Name="usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="proyectoBADModelStoreContainer">
+          <EntitySet Name="bitacora_instalacion" EntityType="Self.bitacora_instalacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="bitacora_mantenimiento" EntityType="Self.bitacora_mantenimiento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="bloqueo_instalacion" EntityType="Self.bloqueo_instalacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="categorias_equipo" EntityType="Self.categorias_equipo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="compras" EntityType="Self.compras" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="departamentos" EntityType="Self.departamentos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="empleados_mantenimiento" EntityType="Self.empleados_mantenimiento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="empresas" EntityType="Self.empresas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="equipos" EntityType="Self.equipos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="equipos_fisicos" EntityType="Self.equipos_fisicos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="equipos_solicitud" EntityType="Self.equipos_solicitud" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="esp_equipos" EntityType="Self.esp_equipos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="instalacion_empleados" EntityType="Self.instalacion_empleados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="instituciones" EntityType="Self.instituciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="linea_compra" EntityType="Self.linea_compra" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mantenimientos" EntityType="Self.mantenimientos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="menus" EntityType="Self.menus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="perfiles" EntityType="Self.perfiles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="perfiles_permisos" EntityType="Self.perfiles_permisos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="perfiles_usuarios" EntityType="Self.perfiles_usuarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="proc_instalacion" EntityType="Self.proc_instalacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rec_password" EntityType="Self.rec_password" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="solicitudes" EntityType="Self.solicitudes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tipos_empresa" EntityType="Self.tipos_empresa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="usuarios" EntityType="Self.usuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_bitacora_inst_equipo" Association="Self.FK_bitacora_inst_equipo">
+            <End Role="proc_instalacion" EntitySet="proc_instalacion" />
+            <End Role="bitacora_instalacion" EntitySet="bitacora_instalacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_bitacora_mantenimiento" Association="Self.FK_bitacora_mantenimiento">
+            <End Role="mantenimientos" EntitySet="mantenimientos" />
+            <End Role="bitacora_mantenimiento" EntitySet="bitacora_mantenimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cat_equipo" Association="Self.FK_cat_equipo">
+            <End Role="categorias_equipo" EntitySet="categorias_equipo" />
+            <End Role="equipos" EntitySet="equipos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_compra" Association="Self.FK_compra">
+            <End Role="compras" EntitySet="compras" />
+            <End Role="linea_compra" EntitySet="linea_compra" />
+          </AssociationSet>
+          <AssociationSet Name="FK_depart" Association="Self.FK_depart">
+            <End Role="departamentos" EntitySet="departamentos" />
+            <End Role="usuarios" EntitySet="usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dept_bloqueado" Association="Self.FK_dept_bloqueado">
+            <End Role="departamentos" EntitySet="departamentos" />
+            <End Role="bloqueo_instalacion" EntitySet="bloqueo_instalacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dept_equipo" Association="Self.FK_dept_equipo">
+            <End Role="departamentos" EntitySet="departamentos" />
+            <End Role="equipos_fisicos" EntitySet="equipos_fisicos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dept_solicitud" Association="Self.FK_dept_solicitud">
+            <End Role="departamentos" EntitySet="departamentos" />
+            <End Role="solicitudes" EntitySet="solicitudes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_empleado" Association="Self.FK_empleado">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="bloqueo_instalacion" EntitySet="bloqueo_instalacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_empleado_instalacion" Association="Self.FK_empleado_instalacion">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="instalacion_empleados" EntitySet="instalacion_empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_empleado_mtto" Association="Self.FK_empleado_mtto">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="empleados_mantenimiento" EntitySet="empleados_mantenimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_empresa" Association="Self.FK_empresa">
+            <End Role="empresas" EntitySet="empresas" />
+            <End Role="usuarios" EntitySet="usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_equipo" Association="Self.FK_equipo">
+            <End Role="equipos" EntitySet="equipos" />
+            <End Role="esp_equipos" EntitySet="esp_equipos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_equipo_fisico" Association="Self.FK_equipo_fisico">
+            <End Role="equipos_fisicos" EntitySet="equipos_fisicos" />
+            <End Role="mantenimientos" EntitySet="mantenimientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_equipo_sol" Association="Self.FK_equipo_sol">
+            <End Role="equipos" EntitySet="equipos" />
+            <End Role="equipos_solicitud" EntitySet="equipos_solicitud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_equipos_compra" Association="Self.FK_equipos_compra">
+            <End Role="esp_equipos" EntitySet="esp_equipos" />
+            <End Role="linea_compra" EntitySet="linea_compra" />
+          </AssociationSet>
+          <AssociationSet Name="FK_esp_equipo" Association="Self.FK_esp_equipo">
+            <End Role="esp_equipos" EntitySet="esp_equipos" />
+            <End Role="equipos_fisicos" EntitySet="equipos_fisicos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_inst_compra" Association="Self.FK_inst_compra">
+            <End Role="instituciones" EntitySet="instituciones" />
+            <End Role="compras" EntitySet="compras" />
+          </AssociationSet>
+          <AssociationSet Name="FK_institucion" Association="Self.FK_institucion">
+            <End Role="instituciones" EntitySet="instituciones" />
+            <End Role="departamentos" EntitySet="departamentos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mantenimiento" Association="Self.FK_mantenimiento">
+            <End Role="mantenimientos" EntitySet="mantenimientos" />
+            <End Role="empleados_mantenimiento" EntitySet="empleados_mantenimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_menu_perfil" Association="Self.FK_menu_perfil">
+            <End Role="menus" EntitySet="menus" />
+            <End Role="perfiles_permisos" EntitySet="perfiles_permisos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_perfil" Association="Self.FK_perfil">
+            <End Role="perfiles" EntitySet="perfiles" />
+            <End Role="perfiles_usuarios" EntitySet="perfiles_usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_perfil_menu" Association="Self.FK_perfil_menu">
+            <End Role="perfiles" EntitySet="perfiles" />
+            <End Role="perfiles_permisos" EntitySet="perfiles_permisos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_proc_instalacion" Association="Self.FK_proc_instalacion">
+            <End Role="equipos_fisicos" EntitySet="equipos_fisicos" />
+            <End Role="proc_instalacion" EntitySet="proc_instalacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_proc_instalacion_emp" Association="Self.FK_proc_instalacion_emp">
+            <End Role="proc_instalacion" EntitySet="proc_instalacion" />
+            <End Role="instalacion_empleados" EntitySet="instalacion_empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_solicitud" Association="Self.FK_solicitud">
+            <End Role="solicitudes" EntitySet="solicitudes" />
+            <End Role="equipos_solicitud" EntitySet="equipos_solicitud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_super_opcion" Association="Self.FK_super_opcion">
+            <End Role="menus" EntitySet="menus" />
+            <End Role="menus1" EntitySet="menus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tipo_empresa" Association="Self.FK_tipo_empresa">
+            <End Role="tipos_empresa" EntitySet="tipos_empresa" />
+            <End Role="empresas" EntitySet="empresas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuario" Association="Self.FK_usuario">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="perfiles_usuarios" EntitySet="perfiles_usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuario_rec_password" Association="Self.FK_usuario_rec_password">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="rec_password" EntitySet="rec_password" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="proyectoBADModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="bitacora_instalacion">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="detalles" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="proc_instalacion" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="proc_instalacion1" Relationship="Self.FK_bitacora_inst_equipo" FromRole="bitacora_instalacion" ToRole="proc_instalacion" />
+        </EntityType>
+        <EntityType Name="bitacora_mantenimiento">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="detalles" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="mantenimiento" Type="Int32" Nullable="false" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="mantenimientos" Relationship="Self.FK_bitacora_mantenimiento" FromRole="bitacora_mantenimiento" ToRole="mantenimientos" />
+        </EntityType>
+        <EntityType Name="categorias_equipo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="categoria" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="equipos" Relationship="Self.FK_cat_equipo" FromRole="categorias_equipo" ToRole="equipos" />
+        </EntityType>
+        <EntityType Name="compras">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="tipo_contratacion" Type="Int32" Nullable="false" />
+          <Property Name="total_compra" Type="Decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="institucion" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="linea_compra" Relationship="Self.FK_compra" FromRole="compras" ToRole="linea_compra" />
+          <NavigationProperty Name="instituciones" Relationship="Self.FK_inst_compra" FromRole="compras" ToRole="instituciones" />
+        </EntityType>
+        <EntityType Name="departamentos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email_contacto" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="max_compras" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="institucion" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="usuarios" Relationship="Self.FK_depart" FromRole="departamentos" ToRole="usuarios" />
+          <NavigationProperty Name="equipos_fisicos" Relationship="Self.FK_dept_equipo" FromRole="departamentos" ToRole="equipos_fisicos" />
+          <NavigationProperty Name="solicitudes" Relationship="Self.FK_dept_solicitud" FromRole="departamentos" ToRole="solicitudes" />
+          <NavigationProperty Name="instituciones" Relationship="Self.FK_institucion" FromRole="departamentos" ToRole="instituciones" />
+          <NavigationProperty Name="usuarios1" Relationship="Self.bloqueo_instalacion" FromRole="departamentos" ToRole="usuarios" />
+        </EntityType>
+        <EntityType Name="empresas">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tipo" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="direccion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="email_contacto" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="nit" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombre_responsable" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="dui_responsable" Type="String" MaxLength="17" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="usuarios" Relationship="Self.FK_empresa" FromRole="empresas" ToRole="usuarios" />
+          <NavigationProperty Name="tipos_empresa" Relationship="Self.FK_tipo_empresa" FromRole="empresas" ToRole="tipos_empresa" />
+        </EntityType>
+        <EntityType Name="equipos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="especificaciones" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="categoria" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="categorias_equipo" Relationship="Self.FK_cat_equipo" FromRole="equipos" ToRole="categorias_equipo" />
+          <NavigationProperty Name="esp_equipos" Relationship="Self.FK_equipo" FromRole="equipos" ToRole="esp_equipos" />
+          <NavigationProperty Name="equipos_solicitud" Relationship="Self.FK_equipo_sol" FromRole="equipos" ToRole="equipos_solicitud" />
+        </EntityType>
+        <EntityType Name="equipos_fisicos">
+          <Key>
+            <PropertyRef Name="num_serial" />
+          </Key>
+          <Property Name="num_serial" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fecha_fabricacion" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="tiempo_garantia" Type="Decimal" Precision="3" Scale="1" Nullable="false" />
+          <Property Name="detalles_garantia" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="estado_garantia" Type="Int32" Nullable="false" />
+          <Property Name="departamento" Type="Int32" Nullable="false" />
+          <Property Name="esp_equipo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="departamentos" Relationship="Self.FK_dept_equipo" FromRole="equipos_fisicos" ToRole="departamentos" />
+          <NavigationProperty Name="mantenimientos" Relationship="Self.FK_equipo_fisico" FromRole="equipos_fisicos" ToRole="mantenimientos" />
+          <NavigationProperty Name="esp_equipos" Relationship="Self.FK_esp_equipo" FromRole="equipos_fisicos" ToRole="esp_equipos" />
+          <NavigationProperty Name="proc_instalacion" Relationship="Self.FK_proc_instalacion" FromRole="equipos_fisicos" ToRole="proc_instalacion" />
+        </EntityType>
+        <EntityType Name="equipos_solicitud">
+          <Key>
+            <PropertyRef Name="equipo" />
+            <PropertyRef Name="solicitud" />
+          </Key>
+          <Property Name="equipo" Type="Int32" Nullable="false" />
+          <Property Name="solicitud" Type="Int32" Nullable="false" />
+          <Property Name="cantidad" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="equipos" Relationship="Self.FK_equipo_sol" FromRole="equipos_solicitud" ToRole="equipos" />
+          <NavigationProperty Name="solicitudes" Relationship="Self.FK_solicitud" FromRole="equipos_solicitud" ToRole="solicitudes" />
+        </EntityType>
+        <EntityType Name="esp_equipos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="marca" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="modelo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="potencia" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="consumo_corriente" Type="Decimal" Precision="7" Scale="2" Nullable="false" />
+          <Property Name="capacidad_btu" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="equipo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="equipos" Relationship="Self.FK_equipo" FromRole="esp_equipos" ToRole="equipos" />
+          <NavigationProperty Name="equipos_fisicos" Relationship="Self.FK_esp_equipo" FromRole="esp_equipos" ToRole="equipos_fisicos" />
+          <NavigationProperty Name="linea_compra" Relationship="Self.FK_equipos_compra" FromRole="esp_equipos" ToRole="linea_compra" />
+        </EntityType>
+        <EntityType Name="instituciones">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="telefono" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="email_contacto" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="direccion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="compras" Relationship="Self.FK_inst_compra" FromRole="instituciones" ToRole="compras" />
+          <NavigationProperty Name="departamentos" Relationship="Self.FK_institucion" FromRole="instituciones" ToRole="departamentos" />
+        </EntityType>
+        <EntityType Name="linea_compra">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cantidad" Type="Int32" Nullable="false" />
+          <Property Name="subtotal" Type="Decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="compra" Type="Int32" Nullable="false" />
+          <Property Name="equipo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="compras" Relationship="Self.FK_compra" FromRole="linea_compra" ToRole="compras" />
+          <NavigationProperty Name="esp_equipos" Relationship="Self.FK_equipos_compra" FromRole="linea_compra" ToRole="esp_equipos" />
+        </EntityType>
+        <EntityType Name="mantenimientos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fecha_ini" Type="DateTime" Precision="0" />
+          <Property Name="fecha_fin" Type="DateTime" Precision="0" />
+          <Property Name="tipo" Type="Int32" Nullable="false" />
+          <Property Name="equipo_fisico" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="bitacora_mantenimiento" Relationship="Self.FK_bitacora_mantenimiento" FromRole="mantenimientos" ToRole="bitacora_mantenimiento" />
+          <NavigationProperty Name="equipos_fisicos" Relationship="Self.FK_equipo_fisico" FromRole="mantenimientos" ToRole="equipos_fisicos" />
+          <NavigationProperty Name="usuarios" Relationship="Self.empleados_mantenimiento" FromRole="mantenimientos" ToRole="usuarios" />
+        </EntityType>
+        <EntityType Name="menus">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="super_opcion" Type="Int32" />
+          <Property Name="nombre_opcion" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ruta_acceso" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="perfiles_permisos" Relationship="Self.FK_menu_perfil" FromRole="menus" ToRole="perfiles_permisos" />
+          <NavigationProperty Name="menus1" Relationship="Self.FK_super_opcion" FromRole="menus" ToRole="menus1" />
+          <NavigationProperty Name="menus2" Relationship="Self.FK_super_opcion" FromRole="menus1" ToRole="menus" />
+        </EntityType>
+        <EntityType Name="perfiles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="perfil" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="perfiles_usuarios" Relationship="Self.FK_perfil" FromRole="perfiles" ToRole="perfiles_usuarios" />
+          <NavigationProperty Name="perfiles_permisos" Relationship="Self.FK_perfil_menu" FromRole="perfiles" ToRole="perfiles_permisos" />
+        </EntityType>
+        <EntityType Name="perfiles_permisos">
+          <Key>
+            <PropertyRef Name="perfil" />
+            <PropertyRef Name="menu" />
+            <PropertyRef Name="estado" />
+          </Key>
+          <Property Name="perfil" Type="Int32" Nullable="false" />
+          <Property Name="menu" Type="Int32" Nullable="false" />
+          <Property Name="estado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="menus" Relationship="Self.FK_menu_perfil" FromRole="perfiles_permisos" ToRole="menus" />
+          <NavigationProperty Name="perfiles" Relationship="Self.FK_perfil_menu" FromRole="perfiles_permisos" ToRole="perfiles" />
+        </EntityType>
+        <EntityType Name="perfiles_usuarios">
+          <Key>
+            <PropertyRef Name="usuario" />
+            <PropertyRef Name="perfil" />
+          </Key>
+          <Property Name="usuario" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="perfil" Type="Int32" Nullable="false" />
+          <Property Name="estado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="perfiles" Relationship="Self.FK_perfil" FromRole="perfiles_usuarios" ToRole="perfiles" />
+          <NavigationProperty Name="usuarios" Relationship="Self.FK_usuario" FromRole="perfiles_usuarios" ToRole="usuarios" />
+        </EntityType>
+        <EntityType Name="proc_instalacion">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="equipo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fecha_ini" Type="DateTime" Precision="0" />
+          <Property Name="fecha_fin" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="bitacora_instalacion" Relationship="Self.FK_bitacora_inst_equipo" FromRole="proc_instalacion" ToRole="bitacora_instalacion" />
+          <NavigationProperty Name="equipos_fisicos" Relationship="Self.FK_proc_instalacion" FromRole="proc_instalacion" ToRole="equipos_fisicos" />
+          <NavigationProperty Name="usuarios" Relationship="Self.instalacion_empleados" FromRole="proc_instalacion" ToRole="usuarios" />
+        </EntityType>
+        <EntityType Name="rec_password">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="usuario" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fecha_fin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ram_hash" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="estado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="usuarios" Relationship="Self.FK_usuario_rec_password" FromRole="rec_password" ToRole="usuarios" />
+        </EntityType>
+        <EntityType Name="solicitudes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fecha_registro" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="departamento" Type="Int32" Nullable="false" />
+          <Property Name="estado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="departamentos" Relationship="Self.FK_dept_solicitud" FromRole="solicitudes" ToRole="departamentos" />
+          <NavigationProperty Name="equipos_solicitud" Relationship="Self.FK_solicitud" FromRole="solicitudes" ToRole="equipos_solicitud" />
+        </EntityType>
+        <EntityType Name="tipos_empresa">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="empresas" Relationship="Self.FK_tipo_empresa" FromRole="tipos_empresa" ToRole="empresas" />
+        </EntityType>
+        <EntityType Name="usuarios">
+          <Key>
+            <PropertyRef Name="email" />
+          </Key>
+          <Property Name="email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="empresa" Type="Int32" />
+          <Property Name="departamento" Type="Int32" />
+          <Property Name="nombre_completo" Type="String" MaxLength="350" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="estado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="departamentos" Relationship="Self.FK_depart" FromRole="usuarios" ToRole="departamentos" />
+          <NavigationProperty Name="empresas" Relationship="Self.FK_empresa" FromRole="usuarios" ToRole="empresas" />
+          <NavigationProperty Name="perfiles_usuarios" Relationship="Self.FK_usuario" FromRole="usuarios" ToRole="perfiles_usuarios" />
+          <NavigationProperty Name="rec_password" Relationship="Self.FK_usuario_rec_password" FromRole="usuarios" ToRole="rec_password" />
+          <NavigationProperty Name="departamentos1" Relationship="Self.bloqueo_instalacion" FromRole="usuarios" ToRole="departamentos" />
+          <NavigationProperty Name="mantenimientos" Relationship="Self.empleados_mantenimiento" FromRole="usuarios" ToRole="mantenimientos" />
+          <NavigationProperty Name="proc_instalacion" Relationship="Self.instalacion_empleados" FromRole="usuarios" ToRole="proc_instalacion" />
+        </EntityType>
+        <Association Name="FK_bitacora_inst_equipo">
+          <End Role="proc_instalacion" Type="Self.proc_instalacion" Multiplicity="1" />
+          <End Role="bitacora_instalacion" Type="Self.bitacora_instalacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="proc_instalacion">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="bitacora_instalacion">
+              <PropertyRef Name="proc_instalacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_bitacora_mantenimiento">
+          <End Role="mantenimientos" Type="Self.mantenimientos" Multiplicity="1" />
+          <End Role="bitacora_mantenimiento" Type="Self.bitacora_mantenimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mantenimientos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="bitacora_mantenimiento">
+              <PropertyRef Name="mantenimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cat_equipo">
+          <End Role="categorias_equipo" Type="Self.categorias_equipo" Multiplicity="1" />
+          <End Role="equipos" Type="Self.equipos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categorias_equipo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="equipos">
+              <PropertyRef Name="categoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_compra">
+          <End Role="compras" Type="Self.compras" Multiplicity="1" />
+          <End Role="linea_compra" Type="Self.linea_compra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="compras">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="linea_compra">
+              <PropertyRef Name="compra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_inst_compra">
+          <End Role="instituciones" Type="Self.instituciones" Multiplicity="1" />
+          <End Role="compras" Type="Self.compras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="instituciones">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="compras">
+              <PropertyRef Name="institucion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_depart">
+          <End Role="departamentos" Type="Self.departamentos" Multiplicity="0..1" />
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="departamentos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="usuarios">
+              <PropertyRef Name="departamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dept_equipo">
+          <End Role="departamentos" Type="Self.departamentos" Multiplicity="1" />
+          <End Role="equipos_fisicos" Type="Self.equipos_fisicos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="departamentos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="equipos_fisicos">
+              <PropertyRef Name="departamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dept_solicitud">
+          <End Role="departamentos" Type="Self.departamentos" Multiplicity="1" />
+          <End Role="solicitudes" Type="Self.solicitudes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="departamentos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="solicitudes">
+              <PropertyRef Name="departamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_institucion">
+          <End Role="instituciones" Type="Self.instituciones" Multiplicity="1" />
+          <End Role="departamentos" Type="Self.departamentos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="instituciones">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="departamentos">
+              <PropertyRef Name="institucion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_empresa">
+          <End Role="empresas" Type="Self.empresas" Multiplicity="0..1" />
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="usuarios">
+              <PropertyRef Name="empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tipo_empresa">
+          <End Role="tipos_empresa" Type="Self.tipos_empresa" Multiplicity="1" />
+          <End Role="empresas" Type="Self.empresas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipos_empresa">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="empresas">
+              <PropertyRef Name="tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_equipo">
+          <End Role="equipos" Type="Self.equipos" Multiplicity="1" />
+          <End Role="esp_equipos" Type="Self.esp_equipos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="equipos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="esp_equipos">
+              <PropertyRef Name="equipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_equipo_sol">
+          <End Role="equipos" Type="Self.equipos" Multiplicity="1" />
+          <End Role="equipos_solicitud" Type="Self.equipos_solicitud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="equipos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="equipos_solicitud">
+              <PropertyRef Name="equipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_equipo_fisico">
+          <End Role="equipos_fisicos" Type="Self.equipos_fisicos" Multiplicity="1" />
+          <End Role="mantenimientos" Type="Self.mantenimientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="equipos_fisicos">
+              <PropertyRef Name="num_serial" />
+            </Principal>
+            <Dependent Role="mantenimientos">
+              <PropertyRef Name="equipo_fisico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_esp_equipo">
+          <End Role="esp_equipos" Type="Self.esp_equipos" Multiplicity="1" />
+          <End Role="equipos_fisicos" Type="Self.equipos_fisicos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="esp_equipos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="equipos_fisicos">
+              <PropertyRef Name="esp_equipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_proc_instalacion">
+          <End Role="equipos_fisicos" Type="Self.equipos_fisicos" Multiplicity="1" />
+          <End Role="proc_instalacion" Type="Self.proc_instalacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="equipos_fisicos">
+              <PropertyRef Name="num_serial" />
+            </Principal>
+            <Dependent Role="proc_instalacion">
+              <PropertyRef Name="equipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_solicitud">
+          <End Role="solicitudes" Type="Self.solicitudes" Multiplicity="1" />
+          <End Role="equipos_solicitud" Type="Self.equipos_solicitud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="solicitudes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="equipos_solicitud">
+              <PropertyRef Name="solicitud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_equipos_compra">
+          <End Role="esp_equipos" Type="Self.esp_equipos" Multiplicity="1" />
+          <End Role="linea_compra" Type="Self.linea_compra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="esp_equipos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="linea_compra">
+              <PropertyRef Name="equipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_menu_perfil">
+          <End Role="menus" Type="Self.menus" Multiplicity="1" />
+          <End Role="perfiles_permisos" Type="Self.perfiles_permisos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="menus">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="perfiles_permisos">
+              <PropertyRef Name="menu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_super_opcion">
+          <End Role="menus" Type="Self.menus" Multiplicity="0..1" />
+          <End Role="menus1" Type="Self.menus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="menus">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="menus1">
+              <PropertyRef Name="super_opcion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_perfil">
+          <End Role="perfiles" Type="Self.perfiles" Multiplicity="1" />
+          <End Role="perfiles_usuarios" Type="Self.perfiles_usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="perfiles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="perfiles_usuarios">
+              <PropertyRef Name="perfil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_perfil_menu">
+          <End Role="perfiles" Type="Self.perfiles" Multiplicity="1" />
+          <End Role="perfiles_permisos" Type="Self.perfiles_permisos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="perfiles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="perfiles_permisos">
+              <PropertyRef Name="perfil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usuario">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="1" />
+          <End Role="perfiles_usuarios" Type="Self.perfiles_usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="email" />
+            </Principal>
+            <Dependent Role="perfiles_usuarios">
+              <PropertyRef Name="usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usuario_rec_password">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="1" />
+          <End Role="rec_password" Type="Self.rec_password" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="email" />
+            </Principal>
+            <Dependent Role="rec_password">
+              <PropertyRef Name="usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="bloqueo_instalacion">
+          <End Role="departamentos" Type="Self.departamentos" Multiplicity="*" />
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="*" />
+        </Association>
+        <Association Name="empleados_mantenimiento">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="*" />
+          <End Role="mantenimientos" Type="Self.mantenimientos" Multiplicity="*" />
+        </Association>
+        <Association Name="instalacion_empleados">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="*" />
+          <End Role="proc_instalacion" Type="Self.proc_instalacion" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="proyectoBADEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="bitacora_instalacion" EntityType="Self.bitacora_instalacion" />
+          <EntitySet Name="bitacora_mantenimiento" EntityType="Self.bitacora_mantenimiento" />
+          <EntitySet Name="categorias_equipo" EntityType="Self.categorias_equipo" />
+          <EntitySet Name="compras" EntityType="Self.compras" />
+          <EntitySet Name="departamentos" EntityType="Self.departamentos" />
+          <EntitySet Name="empresas" EntityType="Self.empresas" />
+          <EntitySet Name="equipos" EntityType="Self.equipos" />
+          <EntitySet Name="equipos_fisicos" EntityType="Self.equipos_fisicos" />
+          <EntitySet Name="equipos_solicitud" EntityType="Self.equipos_solicitud" />
+          <EntitySet Name="esp_equipos" EntityType="Self.esp_equipos" />
+          <EntitySet Name="instituciones" EntityType="Self.instituciones" />
+          <EntitySet Name="linea_compra" EntityType="Self.linea_compra" />
+          <EntitySet Name="mantenimientos" EntityType="Self.mantenimientos" />
+          <EntitySet Name="menus" EntityType="Self.menus" />
+          <EntitySet Name="perfiles" EntityType="Self.perfiles" />
+          <EntitySet Name="perfiles_permisos" EntityType="Self.perfiles_permisos" />
+          <EntitySet Name="perfiles_usuarios" EntityType="Self.perfiles_usuarios" />
+          <EntitySet Name="proc_instalacion" EntityType="Self.proc_instalacion" />
+          <EntitySet Name="rec_password" EntityType="Self.rec_password" />
+          <EntitySet Name="solicitudes" EntityType="Self.solicitudes" />
+          <EntitySet Name="tipos_empresa" EntityType="Self.tipos_empresa" />
+          <EntitySet Name="usuarios" EntityType="Self.usuarios" />
+          <AssociationSet Name="FK_bitacora_inst_equipo" Association="Self.FK_bitacora_inst_equipo">
+            <End Role="proc_instalacion" EntitySet="proc_instalacion" />
+            <End Role="bitacora_instalacion" EntitySet="bitacora_instalacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_bitacora_mantenimiento" Association="Self.FK_bitacora_mantenimiento">
+            <End Role="mantenimientos" EntitySet="mantenimientos" />
+            <End Role="bitacora_mantenimiento" EntitySet="bitacora_mantenimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cat_equipo" Association="Self.FK_cat_equipo">
+            <End Role="categorias_equipo" EntitySet="categorias_equipo" />
+            <End Role="equipos" EntitySet="equipos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_compra" Association="Self.FK_compra">
+            <End Role="compras" EntitySet="compras" />
+            <End Role="linea_compra" EntitySet="linea_compra" />
+          </AssociationSet>
+          <AssociationSet Name="FK_inst_compra" Association="Self.FK_inst_compra">
+            <End Role="instituciones" EntitySet="instituciones" />
+            <End Role="compras" EntitySet="compras" />
+          </AssociationSet>
+          <AssociationSet Name="FK_depart" Association="Self.FK_depart">
+            <End Role="departamentos" EntitySet="departamentos" />
+            <End Role="usuarios" EntitySet="usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dept_equipo" Association="Self.FK_dept_equipo">
+            <End Role="departamentos" EntitySet="departamentos" />
+            <End Role="equipos_fisicos" EntitySet="equipos_fisicos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dept_solicitud" Association="Self.FK_dept_solicitud">
+            <End Role="departamentos" EntitySet="departamentos" />
+            <End Role="solicitudes" EntitySet="solicitudes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_institucion" Association="Self.FK_institucion">
+            <End Role="instituciones" EntitySet="instituciones" />
+            <End Role="departamentos" EntitySet="departamentos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_empresa" Association="Self.FK_empresa">
+            <End Role="empresas" EntitySet="empresas" />
+            <End Role="usuarios" EntitySet="usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tipo_empresa" Association="Self.FK_tipo_empresa">
+            <End Role="tipos_empresa" EntitySet="tipos_empresa" />
+            <End Role="empresas" EntitySet="empresas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_equipo" Association="Self.FK_equipo">
+            <End Role="equipos" EntitySet="equipos" />
+            <End Role="esp_equipos" EntitySet="esp_equipos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_equipo_sol" Association="Self.FK_equipo_sol">
+            <End Role="equipos" EntitySet="equipos" />
+            <End Role="equipos_solicitud" EntitySet="equipos_solicitud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_equipo_fisico" Association="Self.FK_equipo_fisico">
+            <End Role="equipos_fisicos" EntitySet="equipos_fisicos" />
+            <End Role="mantenimientos" EntitySet="mantenimientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_esp_equipo" Association="Self.FK_esp_equipo">
+            <End Role="esp_equipos" EntitySet="esp_equipos" />
+            <End Role="equipos_fisicos" EntitySet="equipos_fisicos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_proc_instalacion" Association="Self.FK_proc_instalacion">
+            <End Role="equipos_fisicos" EntitySet="equipos_fisicos" />
+            <End Role="proc_instalacion" EntitySet="proc_instalacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_solicitud" Association="Self.FK_solicitud">
+            <End Role="solicitudes" EntitySet="solicitudes" />
+            <End Role="equipos_solicitud" EntitySet="equipos_solicitud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_equipos_compra" Association="Self.FK_equipos_compra">
+            <End Role="esp_equipos" EntitySet="esp_equipos" />
+            <End Role="linea_compra" EntitySet="linea_compra" />
+          </AssociationSet>
+          <AssociationSet Name="FK_menu_perfil" Association="Self.FK_menu_perfil">
+            <End Role="menus" EntitySet="menus" />
+            <End Role="perfiles_permisos" EntitySet="perfiles_permisos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_super_opcion" Association="Self.FK_super_opcion">
+            <End Role="menus" EntitySet="menus" />
+            <End Role="menus1" EntitySet="menus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_perfil" Association="Self.FK_perfil">
+            <End Role="perfiles" EntitySet="perfiles" />
+            <End Role="perfiles_usuarios" EntitySet="perfiles_usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_perfil_menu" Association="Self.FK_perfil_menu">
+            <End Role="perfiles" EntitySet="perfiles" />
+            <End Role="perfiles_permisos" EntitySet="perfiles_permisos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuario" Association="Self.FK_usuario">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="perfiles_usuarios" EntitySet="perfiles_usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuario_rec_password" Association="Self.FK_usuario_rec_password">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="rec_password" EntitySet="rec_password" />
+          </AssociationSet>
+          <AssociationSet Name="bloqueo_instalacion" Association="Self.bloqueo_instalacion">
+            <End Role="departamentos" EntitySet="departamentos" />
+            <End Role="usuarios" EntitySet="usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="empleados_mantenimiento" Association="Self.empleados_mantenimiento">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="mantenimientos" EntitySet="mantenimientos" />
+          </AssociationSet>
+          <AssociationSet Name="instalacion_empleados" Association="Self.instalacion_empleados">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="proc_instalacion" EntitySet="proc_instalacion" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="proyectoBADModelStoreContainer" CdmEntityContainer="proyectoBADEntities">
+          <EntitySetMapping Name="bitacora_instalacion">
+            <EntityTypeMapping TypeName="proyectoBADModel.bitacora_instalacion">
+              <MappingFragment StoreEntitySet="bitacora_instalacion">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="detalles" ColumnName="detalles" />
+                <ScalarProperty Name="proc_instalacion" ColumnName="proc_instalacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bitacora_mantenimiento">
+            <EntityTypeMapping TypeName="proyectoBADModel.bitacora_mantenimiento">
+              <MappingFragment StoreEntitySet="bitacora_mantenimiento">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="detalles" ColumnName="detalles" />
+                <ScalarProperty Name="mantenimiento" ColumnName="mantenimiento" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="categorias_equipo">
+            <EntityTypeMapping TypeName="proyectoBADModel.categorias_equipo">
+              <MappingFragment StoreEntitySet="categorias_equipo">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="categoria" ColumnName="categoria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="compras">
+            <EntityTypeMapping TypeName="proyectoBADModel.compras">
+              <MappingFragment StoreEntitySet="compras">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="tipo_contratacion" ColumnName="tipo_contratacion" />
+                <ScalarProperty Name="total_compra" ColumnName="total_compra" />
+                <ScalarProperty Name="institucion" ColumnName="institucion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="departamentos">
+            <EntityTypeMapping TypeName="proyectoBADModel.departamentos">
+              <MappingFragment StoreEntitySet="departamentos">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="email_contacto" ColumnName="email_contacto" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="max_compras" ColumnName="max_compras" />
+                <ScalarProperty Name="institucion" ColumnName="institucion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="empresas">
+            <EntityTypeMapping TypeName="proyectoBADModel.empresas">
+              <MappingFragment StoreEntitySet="empresas">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="email_contacto" ColumnName="email_contacto" />
+                <ScalarProperty Name="nit" ColumnName="nit" />
+                <ScalarProperty Name="nombre_responsable" ColumnName="nombre_responsable" />
+                <ScalarProperty Name="dui_responsable" ColumnName="dui_responsable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="equipos">
+            <EntityTypeMapping TypeName="proyectoBADModel.equipos">
+              <MappingFragment StoreEntitySet="equipos">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="especificaciones" ColumnName="especificaciones" />
+                <ScalarProperty Name="categoria" ColumnName="categoria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="equipos_fisicos">
+            <EntityTypeMapping TypeName="proyectoBADModel.equipos_fisicos">
+              <MappingFragment StoreEntitySet="equipos_fisicos">
+                <ScalarProperty Name="num_serial" ColumnName="num_serial" />
+                <ScalarProperty Name="fecha_fabricacion" ColumnName="fecha_fabricacion" />
+                <ScalarProperty Name="tiempo_garantia" ColumnName="tiempo_garantia" />
+                <ScalarProperty Name="detalles_garantia" ColumnName="detalles_garantia" />
+                <ScalarProperty Name="estado_garantia" ColumnName="estado_garantia" />
+                <ScalarProperty Name="departamento" ColumnName="departamento" />
+                <ScalarProperty Name="esp_equipo" ColumnName="esp_equipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="equipos_solicitud">
+            <EntityTypeMapping TypeName="proyectoBADModel.equipos_solicitud">
+              <MappingFragment StoreEntitySet="equipos_solicitud">
+                <ScalarProperty Name="equipo" ColumnName="equipo" />
+                <ScalarProperty Name="solicitud" ColumnName="solicitud" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="esp_equipos">
+            <EntityTypeMapping TypeName="proyectoBADModel.esp_equipos">
+              <MappingFragment StoreEntitySet="esp_equipos">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="marca" ColumnName="marca" />
+                <ScalarProperty Name="modelo" ColumnName="modelo" />
+                <ScalarProperty Name="potencia" ColumnName="potencia" />
+                <ScalarProperty Name="consumo_corriente" ColumnName="consumo_corriente" />
+                <ScalarProperty Name="capacidad_btu" ColumnName="capacidad_btu" />
+                <ScalarProperty Name="equipo" ColumnName="equipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="instituciones">
+            <EntityTypeMapping TypeName="proyectoBADModel.instituciones">
+              <MappingFragment StoreEntitySet="instituciones">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="email_contacto" ColumnName="email_contacto" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="linea_compra">
+            <EntityTypeMapping TypeName="proyectoBADModel.linea_compra">
+              <MappingFragment StoreEntitySet="linea_compra">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="subtotal" ColumnName="subtotal" />
+                <ScalarProperty Name="compra" ColumnName="compra" />
+                <ScalarProperty Name="equipo" ColumnName="equipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mantenimientos">
+            <EntityTypeMapping TypeName="proyectoBADModel.mantenimientos">
+              <MappingFragment StoreEntitySet="mantenimientos">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fecha_ini" ColumnName="fecha_ini" />
+                <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="equipo_fisico" ColumnName="equipo_fisico" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="menus">
+            <EntityTypeMapping TypeName="proyectoBADModel.menus">
+              <MappingFragment StoreEntitySet="menus">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="super_opcion" ColumnName="super_opcion" />
+                <ScalarProperty Name="nombre_opcion" ColumnName="nombre_opcion" />
+                <ScalarProperty Name="ruta_acceso" ColumnName="ruta_acceso" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="perfiles">
+            <EntityTypeMapping TypeName="proyectoBADModel.perfiles">
+              <MappingFragment StoreEntitySet="perfiles">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="perfil" ColumnName="perfil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="perfiles_permisos">
+            <EntityTypeMapping TypeName="proyectoBADModel.perfiles_permisos">
+              <MappingFragment StoreEntitySet="perfiles_permisos">
+                <ScalarProperty Name="perfil" ColumnName="perfil" />
+                <ScalarProperty Name="menu" ColumnName="menu" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="perfiles_usuarios">
+            <EntityTypeMapping TypeName="proyectoBADModel.perfiles_usuarios">
+              <MappingFragment StoreEntitySet="perfiles_usuarios">
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="perfil" ColumnName="perfil" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="proc_instalacion">
+            <EntityTypeMapping TypeName="proyectoBADModel.proc_instalacion">
+              <MappingFragment StoreEntitySet="proc_instalacion">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="equipo" ColumnName="equipo" />
+                <ScalarProperty Name="fecha_ini" ColumnName="fecha_ini" />
+                <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rec_password">
+            <EntityTypeMapping TypeName="proyectoBADModel.rec_password">
+              <MappingFragment StoreEntitySet="rec_password">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
+                <ScalarProperty Name="ram_hash" ColumnName="ram_hash" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="solicitudes">
+            <EntityTypeMapping TypeName="proyectoBADModel.solicitudes">
+              <MappingFragment StoreEntitySet="solicitudes">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fecha_registro" ColumnName="fecha_registro" />
+                <ScalarProperty Name="departamento" ColumnName="departamento" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tipos_empresa">
+            <EntityTypeMapping TypeName="proyectoBADModel.tipos_empresa">
+              <MappingFragment StoreEntitySet="tipos_empresa">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuarios">
+            <EntityTypeMapping TypeName="proyectoBADModel.usuarios">
+              <MappingFragment StoreEntitySet="usuarios">
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="empresa" ColumnName="empresa" />
+                <ScalarProperty Name="departamento" ColumnName="departamento" />
+                <ScalarProperty Name="nombre_completo" ColumnName="nombre_completo" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="bloqueo_instalacion" TypeName="proyectoBADModel.bloqueo_instalacion" StoreEntitySet="bloqueo_instalacion">
+            <EndProperty Name="departamentos">
+              <ScalarProperty Name="id" ColumnName="departamento" />
+            </EndProperty>
+            <EndProperty Name="usuarios">
+              <ScalarProperty Name="email" ColumnName="usuario" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="empleados_mantenimiento" TypeName="proyectoBADModel.empleados_mantenimiento" StoreEntitySet="empleados_mantenimiento">
+            <EndProperty Name="usuarios">
+              <ScalarProperty Name="email" ColumnName="empleado" />
+            </EndProperty>
+            <EndProperty Name="mantenimientos">
+              <ScalarProperty Name="id" ColumnName="mantenimiento" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="instalacion_empleados" TypeName="proyectoBADModel.instalacion_empleados" StoreEntitySet="instalacion_empleados">
+            <EndProperty Name="usuarios">
+              <ScalarProperty Name="email" ColumnName="empleado" />
+            </EndProperty>
+            <EndProperty Name="proc_instalacion">
+              <ScalarProperty Name="id" ColumnName="proc_instalacion" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

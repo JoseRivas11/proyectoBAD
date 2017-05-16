@@ -12,23 +12,18 @@ namespace proyectoBAD.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class PROCINSTALACION
+    public partial class tipos_empresa
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PROCINSTALACION()
+        public tipos_empresa()
         {
-            this.BITACORAINSTALACIONs = new HashSet<BITACORAINSTALACION>();
+            this.empresas = new HashSet<empresas>();
         }
     
-        public int IDPROCINSTALACION { get; set; }
-        public Nullable<int> IDUSUARIO { get; set; }
-        public Nullable<int> IDEQUIPO { get; set; }
-        public Nullable<System.DateTime> FECHAINICIO { get; set; }
-        public byte ESTADO { get; set; }
+        public int id { get; set; }
+        public string tipo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BITACORAINSTALACION> BITACORAINSTALACIONs { get; set; }
-        public virtual EQUIPO EQUIPO { get; set; }
-        public virtual USUARIO USUARIO { get; set; }
+        public virtual ICollection<empresas> empresas { get; set; }
     }
 }

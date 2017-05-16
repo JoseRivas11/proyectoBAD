@@ -12,13 +12,13 @@ namespace proyectoBAD.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class BITACORAINSTALACION
+    public partial class perfiles_usuarios
     {
-        public int IDBITACORAINSTALACION { get; set; }
-        public Nullable<int> IDPROCINSTALACION { get; set; }
-        public Nullable<System.DateTime> FECHABITACORAIN { get; set; }
-        public string DETALLES { get; set; }
+        public string usuario { get; set; }
+        public int perfil { get; set; }
+        public int estado { get; set; }
     
-        public virtual PROCINSTALACION PROCINSTALACION { get; set; }
+        public virtual perfiles perfiles { get; set; }
+        public virtual usuarios usuarios { get; set; }
     }
 }

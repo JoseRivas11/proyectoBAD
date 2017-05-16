@@ -12,14 +12,13 @@ namespace proyectoBAD.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class RECPASSWORD
+    public partial class bitacora_mantenimiento
     {
-        public int IDRECPASSWORD { get; set; }
-        public Nullable<int> IDUSUARIO { get; set; }
-        public Nullable<System.DateTime> FECHAFIN { get; set; }
-        public string KEY { get; set; }
-        public byte ESTADO { get; set; }
+        public int id { get; set; }
+        public string detalles { get; set; }
+        public int mantenimiento { get; set; }
+        public System.DateTime fecha { get; set; }
     
-        public virtual USUARIO USUARIO { get; set; }
+        public virtual mantenimientos mantenimientos { get; set; }
     }
 }

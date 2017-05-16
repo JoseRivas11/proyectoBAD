@@ -179,78 +179,96 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Authentication\UserManager.cs" />
+    <Compile Include="Controllers\EmpresaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InstitucionController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\BITACORAINSTALACION.cs">
-      <DependentUpon>ModelBD_BAD-115.tt</DependentUpon>
+    <Compile Include="Models\bitacora_instalacion.cs">
+      <DependentUpon>proyectoBAD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\BITACORAMANTENIMIENTO.cs">
-      <DependentUpon>ModelBD_BAD-115.tt</DependentUpon>
+    <Compile Include="Models\bitacora_mantenimiento.cs">
+      <DependentUpon>proyectoBAD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CATEGORIAEQUIPO.cs">
-      <DependentUpon>ModelBD_BAD-115.tt</DependentUpon>
+    <Compile Include="Models\categorias_equipo.cs">
+      <DependentUpon>proyectoBAD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\COMPRA.cs">
-      <DependentUpon>ModelBD_BAD-115.tt</DependentUpon>
+    <Compile Include="Models\compras.cs">
+      <DependentUpon>proyectoBAD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EMPRESA.cs">
-      <DependentUpon>ModelBD_BAD-115.tt</DependentUpon>
+    <Compile Include="Models\departamentos.cs">
+      <DependentUpon>proyectoBAD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EQUIPO.cs">
-      <DependentUpon>ModelBD_BAD-115.tt</DependentUpon>
+    <Compile Include="Models\empresas.cs">
+      <DependentUpon>proyectoBAD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ESPECIFICACIONEQUIPO.cs">
-      <DependentUpon>ModelBD_BAD-115.tt</DependentUpon>
+    <Compile Include="Models\equipos.cs">
+      <DependentUpon>proyectoBAD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\INSTITUCION.cs">
-      <DependentUpon>ModelBD_BAD-115.tt</DependentUpon>
+    <Compile Include="Models\equipos_fisicos.cs">
+      <DependentUpon>proyectoBAD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\LINECOMPRA.cs">
-      <DependentUpon>ModelBD_BAD-115.tt</DependentUpon>
+    <Compile Include="Models\equipos_solicitud.cs">
+      <DependentUpon>proyectoBAD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\MENU.cs">
-      <DependentUpon>ModelBD_BAD-115.tt</DependentUpon>
+    <Compile Include="Models\esp_equipos.cs">
+      <DependentUpon>proyectoBAD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ModelBD_BAD-115.Context.cs">
+    <Compile Include="Models\instituciones.cs">
+      <DependentUpon>proyectoBAD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\linea_compra.cs">
+      <DependentUpon>proyectoBAD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\mantenimientos.cs">
+      <DependentUpon>proyectoBAD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\menus.cs">
+      <DependentUpon>proyectoBAD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\perfiles.cs">
+      <DependentUpon>proyectoBAD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\perfiles_permisos.cs">
+      <DependentUpon>proyectoBAD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\perfiles_usuarios.cs">
+      <DependentUpon>proyectoBAD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\proc_instalacion.cs">
+      <DependentUpon>proyectoBAD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\proyectoBAD.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelBD_BAD-115.Context.tt</DependentUpon>
+      <DependentUpon>proyectoBAD.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ModelBD_BAD-115.cs">
+    <Compile Include="Models\proyectoBAD.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelBD_BAD-115.tt</DependentUpon>
+      <DependentUpon>proyectoBAD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ModelBD_BAD-115.Designer.cs">
+    <Compile Include="Models\proyectoBAD.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelBD_BAD-115.edmx</DependentUpon>
+      <DependentUpon>proyectoBAD.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\PERFIL.cs">
-      <DependentUpon>ModelBD_BAD-115.tt</DependentUpon>
+    <Compile Include="Models\rec_password.cs">
+      <DependentUpon>proyectoBAD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PERFILPERMISO.cs">
-      <DependentUpon>ModelBD_BAD-115.tt</DependentUpon>
+    <Compile Include="Models\solicitudes.cs">
+      <DependentUpon>proyectoBAD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PERFILUSUARIO.cs">
-      <DependentUpon>ModelBD_BAD-115.tt</DependentUpon>
+    <Compile Include="Models\tipos_empresa.cs">
+      <DependentUpon>proyectoBAD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PROCINSTALACION.cs">
-      <DependentUpon>ModelBD_BAD-115.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\RECPASSWORD.cs">
-      <DependentUpon>ModelBD_BAD-115.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TIPOEMPRESA.cs">
-      <DependentUpon>ModelBD_BAD-115.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\USUARIO.cs">
-      <DependentUpon>ModelBD_BAD-115.tt</DependentUpon>
+    <Compile Include="Models\usuarios.cs">
+      <DependentUpon>proyectoBAD.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\EmpresaViewModel.cs" />
     <Compile Include="ViewModels\CreateUserViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
   </ItemGroup>
@@ -272,15 +290,15 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="LICENSE.txt" />
-    <Content Include="Models\ModelBD_BAD-115.Context.tt">
+    <Content Include="Models\proyectoBAD.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelBD_BAD-115.edmx</DependentUpon>
-      <LastGenOutput>ModelBD_BAD-115.Context.cs</LastGenOutput>
+      <DependentUpon>proyectoBAD.edmx</DependentUpon>
+      <LastGenOutput>proyectoBAD.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\ModelBD_BAD-115.tt">
+    <Content Include="Models\proyectoBAD.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelBD_BAD-115.edmx</DependentUpon>
-      <LastGenOutput>ModelBD_BAD-115.cs</LastGenOutput>
+      <DependentUpon>proyectoBAD.edmx</DependentUpon>
+      <LastGenOutput>proyectoBAD.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\additional-methods.min.js" />
     <Content Include="Scripts\BootstarpUnobtrusiveValidation.js" />
@@ -310,6 +328,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Institucion\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -336,21 +355,27 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Models\ModelBD_BAD-115.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModelBD_BAD-115.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Models\ModelBD_BAD-115.edmx.diagram">
-      <DependentUpon>ModelBD_BAD-115.edmx</DependentUpon>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Empresa\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Empresa\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Models\proyectoBAD.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>proyectoBAD.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\proyectoBAD.edmx.diagram">
+      <DependentUpon>proyectoBAD.edmx</DependentUpon>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -12,18 +12,24 @@ namespace proyectoBAD.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class TIPOEMPRESA
+    public partial class equipos
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TIPOEMPRESA()
+        public equipos()
         {
-            this.EMPRESAs = new HashSet<EMPRESA>();
+            this.esp_equipos = new HashSet<esp_equipos>();
+            this.equipos_solicitud = new HashSet<equipos_solicitud>();
         }
     
-        public int IDTIPO { get; set; }
-        public string TIPO { get; set; }
+        public int id { get; set; }
+        public string nombre { get; set; }
+        public string especificaciones { get; set; }
+        public int categoria { get; set; }
     
+        public virtual categorias_equipo categorias_equipo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EMPRESA> EMPRESAs { get; set; }
+        public virtual ICollection<esp_equipos> esp_equipos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<equipos_solicitud> equipos_solicitud { get; set; }
     }
 }

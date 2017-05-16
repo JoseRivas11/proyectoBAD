@@ -16,7 +16,7 @@ namespace proyectoBAD.Controllers
 {
     public class LoginController : Controller
     {
-        private proyectoBADCon db = new proyectoBADCon();
+        private proyectoBADEntities db = new proyectoBADEntities();
 
         // GET: Login
         public ActionResult Index()
@@ -37,14 +37,14 @@ namespace proyectoBAD.Controllers
             {
                 string salt = BCrypt.Net.BCrypt.GenerateSalt(15);
 
-                USUARIO user = new USUARIO();
-                user.NOMBRECOMPLETO = cUserVM.name;
-                user.PASSWORD = BCrypt.Net.BCrypt.HashPassword(cUserVM.password, salt);
-                user.EMAIL = cUserVM.email;
+                usuarios user = new usuarios();
+                user.nombre_completo = cUserVM.name;
+                user.password = BCrypt.Net.BCrypt.HashPassword(cUserVM.password, salt);
+                user.email = cUserVM.email;
 
-                db.USUARIOs.Add(user);
+                db.usuarios.Add(user);
 
-                if (db.USUARIOs.Any(u => u.EMAIL == user.EMAIL))
+                if (db.usuarios.Any(u => u.email == user.email))
                 {
                     ModelState.AddModelError("", "Un usuario ya se encuentra registrado con este Correo Electrónico");
                 }
@@ -65,7 +65,7 @@ namespace proyectoBAD.Controllers
 
             if (ModelState.IsValid)
             {
-                USUARIO user = UserManager.isValid(loginVM.email, loginVM.password);
+                usuarios user = UserManager.isValid(loginVM.email, loginVM.password);
                 if (user == null)
                 {
                     ModelState.AddModelError("", "Correo o contraseña incorrectos");
@@ -76,8 +76,8 @@ namespace proyectoBAD.Controllers
                     var ident = new ClaimsIdentity(
                         new[] {
                             new Claim(ClaimTypes.Email, loginVM.email),
-                            new Claim(ClaimTypes.Name, user.NOMBRECOMPLETO),
-                            new Claim(ClaimTypes.NameIdentifier, user.IDUSUARIO.ToString(), ClaimValueTypes.Integer)
+                            new Claim(ClaimTypes.Name, user.nombre_completo),
+                            new Claim(ClaimTypes.NameIdentifier, user.email)
                         }, DefaultAuthenticationTypes.ApplicationCookie);
                     HttpContext.GetOwinContext().Authentication.SignIn(
                         new AuthenticationProperties { IsPersistent = false }, ident);

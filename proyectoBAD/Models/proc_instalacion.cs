@@ -12,23 +12,24 @@ namespace proyectoBAD.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ESPECIFICACIONEQUIPO
+    public partial class proc_instalacion
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ESPECIFICACIONEQUIPO()
+        public proc_instalacion()
         {
-            this.EQUIPOes = new HashSet<EQUIPO>();
+            this.bitacora_instalacion = new HashSet<bitacora_instalacion>();
+            this.usuarios = new HashSet<usuarios>();
         }
     
-        public int IDESEQUIPO { get; set; }
-        public string MARCA { get; set; }
-        public string MODELO { get; set; }
-        public Nullable<decimal> POTENCIA { get; set; }
-        public Nullable<decimal> CAPACIDADBTU { get; set; }
-        public Nullable<decimal> CORRIENTEOPERACION { get; set; }
-        public string ANIOFABRICACION { get; set; }
+        public int id { get; set; }
+        public string equipo { get; set; }
+        public Nullable<System.DateTime> fecha_ini { get; set; }
+        public Nullable<System.DateTime> fecha_fin { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EQUIPO> EQUIPOes { get; set; }
+        public virtual ICollection<bitacora_instalacion> bitacora_instalacion { get; set; }
+        public virtual equipos_fisicos equipos_fisicos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<usuarios> usuarios { get; set; }
     }
 }

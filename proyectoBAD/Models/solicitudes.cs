@@ -12,26 +12,21 @@ namespace proyectoBAD.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class MENU
+    public partial class solicitudes
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public MENU()
+        public solicitudes()
         {
-            this.MENU1 = new HashSet<MENU>();
-            this.PERFILPERMISOes = new HashSet<PERFILPERMISO>();
+            this.equipos_solicitud = new HashSet<equipos_solicitud>();
         }
     
-        public int IDENTMENU { get; set; }
-        public Nullable<int> MEN_IDENTMENU { get; set; }
-        public string NOMBREOPCION { get; set; }
-        public string RUTAACCESO { get; set; }
-        public Nullable<int> PORDEFECTO { get; set; }
-        public byte ESTADO { get; set; }
+        public int id { get; set; }
+        public System.DateTime fecha_registro { get; set; }
+        public int departamento { get; set; }
+        public int estado { get; set; }
     
+        public virtual departamentos departamentos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MENU> MENU1 { get; set; }
-        public virtual MENU MENU2 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PERFILPERMISO> PERFILPERMISOes { get; set; }
+        public virtual ICollection<equipos_solicitud> equipos_solicitud { get; set; }
     }
 }

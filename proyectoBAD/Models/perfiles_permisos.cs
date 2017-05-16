@@ -12,13 +12,13 @@ namespace proyectoBAD.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class PERFILUSUARIO
+    public partial class perfiles_permisos
     {
-        public int IDUSUARIO { get; set; }
-        public int IDPERFIL { get; set; }
-        public byte ESTADO { get; set; }
+        public int perfil { get; set; }
+        public int menu { get; set; }
+        public int estado { get; set; }
     
-        public virtual PERFIL PERFIL { get; set; }
-        public virtual USUARIO USUARIO { get; set; }
+        public virtual menus menus { get; set; }
+        public virtual perfiles perfiles { get; set; }
     }
 }
