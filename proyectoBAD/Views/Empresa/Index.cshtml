@@ -1,20 +1,19 @@
-﻿@model IEnumerable<proyectoBAD.Models.empresas>
+﻿@model IEnumerable<proyectoBAD.ViewModels.EmpresaViewModel>
 
 @{
     ViewBag.Title = "Admon. Empresas";
     ViewBag.Pageheader = "Empresas";
 }
+
 @section customStyles{ 
     @Styles.Render("~/bundles/dataTableStyles")
 }
 <div class="row">
     <div class="col-md-3 col-md-offset-9">
-        <a class="btn btn-primary" href="@Url.Action("Create", "Empresa")"><i class="fa fa-fw fa-plus"></i> Agregar</a>
+        <a class="btn btn-primary pull-right" href="@Url.Action("Create", "Empresa")"><i class="fa fa-fw fa-plus"></i> Agregar</a>
     </div>
 </div>
 <br />
-<br />
-
 <div class="row">
     
     @if (ViewBag.SuccessMessage != null)
@@ -22,7 +21,7 @@
         <div class="col-md-4 col-md-offset-4">
             <div class="alert alert-success alert-dismissable">
                 <button class="close" aria-hidden="true" type="button" data-dismiss="alert">×</button>
-                ViewBag.SuccessMessage
+                @ViewBag.SuccessMessage
             </div>
         </div>
     }
@@ -33,22 +32,22 @@
                 <thead>
                     <tr role="row">
                         <th>
-                            @Html.DisplayNameFor(model => model.id)
+                            @Html.DisplayNameFor(model => model.IDEMP)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.nombre)
+                            @Html.DisplayNameFor(model => model.NOMBREEMP)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.telefono)
+                            @Html.DisplayNameFor(model => model.TELEFONOCONTACTO)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.email_contacto)
+                            @Html.DisplayNameFor(model => model.EMAILCONTACTO)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.nombre_responsable)
+                            @Html.DisplayNameFor(model => model.NOMBREEMP)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.tipos_empresa)
+                            @Html.DisplayNameFor(model => model.TIPOEMP)
                         </th>
                         <th>Acciones</th>
                     </tr>
@@ -58,25 +57,25 @@
                     {
                         <tr role="row">
                             <td>
-                                @Html.DisplayFor(modelItem => item.id)
+                                @Html.DisplayFor(modelItem => item.IDEMP)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.nombre)
+                                @Html.DisplayFor(modelItem => item.NOMBREEMP)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.telefono)
+                                @Html.DisplayFor(modelItem => item.TELEFONOCONTACTO)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.email_contacto)
+                                @Html.DisplayFor(modelItem => item.EMAILCONTACTO)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.nombre_responsable)
+                                @Html.DisplayFor(modelItem => item.NOMBRERESPEMP)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.tipos_empresa.tipo)
+                                @Html.DisplayFor(modelItem => item.TIPOEMP.tipo)
                             </td>
                             <td>
-                                <a href="@Url.Action("Edit", "Empresa", new { id = item.id })" title=""  class="btn btn-primary btn-xs action"
+                                <a href="@Url.Action("Edit", "Empresa", new { id = item.IDEMP })" title=""  class="btn btn-primary btn-xs action"
                                    data-original-title="Editar" data-toggle="tooltip" data-placement="top">
                                     <i class="fa fa-fw fa-edit"></i>
                                 </a>

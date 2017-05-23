@@ -27,7 +27,6 @@ namespace proyectoBAD.Models
         public string nombre { get; set; }
         public string email_contacto { get; set; }
         public string telefono { get; set; }
-        public decimal max_compras { get; set; }
         public int institucion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

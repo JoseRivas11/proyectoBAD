@@ -10,15 +10,25 @@ namespace proyectoBAD.Controllers
 {
     public class EmpresaController : Controller
     {
-        //TODO: Poner la anotación con respecto a quien debe tener permisos para acceder
+        //TODO: Poner las anotaciones con respecto a quien debe tener permisos para acceder
         private proyectoBADEntities db = new proyectoBADEntities();
 
         // GET: Empresa
         [Authorize]
         public ActionResult Index()
         {
-            List<empresas> empresas = db.empresas.ToList();
-            if (TempData["successMesage"] != null)
+            List<EmpresaViewModel> empresas = db.empresas.Select(t => new EmpresaViewModel()
+            {
+                IDEMP = t.id,
+                TIPOEMP = t.tipos_empresa,
+                DIRECCIONEMP = t.direccion,
+                EMAILCONTACTO = t.email_contacto,
+                NOMBREEMP = t.nombre,
+                NOMBRERESPEMP = t.nombre_responsable,
+                TELEFONOCONTACTO = t.telefono
+
+            }).ToList();
+            if (TempData["successMessage"] != null)
             {
                 ViewBag.SuccessMessage = TempData["successMessage"];
             }
@@ -30,6 +40,10 @@ namespace proyectoBAD.Controllers
         public ActionResult Edit(int id)
         {
             empresas empresa = db.empresas.Find(id);
+
+            ViewBag.Button = "Editar";
+            ViewBag.Action = "Edit";
+
             if (empresa != null)
             {
                 EmpresaViewModel vmEmpresa = new EmpresaViewModel();
@@ -50,16 +64,11 @@ namespace proyectoBAD.Controllers
                 vmEmpresa.EMAILCONTACTO = empresa.email_contacto;
                 vmEmpresa.tiposEmpresa = list;
 
-                ViewBag.Button = "Editar";
-                ViewBag.Action = "Edit";
                 return View("Create", vmEmpresa);
             }
-            else
-            {
-                return View("Create", null);
-            }
 
-            
+            return View("Create", null);
+
         }
 
         [HttpPost]

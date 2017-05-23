@@ -21,29 +21,14 @@ namespace proyectoBAD.Models
             this.usuarios = new HashSet<usuarios>();
         }
 
-        [Display(Name = "Id Empresa")]
         public int id { get; set; }
         public int tipo { get; set; }
-
-        [Display(Name = "Nombre Empresa")]
         public string nombre { get; set; }
-
-        [Display(Name = "Direccion")]
         public string direccion { get; set; }
-
-        [Display(Name = "Telefono Contacto")]
         public string telefono { get; set; }
-
-        [Display(Name = "Email contacto")]
         public string email_contacto { get; set; }
-
-        [Display(Name = "NIT")]
         public string nit { get; set; }
-
-        [Display(Name = "Nombre Representante")]
         public string nombre_responsable { get; set; }
-
-        [Display(Name = "DUI Responsanble")]
         public string dui_responsable { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

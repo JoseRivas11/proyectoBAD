@@ -46,6 +46,9 @@ namespace proyectoBAD.ViewModels
         [Required(ErrorMessage = "Por favor seleccione el tipo de empresa")]
         public int IDTIPO { get; set; }
 
+        [Display(Name = "Tipo Empresa")]
+        public virtual tipos_empresa TIPOEMP { get; set; }
+
         public IEnumerable<SelectListItem> tiposEmpresa;
     }
 }
