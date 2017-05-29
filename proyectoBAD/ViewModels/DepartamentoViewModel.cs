@@ -34,5 +34,8 @@ namespace proyectoBAD.ViewModels
         public virtual instituciones institucion { get; set; }
 
         public IEnumerable<SelectListItem> instituciones;
+        public IEnumerable<SelectListItem> empresas;
+
+        public List<usuarios> empleados { get; set; }
     }
 }

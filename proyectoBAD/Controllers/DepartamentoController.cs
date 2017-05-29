@@ -42,13 +42,22 @@ namespace proyectoBAD.Controllers
                 Value = t.id.ToString()
             });
 
+            IEnumerable<SelectListItem> listEmpresas = db.empresas.Select(t => new SelectListItem()
+            {
+                Text = t.nombre,
+                Value = t.id.ToString()
+            });
+
             DepartamentoViewModel viewModel = new DepartamentoViewModel
             {
-                instituciones = list
+                instituciones = list,
+                empresas = listEmpresas,
+                empleados = new List<usuarios>()
             };
 
             ViewBag.Button = "Agregar";
             ViewBag.Action = "Create";
+            ViewBag.PageHeader = "Crear Institución";
 
             return View(viewModel);
         }
@@ -66,6 +75,7 @@ namespace proyectoBAD.Controllers
                 departamento.telefono = viewModel.telefono;
                 departamento.email_contacto = viewModel.email_contacto;
                 departamento.institucion = viewModel.idInst;
+                departamento.usuarios1 = viewModel.empleados;
 
                 db.departamentos.Add(departamento);
                 db.SaveChanges();
@@ -84,6 +94,7 @@ namespace proyectoBAD.Controllers
 
             ViewBag.Button = "Editar";
             ViewBag.Action = "Edit";
+            ViewBag.PageHeader = "Editar Institución";
 
             if (departamento != null)
             {
@@ -98,8 +109,14 @@ namespace proyectoBAD.Controllers
                     {
                         Text = t.nombre,
                         Value = t.id.ToString()
-                    })
-                };
+                    }),
+                    empresas = db.empresas.Select(t => new SelectListItem()
+                    {
+                        Text = t.nombre,
+                        Value = t.id.ToString()
+                    }),
+                    empleados = departamento.usuarios1.Count > 0 ? departamento.usuarios1.ToList() : new List<usuarios>()
+            };
 
                 return View("Create", viewModel);
             }
@@ -114,7 +131,7 @@ namespace proyectoBAD.Controllers
         {
             if (ModelState.IsValid)
             {
-                departamentos departamento = db.departamentos.Find(viewModel.id);
+                departamentos departamento = db.departamentos.Include("usuarios1").Single(dep => dep.id == viewModel.id);
 
                 if (departamento != null)
                 {
@@ -123,6 +140,38 @@ namespace proyectoBAD.Controllers
                     departamento.email_contacto = viewModel.email_contacto;
                     departamento.institucion = viewModel.idInst;
 
+                    if (departamento.usuarios1 != null && viewModel.empleados != null)
+                    {
+                        foreach (var usuario in departamento.usuarios1.ToList())
+                        {
+                            if (!viewModel.empleados.Any(p => p.email == usuario.email))
+                            {
+                                departamento.usuarios1.Remove(usuario);
+                            }
+                        }
+
+                        foreach (var usuario in viewModel.empleados)
+                        {
+                            if (!departamento.usuarios1.Any(u => u.email == usuario.email))
+                            {
+                                db.usuarios.Attach(usuario);
+                                departamento.usuarios1.Add(usuario);
+                            }
+                        }
+                    } else if (departamento.usuarios1 != null && viewModel.empleados == null)
+                    {
+                        foreach (var usuario in departamento.usuarios1.ToList())
+                        {
+                            departamento.usuarios1.Remove(usuario);
+                        }
+                    } else if (departamento.usuarios1 == null && viewModel.empleados != null)
+                    {
+                        foreach (var usuario in viewModel.empleados)
+                        {
+                            db.usuarios.Attach(usuario);
+                            departamento.usuarios1.Add(usuario);
+                        }
+                    }
                     db.SaveChanges();
 
                     TempData["successMessage"] = "Empresa editada exitosamente";
@@ -137,6 +186,18 @@ namespace proyectoBAD.Controllers
             return View();
         }
 
+        [Authorize]
+        [HttpPost]
+        public JsonResult getEmpleados(int idEmpresa)
+        {
+            List<SelectListItem> empleados = db.usuarios.Where(usuario => usuario.empresa == idEmpresa).Select(t => new SelectListItem()
+            {
+                Text = t.nombre_completo,
+                Value = t.email
+            }).ToList();
+
+            return Json(empleados);
+        }
 
     }
 }
