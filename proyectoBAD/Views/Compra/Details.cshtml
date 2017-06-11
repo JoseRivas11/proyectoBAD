@@ -1,0 +1,101 @@
+﻿@model proyectoBAD.ViewModels.ComprasViewModel
+
+@{
+    ViewBag.Title = "Admon. de Departamentos-Detalles";
+    ViewBag.PageHeader = "Detalles Compra";
+}
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <h4>Compras</h4>
+    <hr />
+    <dl>
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tipo_contratacion_string)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipo_contratacion_string)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.institucion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.institucion.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.total_compra)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.total_compra)
+        </dd>
+
+        <dt>
+            Lineas de Compra
+        </dt>
+        <dd>
+            @if (Model.lineas_compra.Count > 0)
+            {
+                <table class="table table-striped table-bordered table-hover table-condesed">
+                    <thead>
+                        <tr role="row">
+                            <th>Equipo</th>
+                            <th>Empresa proveedora</th>
+                            <th>Categoria Equipo</th>
+                            <th>Marca</th>
+                            <th>Modelo</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                            <th>Subtotal</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.lineas_compra)
+                        {
+                            <tr role="row">
+                                <td>@Html.DisplayFor(modelItem =>item.esp_equipos.equipos.nombre)</td>
+                                <td>@Html.DisplayFor(modelItem => item.esp_equipos.empresas.nombre)</td>
+                                <td>@Html.DisplayFor(modelItem =>item.esp_equipos.equipos.categorias_equipo.categoria)</td>
+                                <td>@Html.DisplayFor(modelItem => item.esp_equipos.marca)</td>
+                                <td>@Html.DisplayFor(modelItem => item.esp_equipos.modelo)</td>
+                                <td>@Html.DisplayFor(modelItem => item.esp_equipos.precio)</td>
+                                <td>@Html.DisplayFor(modelItem =>item.cantidad)</td>
+                                <td>@Html.DisplayFor(modelItem => item.cantidad * item.esp_equipos.precio)</td>
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <h5 id="message">No existen empleados bloqueados</h5>
+            }
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <a href="@Url.Action("Index", "Compra")" class="btn btn-default">
+        <i class="fa fa-fw fa-arrow-left"></i>Volver a la lista de Compras
+    </a>
+    <a href="@Url.Action("Edit", "Compra", new { id = Model.id})" class="btn btn-default">
+        <i class="fa fa-fw fa-edit"></i>Editar Compra
+    </a>
+</p>

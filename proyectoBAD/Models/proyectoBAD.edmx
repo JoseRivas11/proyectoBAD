@@ -121,6 +121,8 @@
           <Property Name="consumo_corriente" Type="decimal" Precision="7" Scale="2" Nullable="false" />
           <Property Name="capacidad_btu" Type="decimal" Precision="15" Scale="2" />
           <Property Name="equipo" Type="int" Nullable="false" />
+          <Property Name="empresa" Type="int" Nullable="false" />
+          <Property Name="precio" Type="decimal" Precision="15" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="instalacion_empleados">
           <Key>
@@ -147,7 +149,6 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="cantidad" Type="int" Nullable="false" />
-          <Property Name="subtotal" Type="decimal" Precision="15" Scale="2" Nullable="false" />
           <Property Name="compra" Type="int" Nullable="false" />
           <Property Name="equipo" Type="int" Nullable="false" />
         </EntityType>
@@ -383,6 +384,18 @@
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="usuarios">
+              <PropertyRef Name="empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empresa_Esq_Equipo">
+          <End Role="empresas" Type="Self.empresas" Multiplicity="1" />
+          <End Role="esp_equipos" Type="Self.esp_equipos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="esp_equipos">
               <PropertyRef Name="empresa" />
             </Dependent>
           </ReferentialConstraint>
@@ -677,6 +690,10 @@
             <End Role="empresas" EntitySet="empresas" />
             <End Role="usuarios" EntitySet="usuarios" />
           </AssociationSet>
+          <AssociationSet Name="FK_Empresa_Esq_Equipo" Association="Self.FK_Empresa_Esq_Equipo">
+            <End Role="empresas" EntitySet="empresas" />
+            <End Role="esp_equipos" EntitySet="esp_equipos" />
+          </AssociationSet>
           <AssociationSet Name="FK_equipo" Association="Self.FK_equipo">
             <End Role="equipos" EntitySet="equipos" />
             <End Role="esp_equipos" EntitySet="esp_equipos" />
@@ -824,6 +841,7 @@
           <Property Name="dui_responsable" Type="String" MaxLength="17" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="usuarios" Relationship="Self.FK_empresa" FromRole="empresas" ToRole="usuarios" />
           <NavigationProperty Name="tipos_empresa" Relationship="Self.FK_tipo_empresa" FromRole="empresas" ToRole="tipos_empresa" />
+          <NavigationProperty Name="esp_equipos" Relationship="proyectoBADModel.FK_Empresa_Esq_Equipo" FromRole="empresas" ToRole="esp_equipos" />
         </EntityType>
         <EntityType Name="equipos">
           <Key>
@@ -878,6 +896,9 @@
           <NavigationProperty Name="equipos" Relationship="Self.FK_equipo" FromRole="esp_equipos" ToRole="equipos" />
           <NavigationProperty Name="equipos_fisicos" Relationship="Self.FK_esp_equipo" FromRole="esp_equipos" ToRole="equipos_fisicos" />
           <NavigationProperty Name="linea_compra" Relationship="Self.FK_equipos_compra" FromRole="esp_equipos" ToRole="linea_compra" />
+          <Property Name="empresa" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="empresas" Relationship="proyectoBADModel.FK_Empresa_Esq_Equipo" FromRole="esp_equipos" ToRole="empresas" />
+          <Property Name="precio" Type="Decimal" Nullable="false" Precision="15" Scale="2" />
         </EntityType>
         <EntityType Name="instituciones">
           <Key>
@@ -898,7 +919,6 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="cantidad" Type="Int32" Nullable="false" />
-          <Property Name="subtotal" Type="Decimal" Precision="15" Scale="2" Nullable="false" />
           <Property Name="compra" Type="Int32" Nullable="false" />
           <Property Name="equipo" Type="Int32" Nullable="false" />
           <NavigationProperty Name="compras" Relationship="Self.FK_compra" FromRole="linea_compra" ToRole="compras" />
@@ -1453,7 +1473,23 @@
             <End Role="usuarios" EntitySet="usuarios" />
             <End Role="proc_instalacion" EntitySet="proc_instalacion" />
           </AssociationSet>
+          <AssociationSet Name="FK_Empresa_Esq_Equipo" Association="proyectoBADModel.FK_Empresa_Esq_Equipo">
+            <End Role="empresas" EntitySet="empresas" />
+            <End Role="esp_equipos" EntitySet="esp_equipos" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_Empresa_Esq_Equipo">
+          <End Type="proyectoBADModel.empresas" Role="empresas" Multiplicity="1" />
+          <End Type="proyectoBADModel.esp_equipos" Role="esp_equipos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="esp_equipos">
+              <PropertyRef Name="empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1560,6 +1596,8 @@
           <EntitySetMapping Name="esp_equipos">
             <EntityTypeMapping TypeName="proyectoBADModel.esp_equipos">
               <MappingFragment StoreEntitySet="esp_equipos">
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="empresa" ColumnName="empresa" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="marca" ColumnName="marca" />
                 <ScalarProperty Name="modelo" ColumnName="modelo" />
@@ -1587,7 +1625,6 @@
               <MappingFragment StoreEntitySet="linea_compra">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="cantidad" ColumnName="cantidad" />
-                <ScalarProperty Name="subtotal" ColumnName="subtotal" />
                 <ScalarProperty Name="compra" ColumnName="compra" />
                 <ScalarProperty Name="equipo" ColumnName="equipo" />
               </MappingFragment>

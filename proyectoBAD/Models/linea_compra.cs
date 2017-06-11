@@ -16,7 +16,6 @@ namespace proyectoBAD.Models
     {
         public int id { get; set; }
         public int cantidad { get; set; }
-        public decimal subtotal { get; set; }
         public int compra { get; set; }
         public int equipo { get; set; }
     
