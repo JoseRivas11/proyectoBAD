@@ -1,0 +1,50 @@
+﻿@model proyectoBAD.ViewModels.CategoriaEquipoViewModel
+
+
+
+@using (Html.BeginForm((String)ViewBag.Action, "CategoriaEquipo", FormMethod.Post, htmlAttributes: new { role = "form", @class = "form" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+       
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @if (ViewBag.Button == "Editar")
+            {
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ID, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-6">
+                        <p class="form-control-static">
+                            @Html.DisplayFor(model => model.ID)
+                            @Html.HiddenFor(model => model.ID)
+                        </p>
+                    </div>
+                </div>
+            }
+        <div class="form-group">
+            @Html.LabelFor(model => model.CATEGORIA, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.CATEGORIA, new { htmlAttributes = new { @class = "form-control", id="datoCat" } })
+                @Html.ValidationMessageFor(model => model.CATEGORIA, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-4">
+                <input type="submit" name="Gruadar" id="btnSave" value="@ViewBag.Button" class="btn btn-default" />
+            </div>
+        </div>
+        
+           
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section customScripts{
+   @Scripts.Render("~/bundles/formValidationScripts")
+}
+

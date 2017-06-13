@@ -1,0 +1,117 @@
+﻿@model proyectoBAD.ViewModels.EspecEquipoViewModel
+
+@{
+    ViewBag.Title = "Insert Especificación";
+    ViewBag.PageHeader = "Crear Especificación";
+}
+
+@section customStyles{
+    @Styles.Render("~/bundles/dataTableStyles")
+}
+
+
+
+
+@using (Html.BeginForm((String)ViewBag.Action, "EspecEquipo", FormMethod.Post, htmlAttributes: new { role = "form", @class = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Inserte los datos de especificación de equipos</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+
+        @if (ViewBag.Button == "Editar")
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.IDESPEQ, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-6">
+                    <p class="form-control-static">
+                        @Html.DisplayFor(model => model.IDESPEQ)
+                        @Html.HiddenFor(model => model.IDESPEQ)
+                    </p>
+                </div>
+            </div>
+        }
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MARCAESPEQ, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.MARCAESPEQ, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MARCAESPEQ, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MODELESPEQ, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.MODELESPEQ, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MODELESPEQ, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.POTENCIAESPEQ, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.POTENCIAESPEQ, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.POTENCIAESPEQ, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CONSCORRESPEQ, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.CONSCORRESPEQ, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CONSCORRESPEQ, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CAPBTUESPEQ, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.CAPBTUESPEQ, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CAPBTUESPEQ, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IDEQESPEQ, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DropDownListFor(model => model.IDEQESPEQ, Model.equiposEsp, "Seleccionar..",
+               htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IDEQESPEQ, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IDEMPESPEQ, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DropDownListFor(model => model.IDEMPESPEQ, Model.empresasEsp, "Seleccionar...",
+        htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IDEMPESPEQ, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PRECIOESPEQ, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.PRECIOESPEQ, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PRECIOESPEQ, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section customScripts{
+    @Scripts.Render("~/bundles/formValidationScripts")
+}

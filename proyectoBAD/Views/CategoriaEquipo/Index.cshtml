@@ -1,0 +1,111 @@
+﻿@model IEnumerable<proyectoBAD.ViewModels.CategoriaEquipoViewModel>
+
+@{
+    ViewBag.Title = "CategoriaEq";
+}
+
+@section customStyles{
+    @Styles.Render("~/bundles/dataTableStyles")
+}
+
+<h2>CATEGORIAS DE EQUIPOS</h2>
+
+<div class="row">
+    <div class="col-md-10">
+        <a class="btn btn-primary pull-right" href="@Url.Action("Create", "CategoriaEquipo")"><i class="fa fa-fw fa-plus"></i> Agregar</a>
+    </div>
+</div>
+
+<br />
+
+<div class="row">
+    @if (ViewBag.SuccessMessage != null)
+    {
+        <div class="col-md-4 col-md-offset-4">
+            <div class="alert alert-warning alert-dismissable">
+                <button class="close" aria-hidden="true" type="button" data-dismiss="alert">×</button>
+                @ViewBag.SuccessMessage
+            </div>
+        </div>
+    }
+    <div class="col-md-10">
+        @if (Model.Count() > 0)
+        { 
+            <table class="table table-striped table-bordered table-hover table-condesed data">
+                <thead>
+                    <tr>
+                        <th>
+                            Id
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CATEGORIA)
+                        </th>
+                        <th>
+                            Opciones
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CATEGORIA)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Editar ", "Edit", new { id = item.ID },new {id=item.ID })<span><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span> |
+                               
+                                @Html.ActionLink("Eliminar ", "Delete", new { id = item.ID}, new {@class = "confirmDelete" })<span><i class="fa fa-trash-o" aria-hidden="true"></i></span>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                
+
+
+            </table>
+            <hr />
+          
+            <input type="hidden" id="hiddenCategoriaID"/>
+        }
+        else
+        {
+        <h3>No hay datos que mostrar</h3>
+        }
+
+        <div>
+            <a href="@Url.Action("Create", "Equipo")" class="btn btn-default">
+                <i class="fa fa-fw fa-arrow-left"></i>Volver a la creación de equipos
+            </a>
+        </div>
+    </div>
+    
+
+</div>
+
+@section customScripts{
+    @Scripts.Render("~/bundles/dataTableScripts")
+    <script type="text/javascript">
+        $(document).ready(function () {
+           $(".data").DataTable({
+                responsive: true
+            });
+
+           $(".action").tooltip({
+               container: "body"
+           });
+           $(".confirmDelete").click(function (event) {
+               if (!confirm('Estas Seguro de Eliminar?')) {
+                   event.preventDefault();          
+                           
+               }
+          
+           });
+
+        });
+    </script>
+}
