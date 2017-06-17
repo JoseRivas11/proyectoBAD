@@ -9,12 +9,12 @@ namespace proyectoBAD.Authentication
 {
     public class UserManager
     {
+
         public static usuarios isValid(String email, String password)
         {
+            proyectoBADEntities db = new proyectoBADEntities();
             usuarios user = null;
-            using (var db = new proyectoBADEntities())
-            {
-                if (db.usuarios.Any(u => u.email == email))
+            if (db.usuarios.Any(u => u.email == email))
                 {
                     // TODO: Ver que el estado del usuario sea igual a 1(Activo)
                     user = db.usuarios.First(u => u.email == email);
@@ -24,7 +24,6 @@ namespace proyectoBAD.Authentication
                         user = null;
                     }
                 }
-            }
             return user;
 
         }

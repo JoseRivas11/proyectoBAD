@@ -30,6 +30,7 @@ namespace proyectoBAD.ViewModels
 
         [Display(Name = "Máximo Compra")]
         [Required(ErrorMessage = "Por favor ingrese el máximo de compra por año por empresa")]
+        [Range(1, int.MaxValue, ErrorMessage = "Por favor ingrese un valor positivo o mayor a 0")]
         public decimal max_compras { get; set; }
     }
 }

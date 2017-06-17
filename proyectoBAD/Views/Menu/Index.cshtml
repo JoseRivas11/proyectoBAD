@@ -1,8 +1,8 @@
-﻿@model IEnumerable<proyectoBAD.ViewModels.ComprasViewModel>
+﻿@model IEnumerable<proyectoBAD.ViewModels.MenuViewModel>
 
 @{
-    ViewBag.Title = "Admon. Compras";
-    ViewBag.Pageheader = "Compras";
+    ViewBag.Title = "Admon. Menus";
+    ViewBag.Pageheader = "Opciones de Menu";
 }
 
 @section customStyles{
@@ -11,7 +11,7 @@
 
 <div class="row">
     <div class="col-md-3 col-md-offset-9">
-        <a class="btn btn-primary pull-right" href="@Url.Action("Create", "Compra")"><i class="fa fa-fw fa-plus"></i> Agregar</a>
+        <a class="btn btn-primary pull-right" href="@Url.Action("Create", "Menu")"><i class="fa fa-fw fa-plus"></i> Agregar</a>
     </div>
 </div>
 <br />
@@ -35,16 +35,19 @@
                             @Html.DisplayNameFor(model => model.id)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.fecha)
+                            @Html.DisplayNameFor(model => model.super_opcion)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.tipo_contratacion)
+                            @Html.DisplayNameFor(model => model.nombre_opcion)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.total_compra)
+                            @Html.DisplayNameFor(model => model.controlador)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.institucion)
+                            @Html.DisplayNameFor(model => model.accion)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.estado)
                         </th>
                         <th>Acciones</th>
                     </tr>
@@ -52,34 +55,42 @@
 
                 @foreach (var item in Model)
                 {
-                    <tr role="row">
+                    <tr>
                         <td>
                             @Html.DisplayFor(modelItem => item.id)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.fecha)
+                            @if (item.superOpcion != null)
+                            {
+                            @Html.DisplayFor(modelItem => item.superOpcion.nombre_opcion)
+                            }
+                            else
+                            {
+                                <span>Ninguna</span>
+                            }
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem =>item.tipo_contratacion_string)
+                            @Html.DisplayFor(modelItem => item.nombre_opcion)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.total_compra)
+                           @Html.DisplayFor(modelItem => item.controlador)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.institucion.nombre)
+                            @Html.DisplayFor(modelItem => item.accion)
                         </td>
                         <td>
-                            <a href="@Url.Action("Edit", "Compra", new { id = item.id })" title="" class="btn btn-primary btn-xs action"
+                            @Html.DisplayFor(modelItem => item.nombre_estado)
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Edit", "Menu", new { id = item.id })" title="" class="btn btn-primary btn-xs action"
                                data-original-title="Editar" data-toggle="tooltip" data-placement="top">
                                 <i class="fa fa-fw fa-edit"></i>
                             </a>
-                            <a href="@Url.Action("Details", "Compra", new { id = item.id })" title="" class="btn btn-primary btn-xs action"
-                               data-original-title="Detalles" data-toggle="tooltip" data-placement="top">
-                                <i class="fa fa-fw fa-file"></i>
-                            </a>
-                            @*@Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                            @**
+                            @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
                             @Html.ActionLink("Details", "Details", new { id = item.id }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.id })*@
+                            @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                            **@
                         </td>
                     </tr>
                 }
@@ -106,4 +117,3 @@
         });
     </script>
 }
-

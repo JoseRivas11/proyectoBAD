@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using Microsoft.Owin;
+using proyectoBAD.ExtHelpers;
 
 namespace proyectoBAD.Controllers
 {
@@ -81,6 +82,38 @@ namespace proyectoBAD.Controllers
                         }, DefaultAuthenticationTypes.ApplicationCookie);
                     HttpContext.GetOwinContext().Authentication.SignIn(
                         new AuthenticationProperties { IsPersistent = false }, ident);
+
+                    List<OpcionMenu> menu = new List<OpcionMenu>();
+                    List<menus> opcionesUsuario = user.perfiles_usuarios.First(p => p.estado == 1).perfiles.perfiles_permisos.Select(t => t.menus).ToList();
+
+                    foreach (var opt in opcionesUsuario)
+                    {
+                        if (opt.super_opcion == null)
+                        {
+                            OpcionMenu optMenu = new OpcionMenu()
+                            {
+                                menu = opt,
+                                menus = new List<OpcionMenu>()
+                            };
+
+                            List<menus> subOpciones = opt.menus1.Where( m => m.super_opcion == opt.id).ToList();
+
+                            foreach (var subOpt in subOpciones)
+                            {
+                                optMenu.menus.Add(new OpcionMenu()
+                                {
+                                    menu = subOpt
+                                });
+                            }
+                            menu.Add(optMenu);
+                        }
+                        
+
+                       
+                    }
+
+                    Session["menu"] = menu;
+
                     return RedirectToAction("Index", "Home");
                 }
             }

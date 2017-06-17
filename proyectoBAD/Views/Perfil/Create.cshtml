@@ -1,0 +1,94 @@
+﻿@model proyectoBAD.ViewModels.PerfilViewModel
+
+@{
+    ViewBag.Title = "Admon. Opciones de Menu";
+}
+
+@section customStyles{
+    @Styles.Render("~/bundles/checkboxStyle")
+}
+
+    <div class="col-md-12">
+        @using (Html.BeginForm((String)ViewBag.Action, "Perfil", FormMethod.Post, htmlAttributes: new { role = "form", @class = "form" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h4>Perfil</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+                @if (ViewBag.Button == "Editar")
+                {
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.id, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-6">
+                            <p class="form-control-static">
+                                @Html.DisplayFor(model => model.id)
+                                @Html.HiddenFor(model => model.id)
+                            </p>
+                        </div>
+                    </div>
+                }
+                <div class="form-group">
+                    @Html.LabelFor(model => model.perfil, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.perfil, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.perfil, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <hr />
+                @if (Model.opcionesMenu.Count > 0) { 
+                    <div class="col-md-12">
+                        <h3>Permisos de Acceso</h3>
+                        <div class="row">
+                            @for (int i = 0; i < Model.opcionesMenu.Count; i++)
+                            {
+                                <div class="col-md-4">
+                                    <div class="checkbox">
+                                        @Html.CheckBoxFor(opcionMenu => Model.opcionesMenu[i].isSelected, 
+                                       htmlAttributes : new { data_toogle = "checkbox-x", data_size = "lg", data_three_state = "false", @class = "main"})
+                                        @Html.LabelFor(opcionMenu => Model.opcionesMenu[i].isSelected,
+                                       Model.opcionesMenu[i].menu.nombre_opcion, htmlAttributes : new { @class = "cbx-label"})
+                                        @Html.HiddenFor(opcionMenu => Model.opcionesMenu[i].menu.id)
+                                    </div>
+                                    @for (int j = 0; j < Model.opcionesMenu[i].menus.Count; j++)
+                                    {
+                                        <div class="checkbox">
+                                            @Html.CheckBoxFor(opcionMenu => Model.opcionesMenu[i].menus[j].isSelected,
+                                       htmlAttributes: new { data_toogle = "checkbox-x", data_three_state = "false", data_inline = "false", @class = "children" })
+                                            @Html.LabelFor(opcionMenu => Model.opcionesMenu[i].menus[j].isSelected,
+                                       Model.opcionesMenu[i].menus[j].menu.nombre_opcion, htmlAttributes: new { @class = "cbx-label" })
+                                            @Html.HiddenFor(opcionMenu => Model.opcionesMenu[i].menus[j].menu.id)
+                                        </div>
+                                    }
+
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="@ViewBag.Button" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div>
+            <a href="@Url.Action("Index", "Menu")" class="btn btn-default">
+                <i class="fa fa-fw fa-arrow-left"></i>Volver a la lista de Opciones de Menu
+            </a>
+        </div>
+    </div>
+@section customScripts{
+    @Scripts.Render("~/bundles/formValidationScripts")
+    @Scripts.Render("~/bundles/checkbox")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".main").change(function () {
+                $(this).parents("div.col-md-4").find(".children").prop("checked", $(this).prop("checked"));
+            });
+        });
+    </script>
+}

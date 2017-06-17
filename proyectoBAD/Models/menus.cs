@@ -24,8 +24,9 @@ namespace proyectoBAD.Models
         public int id { get; set; }
         public Nullable<int> super_opcion { get; set; }
         public string nombre_opcion { get; set; }
-        public string ruta_acceso { get; set; }
         public int estado { get; set; }
+        public string controlador { get; set; }
+        public string accion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<perfiles_permisos> perfiles_permisos { get; set; }

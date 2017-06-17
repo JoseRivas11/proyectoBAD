@@ -25,7 +25,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.tipo_contratacion_string)
+            @Html.DisplayFor(model => model.tipo_contratacion)
         </dd>
 
         <dt>
@@ -61,13 +61,13 @@
                             <th>Precio</th>
                             <th>Cantidad</th>
                             <th>Subtotal</th>
-                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var item in Model.lineas_compra)
                         {
                             <tr role="row">
+                                @{ decimal sub_total = item.cantidad * item.esp_equipos.precio;}
                                 <td>@Html.DisplayFor(modelItem =>item.esp_equipos.equipos.nombre)</td>
                                 <td>@Html.DisplayFor(modelItem => item.esp_equipos.empresas.nombre)</td>
                                 <td>@Html.DisplayFor(modelItem =>item.esp_equipos.equipos.categorias_equipo.categoria)</td>
@@ -75,7 +75,7 @@
                                 <td>@Html.DisplayFor(modelItem => item.esp_equipos.modelo)</td>
                                 <td>@Html.DisplayFor(modelItem => item.esp_equipos.precio)</td>
                                 <td>@Html.DisplayFor(modelItem =>item.cantidad)</td>
-                                <td>@Html.DisplayFor(modelItem => item.cantidad * item.esp_equipos.precio)</td>
+                                <td>@Html.DisplayFor(modelItem => sub_total)</td>
                             </tr>
                         }
 

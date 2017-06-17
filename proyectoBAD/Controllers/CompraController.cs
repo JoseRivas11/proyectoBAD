@@ -12,7 +12,6 @@ namespace proyectoBAD.Controllers
 {
     public class CompraController : Controller
     {
-        //TODO: Poner las anotaciones con respecto a quien debe tener permisos para acceder
         private proyectoBADEntities db = new proyectoBADEntities();
 
         // GET: Compra
@@ -236,6 +235,7 @@ namespace proyectoBAD.Controllers
         [Authorize]
         public ActionResult Edit(int id)
         {
+            compras compra = db.compras.Find(id);
             List<SelectListItem> tipos_compra = new List<SelectListItem>();
 
             tipos_compra.Add(new SelectListItem()
@@ -271,19 +271,22 @@ namespace proyectoBAD.Controllers
 
             ComprasViewModel viewModel = new ComprasViewModel()
             {
+                id = compra.id,
+                lineas_compra = compra.linea_compra.ToList(),
+                tipo_contratacion = compra.tipo_contratacion,
+                idInstitucion = compra.institucion,
                 instituciones = instituciones,
                 tipos_compra = tipos_compra,
-                lineas_compra = new List<linea_compra>(),
                 tipos_equipo = cat_equipos,
                 proveedores = proveedores,
-                fecha = DateTime.Now
+                fecha = compra.fecha
             };
 
             ViewBag.Button = "Editar";
             ViewBag.Action = "Edit";
             ViewBag.PageHeader = "Editar Compra";
 
-            return View(viewModel);
+            return View("Create" ,viewModel);
         }
 
         [Authorize]
@@ -394,7 +397,7 @@ namespace proyectoBAD.Controllers
                 proveedores = proveedores,
                 fecha = DateTime.Now
             };
-            return View(vmNew);
+            return View("Create", vmNew);
         }
     }
 }

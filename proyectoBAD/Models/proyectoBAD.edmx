@@ -169,8 +169,9 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="super_opcion" Type="int" />
           <Property Name="nombre_opcion" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="ruta_acceso" Type="varchar" MaxLength="350" />
           <Property Name="estado" Type="int" Nullable="false" />
+          <Property Name="controlador" Type="varchar" MaxLength="50" />
+          <Property Name="accion" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="perfiles">
           <Key>
@@ -281,7 +282,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_compra">
-          <End Role="compras" Type="Self.compras" Multiplicity="1" />
+          <End Role="compras" Type="Self.compras" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="linea_compra" Type="Self.linea_compra" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="compras">
@@ -944,11 +947,12 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="super_opcion" Type="Int32" />
           <Property Name="nombre_opcion" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ruta_acceso" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
           <Property Name="estado" Type="Int32" Nullable="false" />
           <NavigationProperty Name="perfiles_permisos" Relationship="Self.FK_menu_perfil" FromRole="menus" ToRole="perfiles_permisos" />
           <NavigationProperty Name="menus1" Relationship="Self.FK_super_opcion" FromRole="menus" ToRole="menus1" />
           <NavigationProperty Name="menus2" Relationship="Self.FK_super_opcion" FromRole="menus1" ToRole="menus" />
+          <Property Name="controlador" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="accion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="perfiles">
           <Key>
@@ -1644,10 +1648,11 @@
           <EntitySetMapping Name="menus">
             <EntityTypeMapping TypeName="proyectoBADModel.menus">
               <MappingFragment StoreEntitySet="menus">
+                <ScalarProperty Name="accion" ColumnName="accion" />
+                <ScalarProperty Name="controlador" ColumnName="controlador" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="super_opcion" ColumnName="super_opcion" />
                 <ScalarProperty Name="nombre_opcion" ColumnName="nombre_opcion" />
-                <ScalarProperty Name="ruta_acceso" ColumnName="ruta_acceso" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
               </MappingFragment>
             </EntityTypeMapping>
