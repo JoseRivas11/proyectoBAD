@@ -1,0 +1,49 @@
+﻿@model proyectoBAD.ViewModels.SolicitudesViewModel
+
+@{
+    ViewBag.Title = "Admon.Solictud-EqSolitud";
+    ViewBag.PageHeader = "Detalles Solicitud";
+}
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <h4>Solicitudes</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FECHA_REGISTRO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FECHA_REGISTRO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IDDEPARTAMENTO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DEPARTAMENTO.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ESTADO_STRING)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ESTADO_STRING)
+        </dd>
+
+        <dt>Solicitudes de Equipos</dt>
+        <dd>
+
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
