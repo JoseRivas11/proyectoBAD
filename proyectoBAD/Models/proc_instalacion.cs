@@ -23,8 +23,8 @@ namespace proyectoBAD.Models
     
         public int id { get; set; }
         public string equipo { get; set; }
-        public Nullable<System.DateTime> fecha_ini { get; set; }
-        public Nullable<System.DateTime> fecha_fin { get; set; }
+        public System.DateTime fecha_ini { get; set; }
+        public System.DateTime fecha_fin { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<bitacora_instalacion> bitacora_instalacion { get; set; }

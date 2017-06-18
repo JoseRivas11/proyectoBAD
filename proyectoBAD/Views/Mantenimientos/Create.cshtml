@@ -1,0 +1,126 @@
+﻿@model proyectoBAD.ViewModels.MantenimientosViewModel
+
+@{
+    ViewBag.Title = "Admon. Mantenimientos";
+    ViewBag.PageHeader = "Crear Mantenimientos";
+}
+
+<div class="col-md-12">
+    @using (Html.BeginForm((String)ViewBag.Action, "Mantenimientos", FormMethod.Post, htmlAttributes: new { role = "form", @class = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <h4>Mantenimientos</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+
+            @if (ViewBag.Button == "Editar")
+            {
+                <div class="form-group">
+                    @Html.LabelFor(model => model.idMan, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-6">
+                        <p class="form-control-static">
+                            @Html.DisplayFor(model => model.idMan)
+                            @Html.HiddenFor(model => model.idMan)
+                        </p>
+                    </div>
+                </div>
+            }
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.fechaIniMant, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-7">
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar">
+                            </i>
+                        </div>
+                        @Html.TextBoxFor(model => model.fechaIniMant,
+                        htmlAttributes: new
+                        {
+                            @class = "form-control dPicker",
+                            placeholder = "dd/mm/yyyy"
+                        }, format: "{0:d}"
+
+                        )
+                    </div>
+                    @Html.ValidationMessageFor(model => model.fechaIniMant, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.fechaFinMant, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-7">
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar">
+                            </i>
+                        </div>
+                        @Html.TextBoxFor(model => model.fechaFinMant,
+                        htmlAttributes: new
+                        {
+                            @class = "form-control dPicker",
+                            placeholder = "dd/mm/yyyy"
+                        }, format: "{0:d}"
+
+                        )
+                    </div>
+                    @Html.ValidationMessageFor(model => model.fechaFinMant, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.tipoMant, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-6">
+                    @Html.TextAreaFor(model => model.tipoMant, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.tipoMant, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.equipoFisi, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-6">
+                    @Html.DropDownListFor(model => model.equipoFisi, Model.equipos, "Seleccionar...",
+                   htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.equipoFisi, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="@ViewBag.Button" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+
+    }
+
+    <div>
+        <a href="@Url.Action("Index", "Mantenimientos")" class="btn btn-default">
+            <i class="fa fa-fw fa-arrow-left"></i>Volver a la lista de mantenimientos
+        </a>
+    </div>
+</div>
+@section customScripts{
+    @Scripts.Render("~/bundles/formValidationScripts")
+}
+
+<script type="text/javascript">
+        $(document).ready(function () {
+
+
+
+            $(".dPicker").datepicker({
+                language: "es",
+                format: "dd/mm/yyyy"
+            });
+
+
+            });
+
+
+        ;
+</script>
+

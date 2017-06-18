@@ -1,0 +1,122 @@
+﻿@model proyectoBAD.ViewModels.ProcesoInstalacionViewModel
+
+@{
+    ViewBag.Title = "Admon. de Proceso de Instalacion";
+    ViewBag.PageHeader = "Crear Proceso de Instalacion";
+}
+
+<div class="col-md-12">
+    @using (Html.BeginForm((String)ViewBag.Action, "ProcesoInstalacion", FormMethod.Post, htmlAttributes: new { role = "form", @class = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <h4>Proceso de Instalacion</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+
+            @if (ViewBag.Button == "Editar")
+            {
+                <div class="form-group">
+                    @Html.LabelFor(model => model.idProIns, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-6">
+                        <p class="form-control-static">
+                            @Html.DisplayFor(model => model.idProIns)
+                            @Html.HiddenFor(model => model.idProIns)
+                        </p>
+                    </div>
+                </div>
+            }
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.equipo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-6">
+                    @Html.DropDownListFor(model => model.equipo, Model.equipos, "Seleccionar...",
+                   htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.equipo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.fechaIniPro, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-7">
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar">
+                            </i>
+                        </div>
+                        @Html.TextBoxFor(model => model.fechaIniPro,
+                        htmlAttributes: new
+                        {
+                            @class = "form-control dPicker",
+                            placeholder = "dd/mm/yyyy"
+                        }, format: "{0:d}"
+
+                        )
+                    </div>
+                    @Html.ValidationMessageFor(model => model.fechaIniPro, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.fechaFinPro, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-7">
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar">
+                            </i>
+                        </div>
+                        @Html.TextBoxFor(model => model.fechaFinPro,
+                        htmlAttributes: new
+                        {
+                            @class = "form-control dPicker",
+                            placeholder = "dd/mm/yyyy"
+                        }, format: "{0:d}"
+
+                        )
+                    </div>
+                    @Html.ValidationMessageFor(model => model.fechaFinPro, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            
+
+
+          
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="@ViewBag.Button" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+
+    }
+
+    <div>
+        <a href="@Url.Action("Index", "ProcesoInstalacion")" class="btn btn-default">
+            <i class="fa fa-fw fa-arrow-left"></i>Volver a la lista de procesos de instalacion
+        </a>
+    </div>
+</div>
+@section customScripts{
+    @Scripts.Render("~/bundles/formValidationScripts")
+}
+
+<script type="text/javascript">
+        $(document).ready(function () {
+
+
+
+            $(".dPicker").datepicker({
+                language: "es",
+                format: "dd/mm/yyyy"
+            });
+
+
+            });
+
+
+        ;
+</script>
+
