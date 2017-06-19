@@ -48,7 +48,7 @@ namespace proyectoBAD.Controllers
                 Value = t.id.ToString()
             });
 
-            EquipoFisicoViewModel vModel = new EquipoFisicoViewModel()
+            EquipoFisicoViewModel vModel = new EquipoFisicoViewModel
             {
                 departamentoequipofisico = listEq,
                 especificacionequipofisico = listEmp
@@ -91,9 +91,9 @@ namespace proyectoBAD.Controllers
 
         // GET: EquipoFisico/Edit/5
         [Authorize]
-        public ActionResult Edit(string num_serial)
+        public ActionResult Edit(string numserial)
         {
-            equipos_fisicos equipo_fisico = db.equipos_fisicos.Find(num_serial);
+            equipos_fisicos equipo_fisico = db.equipos_fisicos.Find(numserial);
 
             ViewBag.Button = "Editar";
             ViewBag.Action = "Edit";
@@ -140,7 +140,7 @@ namespace proyectoBAD.Controllers
 
                 if (equipo_fisico != null)
                 {
-                   // equipo_fisico.num_serial = vModel.numserial;
+                    //equipo_fisico.num_serial = viModel.numserial;
                     equipo_fisico.fecha_fabricacion = viModel.fechafabricacion;
                     equipo_fisico.tiempo_garantia = viModel.tiempogarantia;
                     equipo_fisico.detalles_garantia = viModel.detallesgarantia;

@@ -61,7 +61,7 @@
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
-                          {
+                    {
                         <tr role="row">
                             <td>
                                 @Html.DisplayFor(modelItem => item.numserial)
@@ -85,16 +85,18 @@
                                 @Html.DisplayFor(modelItem => item.idEspequifi.marca)
                             </td>
                             <td>
-
+                                <a href="@Url.Action("Edit", "EquipoFisico", new { id = item.numserial })" title="" class="btn btn-primary btn-xs action"
+                                   data-original-title="Editar" data-toggle="tooltip" data-placement="top">
+                                    <i class="fa fa-fw fa-edit"></i>
+                                </a>
                                 <a href="@Url.Action("Delete", "EquipoFisico", new { id = item.numserial })" title="" class="btn btn-primary btn-xs action deleteEquipoFisico"
                                    data-original-title="Eliminar" data-toggle="tooltip" data-placement="top">
                                     <i class="fa fa-fw fa-trash"></i>
                                 </a>
                                 @*
-                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                 @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-
+                                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
                                 *@
                             </td>
                         </tr>
@@ -119,7 +121,7 @@
 
             $(".action").tooltip({
                 container: "body"
-            });
+            })
          });
     </script>
     <script type="text/javascript">
