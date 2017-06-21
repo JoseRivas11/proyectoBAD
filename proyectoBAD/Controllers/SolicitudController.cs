@@ -188,6 +188,8 @@ namespace proyectoBAD.Controllers
         [Authorize]
         public ActionResult Edit(int id)
         {
+            solicitudes solicitud = db.solicitudes.Find(id);
+
             List<SelectListItem> tipo_estado = new List<SelectListItem>();
 
             tipo_estado.Add(new SelectListItem()
@@ -216,16 +218,20 @@ namespace proyectoBAD.Controllers
 
             SolicitudesViewModel vModel = new SolicitudesViewModel()
             {
+                ID = solicitud.id,
                 DEPARTAMENTOS = departamentos,
+                IDDEPARTAMENTO = solicitud.departamento,
+                ESTADO = solicitud.estado,
+                tipo_estado = tipo_estado,
                 EQUIPOS = equipos,
-                EQUIPOS_SOLICITUD = new List<equipos_solicitud>(),
-                FECHA_REGISTRO = DateTime.Now
+                EQUIPOS_SOLICITUD = solicitud.equipos_solicitud.ToList(),
+                FECHA_REGISTRO = solicitud.fecha_registro
             };
             ViewBag.Button = "Editar";
             ViewBag.Action = "Edit";
             ViewBag.PageHeader = "Editar Solitud";
 
-            return View(vModel);
+            return View("Create", vModel);
         }
 
         [Authorize]
