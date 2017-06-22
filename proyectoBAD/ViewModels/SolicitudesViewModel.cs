@@ -31,13 +31,16 @@ namespace proyectoBAD.ViewModels
         [Display(Name = "Seleccione los equipos")]
         public String ESTADO_STRING;
 
+        [Display(Name = "Seleccione institución")]
+        public int INTITUCION;
+
         public List<equipos_solicitud> EQUIPOS_SOLICITUD { get; set; }
 
         public IEnumerable<SelectListItem> DEPARTAMENTOS;
         public IEnumerable<SelectListItem> EQUIPOS;
         public IEnumerable<SelectListItem> TIPOS_SOLICITUD;
         public IEnumerable<SelectListItem> tipo_estado;
-
+        public IEnumerable<SelectListItem> INSTITUCIONES;   
 
     }
 }

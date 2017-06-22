@@ -49,6 +49,13 @@ namespace proyectoBAD.Controllers
                 Text = "Normal",
                 Value = "2"
             });
+
+            List<SelectListItem> instituciones = db.instituciones.Select(item => new SelectListItem()
+            {
+                Text = item.nombre,
+                Value = item.id.ToString()
+            }).ToList();
+
             List<SelectListItem> departamentos = db.departamentos.Select(item => new SelectListItem()
             {
                 Text = item.nombre,
@@ -64,6 +71,7 @@ namespace proyectoBAD.Controllers
             SolicitudesViewModel vModel = new SolicitudesViewModel()
             {
                 DEPARTAMENTOS = departamentos,
+                INSTITUCIONES = instituciones,
                 tipo_estado = tipo_estado,
                 EQUIPOS = equipos,
                 EQUIPOS_SOLICITUD = new List<equipos_solicitud>(),
@@ -101,7 +109,16 @@ namespace proyectoBAD.Controllers
             return Json(entidad);
         }
 
-
+        public JsonResult getDepartamento(int idInt)
+        {
+            List<SelectListItem> depart = db.departamentos.Where(t => t.institucion == idInt).Select(
+               t => new SelectListItem()
+               {
+                   Text = t.nombre,
+                   Value = t.id.ToString()
+               }).ToList();
+            return Json(depart, JsonRequestBehavior.AllowGet);
+        }
 
         [Authorize]
         [ValidateAntiForgeryToken]
@@ -203,6 +220,12 @@ namespace proyectoBAD.Controllers
                 Value = "2"
             });
 
+            List<SelectListItem> instituciones = db.instituciones.Select(item => new SelectListItem()
+            {
+                Text = item.nombre,
+                Value = item.id.ToString()
+            }).ToList();
+
             List<SelectListItem> departamentos = db.departamentos.Select(item => new SelectListItem()
             {
                 Text = item.nombre,
@@ -218,6 +241,7 @@ namespace proyectoBAD.Controllers
             SolicitudesViewModel vModel = new SolicitudesViewModel()
             {
                 ID = solicitud.id,
+                INSTITUCIONES = instituciones,
                 DEPARTAMENTOS = departamentos,
                 IDDEPARTAMENTO = solicitud.departamento,
                 ESTADO = solicitud.estado,
@@ -280,7 +304,7 @@ namespace proyectoBAD.Controllers
                         }
                     }
                 }
-                TempData["successMessage"] = "solicitud creada exitosamente";
+                TempData["successMessage"] = "solicitud editada exitosamente";
 
                 return RedirectToAction("Index");
             }
