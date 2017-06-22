@@ -109,7 +109,8 @@ namespace proyectoBAD.Controllers
             });
             BitacoraInstalacionViewModel viewModel = new BitacoraInstalacionViewModel ()
             {
-                proc_insta = list
+                proc_insta = list,
+                fecha1 = DateTime.Now
             };
 
             ViewBag.Button = "Crear";

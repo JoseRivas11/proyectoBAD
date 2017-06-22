@@ -179,14 +179,23 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Authentication\UserManager.cs" />
+    <Compile Include="Controllers\BitacoraDeMantenimientoController.cs" />
+    <Compile Include="Controllers\BitacoraInstalacionController.cs" />
+    <Compile Include="Controllers\CategoriaEquipoController.cs" />
     <Compile Include="Controllers\CompraController.cs" />
     <Compile Include="Controllers\DepartamentoController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
+    <Compile Include="Controllers\EquipoController.cs" />
+    <Compile Include="Controllers\EquipoFisicoController.cs" />
+    <Compile Include="Controllers\EspecEquipoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InstitucionController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MantenimientosController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\PerfilController.cs" />
+    <Compile Include="Controllers\ProcesoInstalacionController.cs" />
+    <Compile Include="Controllers\SolicitudController.cs" />
     <Compile Include="ExtHelpers\HelperExtensions.cs" />
     <Compile Include="ExtHelpers\OpcionMenu.cs" />
     <Compile Include="Global.asax.cs">
@@ -274,14 +283,23 @@
       <DependentUpon>proyectoBAD.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\BitacoraInstalacionViewModel.cs" />
+    <Compile Include="ViewModels\BitacoraMantenimientoViewModel.cs" />
+    <Compile Include="ViewModels\CategoriaEquipoViewModel.cs" />
     <Compile Include="ViewModels\ComprasViewModel.cs" />
     <Compile Include="ViewModels\EmpresaViewModel.cs" />
     <Compile Include="ViewModels\CreateUserViewModel.cs" />
     <Compile Include="ViewModels\DepartamentoViewModel.cs" />
+    <Compile Include="ViewModels\EquipoFisicoViewModel.cs" />
+    <Compile Include="ViewModels\EquipoViewModel.cs" />
+    <Compile Include="ViewModels\EspecEquipoViewModel.cs" />
     <Compile Include="ViewModels\InstitucionViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\ManteniminetosViewModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\PerfilViewModel.cs" />
+    <Compile Include="ViewModels\ProcesoInstalacionViewModel.cs" />
+    <Compile Include="ViewModels\SolicitudesViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\bootstrap-datepicker3.min.css" />
@@ -433,6 +451,28 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Perfil\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\BitacoraDeMantenimiento\Create.cshtml" />
+    <Content Include="Views\BitacoraDeMantenimiento\Index.cshtml" />
+    <Content Include="Views\BitacoraInstalacion\Create.cshtml" />
+    <Content Include="Views\BitacoraInstalacion\Index.cshtml" />
+    <Content Include="Views\CategoriaEquipo\Create.cshtml" />
+    <Content Include="Views\CategoriaEquipo\Index.cshtml" />
+    <Content Include="Views\EquipoFisico\Create.cshtml" />
+    <Content Include="Views\EquipoFisico\Index.cshtml" />
+    <Content Include="Views\Equipo\Create.cshtml" />
+    <Content Include="Views\Equipo\createCat.cshtml" />
+    <Content Include="Views\Equipo\Index.cshtml" />
+    <Content Include="Views\EspecEquipo\Create.cshtml" />
+    <Content Include="Views\EspecEquipo\Index.cshtml" />
+    <Content Include="Views\Mantenimientos\Create.cshtml" />
+    <Content Include="Views\Mantenimientos\Index.cshtml" />
+    <Content Include="Views\ProcesoInstalacion\Create.cshtml" />
+    <Content Include="Views\ProcesoInstalacion\Index.cshtml" />
+    <Content Include="Views\Solicitud\Create.cshtml" />
+    <Content Include="Views\Solicitud\Details.cshtml" />
+    <Content Include="Views\Solicitud\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

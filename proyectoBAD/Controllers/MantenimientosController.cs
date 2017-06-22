@@ -52,6 +52,20 @@ namespace proyectoBAD.Controllers
             {
 
                 MantenimientosViewModel vmMan = new MantenimientosViewModel();
+
+                List<SelectListItem> tipoMantenimiento = new List<SelectListItem>();
+
+                tipoMantenimiento.Add(new SelectListItem()
+                {
+                    Text = "Preventivo",
+                    Value = "1"
+                });
+
+                tipoMantenimiento.Add(new SelectListItem()
+                {
+                    Text = "Correctivo",
+                    Value = "2"
+                });
                 IEnumerable<SelectListItem> list = db.equipos_fisicos.Select(t => new SelectListItem()
                 {
                     Text = t.num_serial,
@@ -63,6 +77,7 @@ namespace proyectoBAD.Controllers
                 vmMan.tipoMant = Man.tipo;
                 vmMan.equipoFisi = Man.equipo_fisico;
                 vmMan.equipos = list;
+                vmMan.tipoMantenimiento = tipoMantenimiento;
 
                 return View("Create", vmMan);
             }
@@ -105,6 +120,20 @@ namespace proyectoBAD.Controllers
         [Authorize]
         public ActionResult Create()
         {
+            List<SelectListItem> tipoMantenimiento = new List<SelectListItem>();
+
+            tipoMantenimiento.Add(new SelectListItem()
+            {
+                Text = "Preventivo",
+                Value = "1"
+            });
+
+            tipoMantenimiento.Add(new SelectListItem()
+            {
+                Text = "Correctivo",
+                Value = "2"
+            });
+
             IEnumerable<SelectListItem> list = db.equipos_fisicos.Select(t => new SelectListItem()
             {
                 Text = t.num_serial,
@@ -112,7 +141,10 @@ namespace proyectoBAD.Controllers
             });
             MantenimientosViewModel viewModel = new MantenimientosViewModel ()
             {
-                equipos = list
+                equipos = list,
+                fechaFinMant = DateTime.Now,
+                fechaIniMant = DateTime.Now,
+                tipoMantenimiento = tipoMantenimiento
             };
 
             ViewBag.Button = "Crear";

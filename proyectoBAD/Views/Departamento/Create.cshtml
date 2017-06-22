@@ -236,8 +236,9 @@
 
                     $("body").on("click", ".deleteLink", function () {
                         $(this).tooltip('hide');
+                        var count = $(this).parents("table").find("tbody tr").length - 1;
                         $(this).parents("tr").remove();
-                        var count = $(this).parents("table").find("tbody tr").length;
+                        
                         if (count <= 0) {
                             $("#message").show();
                             $("#tableEmp thead").hide();

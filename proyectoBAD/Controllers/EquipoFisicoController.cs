@@ -51,7 +51,8 @@ namespace proyectoBAD.Controllers
             EquipoFisicoViewModel vModel = new EquipoFisicoViewModel
             {
                 departamentoequipofisico = listEq,
-                especificacionequipofisico = listEmp
+                especificacionequipofisico = listEmp,
+                fechafabricacion = DateTime.Now
             };
 
             ViewBag.Button = "Agregar";

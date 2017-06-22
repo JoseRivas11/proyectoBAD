@@ -280,7 +280,7 @@ namespace proyectoBAD.Controllers
                         }
                     }
                 }
-                TempData["successMessage"] = "solicitud creada exitosamente";
+                TempData["successMessage"] = "solicitud editada exitosamente";
 
                 return RedirectToAction("Index");
             }
