@@ -30,11 +30,6 @@ namespace proyectoBAD.ViewModels
         [Required(ErrorMessage = "Por favor ingrese la fecha de finalizacion del mantenimiento")]
         public DateTime fechaFinPro { get; set; }
 
-        public List<SelectListItem> institucion;
-        public List<SelectListItem> departamento;
-        public List<SelectList> categoriaEquipo;
-        public List<SelectList> tipoEquipo;
-
 
 
     }

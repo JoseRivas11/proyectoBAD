@@ -86,28 +86,9 @@
     @Scripts.Render("~/bundles/checkbox")
     <script type="text/javascript">
         $(document).ready(function () {
-            enable_cb();
-
             $(".main").change(function () {
-                if ($(this).prop("checked")) {
-                    $(this).parents("div.col-md-4").find(".children").removeAttr("disabled");
-                } else {
-                    $(this).parents("div.col-md-4").find(".children").attr("disabled", true);
-                }
                 $(this).parents("div.col-md-4").find(".children").prop("checked", $(this).prop("checked"));
-               
             });
-
-            function enable_cb() {
-                $(".main").each(function () {
-                    if ($(this).prop("checked")) {
-                        $(this).parents("div.col-md-4").find(".children").removeAttr("disabled");
-
-                    } else {
-                        $(this).parents("div.col-md-4").find(".children").attr("disabled", true);
-                    }
-                });
-            }
         });
     </script>
 }

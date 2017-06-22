@@ -128,7 +128,7 @@
                                         @Html.Hidden("lineas_compra.Index", i)
                                         @Html.HiddenFor(item => Model.lineas_compra[i].id)
                                         @Html.HiddenFor(item => Model.lineas_compra[i].esp_equipos.id)
-                                        @Html.HiddenFor(item => Model.lineas_compra[i].cantidad, htmlAttributes : new { @class="cantidadHidden"})
+                                        @Html.HiddenFor(item => Model.lineas_compra[i].cantidad)
                                     </tr>
                                 }
 
@@ -268,7 +268,7 @@
 
             $(".dPicker").datepicker({
                 language: "es",
-                format: "mm/dd/yyyy"
+                format: "dd/mm/yyyy"
             });
 
             $("#btnAddCantidad").click(function () {
@@ -376,12 +376,10 @@
 
                     table.append(tableRow);
                 } else {
-                    var cantidad = form_cantidad.find("input#cant").val();
+                    var cantidad = form_cantidad.find("input#cantidad").val();
                     var precio = row.find(".precioUni").text();
                     var subtotal = cantidad * precio;
                     row.find(".subtotal").text(subtotal.toFixed(2));
-                    row.find(".cantEquipos").text(cantidad);
-                    row.find("input.cantidadHidden").val(cantidad);
                     row.removeClass("row-selected");
                 }
                 form_equipo.find("#marca").text("");
@@ -393,10 +391,9 @@
 
             $("body").on("click", ".deleteLink", function () {
                 $(this).tooltip('hide');
-
-                var count = $(this).parents("table").find("tbody tr").length - 1;
+            
                 $(this).parents("tr").remove();
-               
+                var count = $(this).parents("table").find("tbody tr").length;
                 if (count <= 0) {
                     $("#message").show();
                     $("#tableLineasCompra thead").hide();

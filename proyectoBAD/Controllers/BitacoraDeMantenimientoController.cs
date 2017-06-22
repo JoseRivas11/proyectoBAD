@@ -110,8 +110,7 @@ namespace proyectoBAD.Controllers
             });
             BitacoraMantenimientoViewModel viewModel = new BitacoraMantenimientoViewModel()
             {
-                mantenMa = list,
-                fechaMa = DateTime.Now
+                mantenMa = list
             };
 
             ViewBag.Button = "Crear";

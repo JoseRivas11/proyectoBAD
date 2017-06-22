@@ -98,7 +98,7 @@ namespace proyectoBAD.Controllers
                     categoriasEq.categoria = vModel.CATEGORIA;
                     db.SaveChanges();
 
-                    TempData["successMessage"] = "Catrgoria editada exitosamente";
+                    TempData["successMessage"] = "Empresa editada exitosamente";
 
                     return RedirectToAction("Index");
                 }

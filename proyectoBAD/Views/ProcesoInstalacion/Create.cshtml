@@ -101,25 +101,22 @@
 </div>
 @section customScripts{
     @Scripts.Render("~/bundles/formValidationScripts")
-    @Scripts.Render("~/bundles/datepicker")
-<script type="text/javascript">
-    $(document).ready(function () {
-
-
-
-        $(".dPicker").datepicker({
-            language: "es",
-            format: "mm/dd/yyyy"
-        });
-
-
-    });
-
-
-    ;
-</script>
-
 }
 
+<script type="text/javascript">
+        $(document).ready(function () {
 
+
+
+            $(".dPicker").datepicker({
+                language: "es",
+                format: "dd/mm/yyyy"
+            });
+
+
+            });
+
+
+        ;
+</script>
 

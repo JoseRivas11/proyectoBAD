@@ -103,16 +103,14 @@ namespace proyectoBAD.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            IEnumerable<SelectListItem> list = db.equipos_fisicos.Select(t => new SelectListItem()
+            IEnumerable<SelectListItem> list = db.equipos.Select(t => new SelectListItem()
             {
-                Text = t.num_serial,
-                Value = t.num_serial
+                Text = t.nombre,
+                Value = t.id.ToString()
             });
             ProcesoInstalacionViewModel viewModel = new ProcesoInstalacionViewModel ()
             {
-                equipos = list,
-                fechaFinPro = DateTime.Now,
-                fechaIniPro = DateTime.Now
+                equipos = list
             };
 
             ViewBag.Button = "Crear";

@@ -33,7 +33,6 @@ namespace proyectoBAD.ViewModels
         public virtual equipos_fisicos equiFis { get; set; }
 
         public IEnumerable<SelectListItem> equipos;
-        public List<SelectListItem> tipoMantenimiento;
 
 
     }
