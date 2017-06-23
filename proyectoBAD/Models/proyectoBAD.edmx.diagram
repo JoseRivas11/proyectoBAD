@@ -4,10 +4,10 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="691d302eb1614cd98c47b5f7dcabbd85" Name="Diagram1" ZoomLevel="94">
+      <Diagram DiagramId="691d302eb1614cd98c47b5f7dcabbd85" Name="Diagram1" ZoomLevel="85">
         <EntityTypeShape EntityType="proyectoBADModel.bitacora_instalacion" Width="1.5" PointX="15.75" PointY="13.125" IsExpanded="true" />
         <EntityTypeShape EntityType="proyectoBADModel.bitacora_mantenimiento" Width="1.5" PointX="12.75" PointY="16.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="proyectoBADModel.categorias_equipo" Width="1.5" PointX="1.25" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="proyectoBADModel.categorias_equipo" Width="1.5" PointX="1.75" PointY="1.75" IsExpanded="true" />
         <EntityTypeShape EntityType="proyectoBADModel.compras" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
         <EntityTypeShape EntityType="proyectoBADModel.departamentos" Width="1.5" PointX="3" PointY="12.5" IsExpanded="true" />
         <EntityTypeShape EntityType="proyectoBADModel.empresas" Width="1.5" PointX="6" PointY="20.5" IsExpanded="true" />

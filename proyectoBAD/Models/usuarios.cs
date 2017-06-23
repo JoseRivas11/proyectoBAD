@@ -30,6 +30,7 @@ namespace proyectoBAD.Models
         public string nombre_completo { get; set; }
         public string password { get; set; }
         public int estado { get; set; }
+        public int id { get; set; }
     
         public virtual departamentos departamentos { get; set; }
         public virtual empresas empresas { get; set; }

@@ -38,6 +38,12 @@
                             @Html.DisplayNameFor(model => model.numserial)
                         </th>
                         <th>
+                            Marca
+                        </th>
+                        <th>
+                            Modelo
+                        </th>
+                        <th>
                             @Html.DisplayNameFor(model => model.fechafabricacion)
                         </th>
                         <th>
@@ -48,6 +54,9 @@
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.estadogarantia)
+                        </th>
+                        <th>
+                            Institucion
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.idDepEquiFisico)
@@ -67,6 +76,12 @@
                                 @Html.DisplayFor(modelItem => item.numserial)
                             </td>
                             <td>
+                                @Html.DisplayFor(modelItem => item.idEspequifi.marca)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.idEspequifi.modelo)
+                            </td>
+                            <td>
                                 @Html.DisplayFor(modelItem => item.fechafabricacion)
                             </td>
                             <td>
@@ -79,10 +94,13 @@
                                 @Html.DisplayFor(modelItem => item.estadogarantia)
                             </td>
                             <td>
+                                @Html.DisplayFor(modelItem => item.iddepartamento.instituciones.nombre)
+                            </td>
+                            <td>
                                 @Html.DisplayFor(modelItem => item.iddepartamento.nombre)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.idEspequifi.marca)
+                                @Html.DisplayFor(modelItem => item.idEspequifi.equipos.especificaciones)
                             </td>
                             <td>
                                 <a href="@Url.Action("Edit", "EquipoFisico", new { id = item.numserial })" title="" class="btn btn-primary btn-xs action"

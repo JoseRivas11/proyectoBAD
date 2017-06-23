@@ -37,21 +37,46 @@ namespace proyectoBAD.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            IEnumerable<SelectListItem> listEq = db.departamentos.Select(t => new SelectListItem()
+            List<SelectListItem> estados = new List<SelectListItem>()
             {
-                Text = t.nombre,
-                Value = t.id.ToString()
-            });
-            IEnumerable<SelectListItem> listEmp = db.esp_equipos.Select(t => new SelectListItem()
+                new SelectListItem()
+                {
+                    Text = "Activa",
+                    Value = "1"
+                },
+                new SelectListItem()
+                {
+                    Text = "Caducada",
+                    Value = "2"
+                }
+                
+            };
+
+            List<SelectListItem> instituciones = db.instituciones.Select(i => new SelectListItem()
             {
-                Text = t.marca,
-                Value = t.id.ToString()
-            });
+                Value = i.id.ToString(),
+                Text = i.nombre
+            }).ToList();
+
+            List<SelectListItem> empresas = db.empresas.Where(e => e.tipos_empresa.tipo == "Venta" || e.tipos_empresa.tipo == "Venta e Instalacion")
+                .Select(e => new SelectListItem()
+                {
+                    Value = e.id.ToString(),
+                    Text = e.nombre,
+                }).ToList();
+
+            List<SelectListItem> categorias = db.categorias_equipo.Select(c => new SelectListItem()
+            {
+                Value = c.id.ToString(),
+                Text = c.categoria
+            }).ToList();
 
             EquipoFisicoViewModel vModel = new EquipoFisicoViewModel
             {
-                departamentoequipofisico = listEq,
-                especificacionequipofisico = listEmp
+                instituciones = instituciones,
+                estados_garantia = estados,
+                empresas = empresas,
+                categorias = categorias
             };
 
             ViewBag.Button = "Agregar";
@@ -90,97 +115,136 @@ namespace proyectoBAD.Controllers
         }
 
         // GET: EquipoFisico/Edit/5
-        [Authorize]
-        public ActionResult Edit(string numserial)
-        {
-            equipos_fisicos equipo_fisico = db.equipos_fisicos.Find(numserial);
+        //[Authorize]
+        //public ActionResult Edit(string numserial)
+        //{
+        //    equipos_fisicos equipo_fisico = db.equipos_fisicos.Find(numserial);
 
-            ViewBag.Button = "Editar";
-            ViewBag.Action = "Edit";
-            ViewBag.PageHeader = "Editar Equipo Físico";
+        //    ViewBag.Button = "Editar";
+        //    ViewBag.Action = "Edit";
+        //    ViewBag.PageHeader = "Editar Equipo Físico";
 
-            if (equipo_fisico != null)
-            {
-                EquipoFisicoViewModel vModel = new EquipoFisicoViewModel();
+        //    if (equipo_fisico != null)
+        //    {
+        //        EquipoFisicoViewModel vModel = new EquipoFisicoViewModel();
 
-                IEnumerable<SelectListItem> listEq = db.departamentos.Select(t => new SelectListItem()
-                {
-                    Text = t.nombre,
-                    Value = t.id.ToString()
-                });
-                IEnumerable<SelectListItem> listEmp = db.esp_equipos.Select(t => new SelectListItem()
-                {
-                    Text = t.marca,
-                    Value = t.id.ToString()
-                });
+        //        IEnumerable<SelectListItem> listEq = db.departamentos.Select(t => new SelectListItem()
+        //        {
+        //            Text = t.nombre,
+        //            Value = t.id.ToString()
+        //        });
+        //        IEnumerable<SelectListItem> listEmp = db.esp_equipos.Select(t => new SelectListItem()
+        //        {
+        //            Text = t.marca,
+        //            Value = t.id.ToString()
+        //        });
 
-                vModel.numserial = equipo_fisico.num_serial;
-                vModel.fechafabricacion = equipo_fisico.fecha_fabricacion;
-                vModel.tiempogarantia = equipo_fisico.tiempo_garantia;
-                vModel.detallesgarantia = equipo_fisico.detalles_garantia;
-                vModel.estadogarantia = equipo_fisico.estado_garantia;
-                vModel.idDepEquiFisico = equipo_fisico.departamento;
-                vModel.departamentoequipofisico = listEq;
-                vModel.idEspEquiFisico  = equipo_fisico.esp_equipo;
-                vModel.especificacionequipofisico = listEmp;
-                return View("Create", vModel);
-            }
-            return View("Create", null);
-        }
+        //        vModel.numserial = equipo_fisico.num_serial;
+        //        vModel.fechafabricacion = equipo_fisico.fecha_fabricacion;
+        //        vModel.tiempogarantia = equipo_fisico.tiempo_garantia;
+        //        vModel.detallesgarantia = equipo_fisico.detalles_garantia;
+        //        vModel.estadogarantia = equipo_fisico.estado_garantia;
+        //        vModel.idDepEquiFisico = equipo_fisico.departamento;
+        //        vModel.departamentoequipofisico = listEq;
+        //        vModel.idEspEquiFisico  = equipo_fisico.esp_equipo;
+        //        vModel.especificacionequipofisico = listEmp;
+        //        return View("Create", vModel);
+        //    }
+        //    return View("Create", null);
+        //}
 
-        // POST: EquipoFisico/Edit/5
-        [HttpPost]
-        [Authorize]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(EquipoFisicoViewModel viModel)
-        {
-            if (ModelState.IsValid)
-            {
-                equipos_fisicos equipo_fisico = db.equipos_fisicos.Find(viModel.numserial);
+        //// POST: EquipoFisico/Edit/5
+        //[HttpPost]
+        //[Authorize]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit(EquipoFisicoViewModel viModel)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        equipos_fisicos equipo_fisico = db.equipos_fisicos.Find(viModel.numserial);
 
-                if (equipo_fisico != null)
-                {
-                    //equipo_fisico.num_serial = viModel.numserial;
-                    equipo_fisico.fecha_fabricacion = viModel.fechafabricacion;
-                    equipo_fisico.tiempo_garantia = viModel.tiempogarantia;
-                    equipo_fisico.detalles_garantia = viModel.detallesgarantia;
-                    equipo_fisico.estado_garantia = viModel.estadogarantia;
-                    equipo_fisico.departamento = viModel.idDepEquiFisico;
-                    equipo_fisico.esp_equipo = viModel.idEspEquiFisico;
+        //        if (equipo_fisico != null)
+        //        {
+        //            //equipo_fisico.num_serial = viModel.numserial;
+        //            equipo_fisico.fecha_fabricacion = viModel.fechafabricacion;
+        //            equipo_fisico.tiempo_garantia = viModel.tiempogarantia;
+        //            equipo_fisico.detalles_garantia = viModel.detallesgarantia;
+        //            equipo_fisico.estado_garantia = viModel.estadogarantia;
+        //            equipo_fisico.departamento = viModel.idDepEquiFisico;
+        //            equipo_fisico.esp_equipo = viModel.idEspEquiFisico;
                     
-                    db.SaveChanges();
+        //            db.SaveChanges();
 
-                    TempData["successMessage"] = "Equipo Físico editado exitosamente";
+        //            TempData["successMessage"] = "Equipo Físico editado exitosamente";
 
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Error a la hora de guardar los datos, por favor intente mas tarde");
-                }
-            }
-            return View();
+        //            return RedirectToAction("Index");
+        //        }
+        //        else
+        //        {
+        //            ModelState.AddModelError("", "Error a la hora de guardar los datos, por favor intente mas tarde");
+        //        }
+        //    }
+        //    return View();
+        //}
+
+        //// GET: EquipoFisico/Delete/5
+        //[Authorize]
+        //public ActionResult Delete(string numserial)
+        //{
+        //    try
+        //    {
+        //        equipos_fisicos equipoFic = db.equipos_fisicos.Find(numserial);
+        //        db.equipos_fisicos.Remove(equipoFic);
+        //        db.SaveChanges();
+        //        TempData["successMessage"] = "Equipo Físico Eliminado";
+        //        return RedirectToAction("Index");
+        //    }
+        //    catch
+        //    {
+        //        TempData["successMessage"] = "Error al eliminar proceso de mantenimiento pendiente";
+        //        return RedirectToAction("Index");
+        //    }
+
+
+        //}
+
+        [Authorize]
+        [HttpPost]
+        public JsonResult getDepartamentos(int institucion)
+        {
+            List<SelectListItem> departamentos = db.departamentos.Where(d => d.institucion == institucion).Select(d => new SelectListItem()
+            {
+                Value = d.id.ToString(),
+                Text = d.nombre
+            }).ToList();
+
+            return Json(departamentos);
         }
 
-        // GET: EquipoFisico/Delete/5
         [Authorize]
-        public ActionResult Delete(string numserial)
+        [HttpPost]
+        public JsonResult getEquipos(int categoria)
         {
-            try
+            List<SelectListItem> equipos = db.equipos.Where(e => e.categoria == categoria).Select(d => new SelectListItem()
             {
-                equipos_fisicos equipoFic = db.equipos_fisicos.Find(numserial);
-                db.equipos_fisicos.Remove(equipoFic);
-                db.SaveChanges();
-                TempData["successMessage"] = "Equipo Físico Eliminado";
-                return RedirectToAction("Index");
-            }
-            catch
+                Value = d.id.ToString(),
+                Text = d.nombre
+            }).ToList();
+
+            return Json(equipos);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public JsonResult getEspEquipos(int empresa, int equipo)
+        {
+            List<SelectListItem> espEquipos = db.esp_equipos.Where(e => e.empresa == empresa && e.equipo == equipo).Select(d => new SelectListItem()
             {
-                TempData["successMessage"] = "Error al eliminar proceso de mantenimiento pendiente";
-                return RedirectToAction("Index");
-            }
+                Value = d.id.ToString(),
+                Text = d.marca + " " + d.modelo
+            }).ToList();
 
-
+            return Json(espEquipos);
         }
     }
 }

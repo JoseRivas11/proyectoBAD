@@ -21,8 +21,8 @@ namespace proyectoBAD.Controllers
             {
                 idProIns = t.id,
                 equipo = t.equipo,                                
-                fechaIniPro = t.fecha_ini,
-                fechaFinPro = t.fecha_fin,
+                //fechaIniPro = t.fecha_ini,
+                //fechaFinPro = t.fecha_fin,
                 
                 
             }).ToList();
@@ -59,8 +59,8 @@ namespace proyectoBAD.Controllers
                 });
                 vmPro.idProIns = Pro.id;
                 vmPro.equipo = Pro.equipo;
-                vmPro.fechaIniPro = Pro.fecha_ini;
-                vmPro.fechaFinPro = Pro.fecha_fin;
+                //vmPro.fechaIniPro = Pro.fecha_ini;
+                //vmPro.fechaFinPro = Pro.fecha_fin;
                 vmPro.equipos = list;
 
                 return View("Create", vmPro);

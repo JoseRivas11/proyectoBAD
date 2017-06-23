@@ -27,9 +27,7 @@ namespace proyectoBAD.ViewModels
         [Required(ErrorMessage = "Por favor ingrese los detalles de la garantía")]
         public String detallesgarantia { get; set; }
 
-        [Display(Name = "EstadoGarantía: 1.Activa 2.Inactiva")]
-        [Required(ErrorMessage = "Por favor ingrese el estado de la garantía")]
-        [Range(1, 2, ErrorMessage = "Solo se permiten los numeros 1: Garantía Activa 2:Garantía Inactiva")]
+        [Display(Name = "Garantia")]
         public int estadogarantia { get; set; }
 
         [Display(Name = "Departamento")]
@@ -47,9 +45,13 @@ namespace proyectoBAD.ViewModels
         [Display(Name = "Especificación del Equipo perteneciente")]
         public virtual esp_equipos idEspequifi { get; set; }
 
-
-        public IEnumerable<SelectListItem> departamentoequipofisico;
-        public IEnumerable<SelectListItem> especificacionequipofisico;
+        public List<SelectListItem> instituciones;
+        public List<SelectListItem> empresas;
+        public List<SelectListItem> categorias;
+        public List<SelectListItem> estados_garantia;
+        public List<SelectListItem> departamentos;
+        public List<SelectListItem> equipos;
+        public List<SelectListItem> esp_equipos;
 
     }
 }

@@ -244,6 +244,7 @@
           <Property Name="nombre_completo" Type="varchar" MaxLength="350" Nullable="false" />
           <Property Name="password" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="estado" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <Association Name="FK_bitacora_inst_equipo">
           <End Role="proc_instalacion" Type="Self.proc_instalacion" Multiplicity="1" />
@@ -1045,6 +1046,7 @@
           <NavigationProperty Name="departamentos1" Relationship="Self.bloqueo_instalacion" FromRole="usuarios" ToRole="departamentos" />
           <NavigationProperty Name="mantenimientos" Relationship="Self.empleados_mantenimiento" FromRole="usuarios" ToRole="mantenimientos" />
           <NavigationProperty Name="proc_instalacion" Relationship="Self.instalacion_empleados" FromRole="usuarios" ToRole="proc_instalacion" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
         <Association Name="FK_bitacora_inst_equipo">
           <End Role="proc_instalacion" Type="Self.proc_instalacion" Multiplicity="1" />
@@ -1725,6 +1727,7 @@
           <EntitySetMapping Name="usuarios">
             <EntityTypeMapping TypeName="proyectoBADModel.usuarios">
               <MappingFragment StoreEntitySet="usuarios">
+                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="empresa" ColumnName="empresa" />
                 <ScalarProperty Name="departamento" ColumnName="departamento" />

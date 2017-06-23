@@ -22,8 +22,8 @@ namespace proyectoBAD.Models
         }
     
         public int id { get; set; }
-        public System.DateTime fecha_ini { get; set; }
-        public System.DateTime fecha_fin { get; set; }
+        public Nullable<System.DateTime> fecha_ini { get; set; }
+        public Nullable<System.DateTime> fecha_fin { get; set; }
         public int tipo { get; set; }
         public string equipo_fisico { get; set; }
     

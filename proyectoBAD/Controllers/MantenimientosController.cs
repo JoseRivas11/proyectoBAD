@@ -20,8 +20,8 @@ namespace proyectoBAD.Controllers
             List<MantenimientosViewModel> mantes = db.mantenimientos.Select(t => new MantenimientosViewModel()
             {
                 idMan = t.id,                                
-                fechaIniMant = t.fecha_ini,
-                fechaFinMant = t.fecha_fin,
+                //fechaIniMant = t.fecha_ini,
+                //fechaFinMant = t.fecha_fin,
                 tipoMant= t.tipo,
                 equipoFisi = t.equipo_fisico,
                 
@@ -58,8 +58,8 @@ namespace proyectoBAD.Controllers
                     Value = t.num_serial.ToString()
                 });
                 vmMan.idMan = Man.id;
-                vmMan.fechaIniMant = Man.fecha_ini;
-                vmMan.fechaFinMant = Man.fecha_fin;
+                //vmMan.fechaIniMant = Man.fecha_ini;
+                //vmMan.fechaFinMant = Man.fecha_fin;
                 vmMan.tipoMant = Man.tipo;
                 vmMan.equipoFisi = Man.equipo_fisico;
                 vmMan.equipos = list;
