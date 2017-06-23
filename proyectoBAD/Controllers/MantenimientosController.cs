@@ -34,11 +34,6 @@ namespace proyectoBAD.Controllers
         }
 
 
-        // GET: BitacoraDeMantenimiento/Details/5
-        /*public ActionResult Details(int id)
-        {
-            return View();
-        }*/
         [Authorize]
         public ActionResult Edit(int id)
         {
@@ -52,6 +47,19 @@ namespace proyectoBAD.Controllers
             {
 
                 MantenimientosViewModel vmMan = new MantenimientosViewModel();
+                List<SelectListItem> tipoMantenimiento = new List<SelectListItem>();
+
+                tipoMantenimiento.Add(new SelectListItem()
+                {
+                    Text = "Preventivo",
+                    Value = "1"
+                });
+
+                tipoMantenimiento.Add(new SelectListItem()
+                {
+                    Text = "Correctivo",
+                    Value = "2"
+                });
                 IEnumerable<SelectListItem> list = db.equipos_fisicos.Select(t => new SelectListItem()
                 {
                     Text = t.num_serial,
@@ -63,7 +71,7 @@ namespace proyectoBAD.Controllers
                 vmMan.tipoMant = Man.tipo;
                 vmMan.equipoFisi = Man.equipo_fisico;
                 vmMan.equipos = list;
-
+                vmMan.tipoMantenimiento = tipoMantenimiento;
                 return View("Create", vmMan);
             }
             return View("Create", null);
@@ -105,6 +113,26 @@ namespace proyectoBAD.Controllers
         [Authorize]
         public ActionResult Create()
         {
+            List<SelectListItem> tipoMantenimiento = new List<SelectListItem>();
+
+            tipoMantenimiento.Add(new SelectListItem()
+            {
+                Text = "Preventivo",
+                Value = "1"
+            });
+
+            tipoMantenimiento.Add(new SelectListItem()
+            {
+                Text = "Correctivo",
+                Value = "2"
+            });
+
+            List<SelectListItem> instituciones = db.instituciones.Select(item => new SelectListItem()
+            {
+                Text = item.nombre,
+                Value = item.id.ToString()
+            }).ToList();
+
             IEnumerable<SelectListItem> list = db.equipos_fisicos.Select(t => new SelectListItem()
             {
                 Text = t.num_serial,
@@ -112,13 +140,28 @@ namespace proyectoBAD.Controllers
             });
             MantenimientosViewModel viewModel = new MantenimientosViewModel ()
             {
-                equipos = list
+                equipos = list,
+                Instituciones = instituciones,
+                fechaFinMant = DateTime.Now,
+                fechaIniMant = DateTime.Now,
+                tipoMantenimiento = tipoMantenimiento
             };
 
             ViewBag.Button = "Crear";
             ViewBag.Action = "Create";
 
             return View(viewModel);
+        }
+
+        public JsonResult getDepartamento(int idInt)
+        {
+            List<SelectListItem> depart = db.departamentos.Where(t => t.institucion == idInt).Select(
+               t => new SelectListItem()
+               {
+                   Text = t.nombre,
+                   Value = t.id.ToString()
+               }).ToList();
+            return Json(depart, JsonRequestBehavior.AllowGet);
         }
 
         // GET: BitacoraDeMantenimiento/Create
@@ -148,41 +191,6 @@ namespace proyectoBAD.Controllers
             return View();
         }
 
-        // POST: BitacoraDeMantenimiento/Create
-        /*[HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }*/
-
-        
-
-        
-
-        // POST: BitacoraDeMantenimiento/Edit/5
-        /*[HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }*/
 
         // GET: BitacoraDeMantenimiento/Delete/5
         public ActionResult Delete(int id)
