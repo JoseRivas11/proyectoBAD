@@ -103,13 +103,22 @@ namespace proyectoBAD.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            IEnumerable<SelectListItem> list = db.equipos.Select(t => new SelectListItem()
+            IEnumerable<SelectListItem> list = db.equipos_fisicos.Select(t => new SelectListItem()
             {
-                Text = t.nombre,
-                Value = t.id.ToString()
+                Text = t.num_serial,
+                Value = t.num_serial.ToString()
             });
-            ProcesoInstalacionViewModel viewModel = new ProcesoInstalacionViewModel ()
+            List<SelectListItem> instituciones = db.instituciones.Select(item => new SelectListItem()
             {
+                Text = item.nombre,
+                Value = item.id.ToString()
+            }).ToList();
+
+            ProcesoInstalacionViewModel viewModel = new ProcesoInstalacionViewModel()
+            {
+                Instituciones = instituciones,
+                fechaIniPro = DateTime.Now,
+                fechaFinPro = DateTime.Now,
                 equipos = list
             };
 
@@ -117,6 +126,17 @@ namespace proyectoBAD.Controllers
             ViewBag.Action = "Create";
 
             return View(viewModel);
+        }
+
+        public JsonResult getDepartamento(int idInt)
+        {
+            List<SelectListItem> depart = db.departamentos.Where(t => t.institucion == idInt).Select(
+               t => new SelectListItem()
+               {
+                   Text = t.nombre,
+                   Value = t.id.ToString()
+               }).ToList();
+            return Json(depart, JsonRequestBehavior.AllowGet);
         }
 
         // GET: BitacoraDeMantenimiento/Create
@@ -128,13 +148,14 @@ namespace proyectoBAD.Controllers
             if (ModelState.IsValid)
             {
                 proc_instalacion Proc = new proc_instalacion();
-
+                //string ins = viewModel.Instituciones;
                 Proc.equipo = viewModel.equipo;
                 Proc.fecha_ini = viewModel.fechaIniPro;
                 Proc.fecha_fin = viewModel.fechaFinPro;
                 
+
                 //bitaInsta.proc_instalacion = viewModel.proc_instalacion1;
-                
+
 
                 db.proc_instalacion.Add(Proc);
                 db.SaveChanges();
@@ -146,41 +167,9 @@ namespace proyectoBAD.Controllers
             return View();
         }
 
-        // POST: BitacoraDeMantenimiento/Create
-        /*[HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }*/
-
         
 
         
-
-        // POST: BitacoraDeMantenimiento/Edit/5
-        /*[HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }*/
 
         // GET: BitacoraDeMantenimiento/Delete/5
         public ActionResult Delete(int id)

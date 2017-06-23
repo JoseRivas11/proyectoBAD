@@ -17,6 +17,8 @@ namespace proyectoBAD.ViewModels
         [Required(ErrorMessage = "Por favor ingrese el detalle de la instalacion")]
         public string equipo { get; set; }
 
+        public List<SelectListItem> equiFi;
+
         [Display(Name = "Proceso de instalacion")]
         public virtual equipos_fisicos equi { get; set; }
 
@@ -30,7 +32,7 @@ namespace proyectoBAD.ViewModels
         [Required(ErrorMessage = "Por favor ingrese la fecha de finalizacion del mantenimiento")]
         public DateTime fechaFinPro { get; set; }
 
-
+        public IEnumerable<SelectListItem> Instituciones;
 
     }
 }

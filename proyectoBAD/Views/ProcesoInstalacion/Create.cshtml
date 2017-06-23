@@ -25,13 +25,89 @@
                         </p>
                     </div>
                 </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.equipo, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-6">
+                        @Html.DropDownListFor(model => model.equipo, Model.equipos, "Seleccionar...",
+htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.equipo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.fechaIniPro, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-7">
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar">
+                                </i>
+                            </div>
+                            @Html.TextBoxFor(model => model.fechaIniPro,
+htmlAttributes: new
+{
+    @class = "form-control dPicker",
+    placeholder = "mm/dd/yyyy"
+}, format: "{0:d}"
+
+)
+                        </div>
+                        @Html.ValidationMessageFor(model => model.fechaIniPro, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.fechaFinPro, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-7">
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar">
+                                </i>
+                            </div>
+                            @Html.TextBoxFor(model => model.fechaFinPro,
+htmlAttributes: new
+{
+    @class = "form-control dPicker",
+    placeholder = "mm/dd/yyyy"
+}, format: "{0:d}"
+
+)
+                        </div>
+                        @Html.ValidationMessageFor(model => model.fechaFinPro, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="@ViewBag.Button" class="btn btn-primary" />
+                    </div>
+                </div>
             }
+            else
+            {
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Institución</label>
+                @{ string idInstitucion = "";}
+                <div class="col-md-4">
+                    @Html.DropDownListFor(x => idInstitucion, Model.Instituciones, "Seleccionar...",
+htmlAttributes: new { @class = "form-control", @id = "ddIdInt" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Departamento</label>
+                @{ string idDepartamento = "";}
+                <div class="col-md-4">
+                    @Html.DropDownListFor(x => idDepartamento, new SelectList(String.Empty, "Value", "Text"), "Seleccionar...",
+                                                  htmlAttributes: new { @id = "idDep", @class = "form-control" })
+                </div>
+            </div>
 
             <div class="form-group">
                 @Html.LabelFor(model => model.equipo, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-6">
                     @Html.DropDownListFor(model => model.equipo, Model.equipos, "Seleccionar...",
-                   htmlAttributes: new { @class = "form-control" })
+                                                  htmlAttributes: new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.equipo, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -45,13 +121,13 @@
                             </i>
                         </div>
                         @Html.TextBoxFor(model => model.fechaIniPro,
-                        htmlAttributes: new
-                        {
-                            @class = "form-control dPicker",
-                            placeholder = "dd/mm/yyyy"
-                        }, format: "{0:d}"
+                                           htmlAttributes: new
+                                           {
+                                               @class = "form-control dPicker",
+                                               placeholder = "mm/dd/yyyy"
+                                           }, format: "{0:d}"
 
-                        )
+                                           )
                     </div>
                     @Html.ValidationMessageFor(model => model.fechaIniPro, "", new { @class = "text-danger" })
                 </div>
@@ -66,22 +142,17 @@
                             </i>
                         </div>
                         @Html.TextBoxFor(model => model.fechaFinPro,
-                        htmlAttributes: new
-                        {
-                            @class = "form-control dPicker",
-                            placeholder = "dd/mm/yyyy"
-                        }, format: "{0:d}"
+                                           htmlAttributes: new
+                                           {
+                                               @class = "form-control dPicker",
+                                               placeholder = "mm/dd/yyyy"
+                                           }, format: "{0:d}"
 
-                        )
+                                           )
                     </div>
                     @Html.ValidationMessageFor(model => model.fechaFinPro, "", new { @class = "text-danger" })
                 </div>
             </div>
-
-            
-
-
-          
 
 
             <div class="form-group">
@@ -89,9 +160,10 @@
                     <input type="submit" value="@ViewBag.Button" class="btn btn-primary" />
                 </div>
             </div>
+                    }
         </div>
 
-    }
+                         }
 
     <div>
         <a href="@Url.Action("Index", "ProcesoInstalacion")" class="btn btn-default">
@@ -99,10 +171,10 @@
         </a>
     </div>
 </div>
+
 @section customScripts{
     @Scripts.Render("~/bundles/formValidationScripts")
-}
-
+    @Scripts.Render("~/bundles/datepicker")
 <script type="text/javascript">
         $(document).ready(function () {
 
@@ -110,13 +182,32 @@
 
             $(".dPicker").datepicker({
                 language: "es",
-                format: "dd/mm/yyyy"
+                format: "mm/dd/yyyy"
             });
 
+            $("#ddIdInt").change(function () {
+                if ($(this).val() != "") {
+                    $("#idDep").empty();
+                    $.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("getDepartamento")',
+                        dataType: 'json',
+                        data: { idInt: $("#ddIdInt").val() },
+                        success: function (data) {
+                            $("#idDep").append($('<option></option>').val("").text("Seleccionar..."));
+                            $.each(data, function (i, item) {
+                                $("#idDep").append($('<option></option>').val(item.Value).text(item.Text));
+                                // here we are adding option for States
+                            });
+                        }
+                    });
+                }
 
             });
 
-
-        ;
+            });
 </script>
+}
+
+
 
