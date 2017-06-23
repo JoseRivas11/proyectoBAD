@@ -51,12 +51,22 @@
                     @Html.ValidationMessageFor(model => model.FECHA_REGISTRO, "", new { @class = "text-danger" })
                 </div>
             </div>
+            
+            <div class="form-group">
+                <label class="control-label col-md-2">Institución</label>
+                @{ string idInstitucion = "";}
+                <div class="col-md-4">
+                    @Html.DropDownListFor(x => idInstitucion, Model.INSTITUCIONES, "Seleccionar...",
+                   htmlAttributes: new { @class = "form-control", @id="ddIdInt" })
+                    @Html.ValidationMessageFor(model => model.IDDEPARTAMENTO, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.IDDEPARTAMENTO, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.IDDEPARTAMENTO, htmlAttributes: new {@class = "control-label col-md-2" })
                 <div class="col-md-4">
-                    @Html.DropDownListFor(model => model.IDDEPARTAMENTO, Model.DEPARTAMENTOS, "Seleccionar...",
-                   htmlAttributes: new { @class = "form-control" })
+                    @Html.DropDownListFor(model => Model.IDDEPARTAMENTO, new SelectList(String.Empty, "Value", "Text"), "Seleccionar...",
+                   htmlAttributes: new {@id = "idDep", @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.IDDEPARTAMENTO, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -70,7 +80,7 @@
                 </div>
             </div>
             <div class="form-group">
-                @Html.LabelFor(model => model.ESTADO, htmlAttributes: new { @class = "control-label col-md-2" })
+                <label class="control-label col-md-2">Equipos</label>
                 <div class="row">
                     <div class="col-md-4">
                         <a class="btn btn-success" data-toggle="modal" data-target="#modalEquipo">
@@ -220,7 +230,7 @@
 
             $(".dPicker").datepicker({
                 language: "es",
-                format: "dd/mm/yyyy"
+                format: "mm/dd/yyyy"
             });
 
             $("#ddEquipos").change(function () {
@@ -241,6 +251,26 @@
                     }
                 });
                 return false;
+            });
+
+            $("#ddIdInt").change(function () {
+                if ($(this).val() != "") {
+                    $("#idDep").empty();
+                    $.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("getDepartamento")',
+                        dataType: 'json',
+                        data: { idInt: $("#ddIdInt").val() },
+                        success: function (data) {
+                            $("#idDep").append($('<option></option>').val("").text("Seleccionar..."));
+                            $.each(data, function (i, item) {
+                                $("#idDep").append($('<option></option>').val(item.Value).text(item.Text));
+                                // here we are adding option for States
+                            });
+                        }
+                    });
+                }
+               
             });
 
             $('#btnAddEquipo').click(function () {
