@@ -55,7 +55,7 @@ namespace proyectoBAD.Controllers
                 empleados = new List<usuarios>()
             };
 
-            ViewBag.Button = "Agregar";
+            ViewBag.Button = "Crear";
             ViewBag.Action = "Create";
             ViewBag.PageHeader = "Crear Institución";
 
@@ -75,7 +75,15 @@ namespace proyectoBAD.Controllers
                 departamento.telefono = viewModel.telefono;
                 departamento.email_contacto = viewModel.email_contacto;
                 departamento.institucion = viewModel.idInst;
-                departamento.usuarios1 = viewModel.empleados;
+                
+                if (viewModel.empleados.Count > 0)
+                {
+                    foreach(var empleado in viewModel.empleados)
+                    {
+                        db.usuarios.Attach(empleado);
+                        departamento.usuarios1.Add(empleado);
+                    }
+                }
 
                 db.departamentos.Add(departamento);
                 db.SaveChanges();
@@ -197,6 +205,24 @@ namespace proyectoBAD.Controllers
             }).ToList();
 
             return Json(empleados);
+        }
+
+        [Authorize]
+        public ActionResult Detail(int id)
+        {
+            departamentos departamento = db.departamentos.Find(id);
+
+            DepartamentoViewModel viewModel = new DepartamentoViewModel()
+            {
+                id = departamento.id,
+                nombre = departamento.nombre,
+                email_contacto = departamento.email_contacto,
+                telefono = departamento.telefono,
+                institucion = departamento.instituciones,
+                empleados = departamento.usuarios1.ToList()
+            };
+
+            return View(viewModel);
         }
 
     }

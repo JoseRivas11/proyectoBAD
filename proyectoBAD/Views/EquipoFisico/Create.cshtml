@@ -1,0 +1,232 @@
+﻿@model proyectoBAD.ViewModels.EquipoFisicoViewModel
+
+@{
+    ViewBag.Title = "Insert Equipo Fisico";
+}
+
+@section customStyles{
+    @Styles.Render("~/bundles/dataTableStyles")
+}
+
+<h2>Crear Equipo Físico</h2>
+
+
+@using (Html.BeginForm((String)ViewBag.Action, "EquipoFisico", FormMethod.Post, htmlAttributes: new { role = "form", @class = "form" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.numserial, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.numserial, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.numserial, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.fechafabricacion, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-7">
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar">
+                        </i>
+                    </div>
+                    @Html.TextBoxFor(model => model.fechafabricacion,
+                       htmlAttributes: new
+                       {
+                           @class = "form-control dPicker",
+                           placeholder = "dd-mm-yyyy"
+                       }, format: "{0:d}"
+
+                        )
+                </div>
+                @Html.ValidationMessageFor(model => model.fechafabricacion, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.tiempogarantia, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.tiempogarantia, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.tiempogarantia, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.detallesgarantia, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.detallesgarantia, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.detallesgarantia, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.estadogarantia, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.estadogarantia, Model.estados_garantia, 
+               htmlAttributes : new { @class = "form-control", })
+                @Html.ValidationMessageFor(model => model.estadogarantia, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Institucion</label>
+            <div class="col-md-10">
+                @Html.DropDownList("institucion", Model.instituciones, "Seleccionar...", 
+               htmlAttributes: new { @class = "form-control", id = "ddlInstitucion"})
+            </div>
+        </div>
+
+       
+        <div class="form-group">
+            @Html.LabelFor(model => model.idDepEquiFisico, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.idDepEquiFisico, new SelectList(String.Empty, "Value", "Text"), "Seleccionar..."
+               , htmlAttributes: new { @class = "form-control", id = "ddlDepartamento"})
+                @Html.ValidationMessageFor(model => model.idDepEquiFisico, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Empresas</label>
+            <div class="col-md-10">
+                @Html.DropDownList("empresas", Model.empresas, "Seleccionar...", htmlAttributes: new { @class = "form-control",
+               id = "ddlEmpresa"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Categorias de Equipo</label>
+            <div class="col-md-10">
+                @Html.DropDownList("categorias", Model.categorias, "Seleccionar...", htmlAttributes: new { @class = "form-control",
+           id = "ddlCategoria"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Equipo</label>
+            <div class="col-md-10">
+                @Html.DropDownList("equipo", new SelectList(String.Empty, "Value", "Text"), "Seleccionar...",
+               htmlAttributes : new { @class = "form-control", id = "ddlEquipo"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idEspEquiFisico, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.idEspEquiFisico, new SelectList(String.Empty, "Value", "Text"), "Seleccioanr...",
+               htmlAttributes: new { @class = "form-control", id = "ddlEspEquipo"})
+                @Html.ValidationMessageFor(model => model.idEspEquiFisico, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Agregar" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Regresar a lista de Equipos Fisicos", "Index")
+</div>
+
+@section customScripts{
+    @Scripts.Render("~/bundles/formValidationScripts")
+    @Scripts.Render("~/bundles/datepicker")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".dPicker").datepicker({
+                language: "es",
+                format: "dd/mm/yyyy"
+            });
+            $("#ddlInstitucion").change(function () {
+                $("#ddlDepartamento").empty();
+                $.ajax({
+                    type: 'POST',
+                    url:  '@Url.Action("getDepartamentos")', // we are calling json method  
+
+                                    dataType:  'json',
+
+                                    data:  {institucion :  $("#ddlInstitucion").val()  },
+                                   // here we are get value of selected country and passing same value  
+                                   //   as input to json method GetStates.  
+
+                                    success:  function  (data)  {
+                                            // states contains the JSON formatted list  
+                                            // of states passed from the controller  
+                                        $("#ddlDepartamento").append($('<option></option>').val("").text("Seleccionar..."));
+                                        $.each(data, function (i, item) {
+                                            $("#ddlDepartamento").append($('<option></option>').val(item.Value).text(item.Text));
+                                                // here we are adding option for States  
+
+                                            });
+                                    },
+                                    error:  function  (ex)  {
+                                            alert('Failed to retrieve states.'  +  ex);
+                                    }
+                            });
+                            return  false;
+            });
+
+            $("#ddlCategoria").change(function  ()  {
+                $("#ddlEquipo").empty();
+                            $.ajax({
+                                    type:  'POST',
+                                    url:  '@Url.Action("getEquipos")', // we are calling json method  
+
+                                    dataType:  'json',
+
+                                    data:  {categoria :  $("#ddlCategoria").val()  },
+                                   // here we are get value of selected country and passing same value  
+                                   //   as input to json method GetStates.  
+
+                                    success:  function  (data)  {
+                                            // states contains the JSON formatted list  
+                                            // of states passed from the controller  
+                                        $("#ddlEquipo").append($('<option></option>').val("").text("Seleccionar..."));
+                                        $.each(data, function (i, item) {
+                                            $("#ddlEquipo").append($('<option></option>').val(item.Value).text(item.Text));
+                                                // here we are adding option for States  
+
+                                            });
+                                    },
+                                    error:  function  (ex)  {
+                                            alert('Failed to retrieve states.'  +  ex);
+                                    }
+                            });
+                            return  false;
+            });
+
+            $("#ddlEquipo, #ddlEmpresa").change(function () {
+                if ($(this).val() != "") {
+                    $("#ddlEspEquipo").empty();
+                    $.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("getEspEquipos")', // we are calling json method  
+
+                        dataType: 'json',
+
+                        data: { empresa: $("#ddlEmpresa").val(), equipo: $("#ddlEquipo").val() },
+                        // here we are get value of selected country and passing same value  
+                        //   as input to json method GetStates.  
+
+                        success: function (data) {
+                            // states contains the JSON formatted list  
+                            // of states passed from the controller  
+                            $("#ddlEspEquipo").append($('<option></option>').val("").text("Seleccionar..."));
+                            $.each(data, function (i, item) {
+                                $("#ddlEspEquipo").append($('<option></option>').val(item.Value).text(item.Text));
+                                // here we are adding option for States
+                            });
+                        }
+                    });
+                }
+                return  false;
+            });
+
+
+        });
+    </script>
+}

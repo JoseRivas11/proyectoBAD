@@ -1,0 +1,77 @@
+﻿@model proyectoBAD.ViewModels.SolicitudesViewModel
+
+@{
+    ViewBag.Title = "Admon.Solictud-EqSolitud";
+    ViewBag.PageHeader = "Detalles Solicitud";
+}
+
+
+
+<div>
+    <h4>Se muestran los detales de su solicitud</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FECHA_REGISTRO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FECHA_REGISTRO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IDDEPARTAMENTO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DEPARTAMENTO.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ESTADO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ESTADO_STRING)
+        </dd>
+
+        <dt>Solicitudes de Equipos</dt>
+        <dd>
+            @if (Model.EQUIPOS_SOLICITUD.Count > 0)
+            {
+                <table class="table table-striped table-bordered table-hover table-condesed">
+                    <thead>
+                        <tr role="row">
+                            <th>Cantidad</th>
+                            <th>Equipo</th>
+                            <th>Categoria</th>
+                            <th>Especificaciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.EQUIPOS_SOLICITUD)
+                        {
+                            <tr role="row">
+                                <td>@Html.DisplayFor(modelItem => item.cantidad)</td>
+                                <td>@Html.DisplayFor(modelItem => item.equipos.nombre)</td>
+                                <td>@Html.DisplayFor(modelItem => item.equipos.categorias_equipo.categoria)</td>
+                                <td>@Html.DisplayFor(modelItem => item.equipos.especificaciones)</td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            }
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <a href="@Url.Action("Index", "Solicitud")" title="" class="btn btn-primary"
+       data-original-title="Detalles" data-toggle="tooltip" data-placement="top">
+        <i class="fa fa-home" aria-hidden="true"></i>
+        Volver a Lista
+    </a>
+
+</p>
+

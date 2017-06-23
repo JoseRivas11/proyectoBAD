@@ -22,14 +22,15 @@
         <div id="wrapper">
             <!-- Navigation -->
             <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-                <div class="navbar-header">
+                <div class="navbar-header col-lg-4">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Icono<!-- Aqui va ir el logo --></a>
+                    <a class="navbar-brand" href="@Url.Action("Index","Home")"><img src="~/Content/img/logo.png" width="35" alt="35" /><!-- Aqui va ir el logo --></a>
+                    <h3>With Developers</h3>
                 </div>
                 <!-- /.navbar-header -->
 
@@ -52,58 +53,45 @@
                     <!-- /.dropdown -->
                 </ul>
 
+                @if (Session["menu"] != null)
+                        {
+                            var menu = Session["menu"] as List<proyectoBAD.ExtHelpers.OpcionMenu>;
                 <div class="navbar-default sidebar" role="navigation">
                     <div class="sidebar-nav navbar-collapse">
                         <ul class="nav" id="side-menu">
-                            <li>
-                                <a href="#"><i class="fa fa-dashboard fa-fw"></i>Primer Nivel</a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Primer Nivel<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
-                                    <li>
-                                        <a href="#">Segundo Nivel</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Segundo Nivel</a>
-                                    </li>
-                                </ul>
-                                <!-- /.nav-second-level -->
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-sitemap fa-fw"></i> Primer Nivel<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
-                                    <li>
-                                        <a href="#">Second Level Item</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Second Level Item</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Third Level <span class="fa arrow"></span></a>
-                                        <ul class="nav nav-third-level">
-                                            <li>
-                                                <a href="#">Third Level Item</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Third Level Item</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Third Level Item</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Third Level Item</a>
-                                            </li>
+                            @foreach (var opt in menu)
+                            {
+                                <li>
+                                    <a href="@if (opt.menu.controlador != null) { @Url.Action(opt.menu.accion, opt.menu.accion) } else { "#".ToString(); } ">
+                                        @opt.menu.nombre_opcion
+                                        @if (opt.menus.Count > 0)
+                                        {
+                                            <span class="fa arrow"></span>
+                                        }
+                                    </a>
+
+                                    @if (opt.menus.Count > 0)
+                                    {
+                                        <ul class="nav nav-second-level">
+                                            @foreach (var subOpt in opt.menus)
+                                            {
+                                                if (subOpt.menu.accion == "Create" || subOpt.menu.accion == "Index")
+                                                {
+                                                    <li>
+                                                        <a href="@Url.Action(subOpt.menu.accion, subOpt.menu.controlador)">@subOpt.menu.nombre_opcion</a>
+                                                    </li>
+                                                }
+                                            }
                                         </ul>
-                                        <!-- /.nav-third-level -->
-                                    </li>
-                                </ul>
-                                <!-- /.nav-second-level -->
-                            </li>
+                                    }
+                                </li>
+                            }
+                            
                         </ul>
                     </div>
                     <!-- /.sidebar-collapse -->
                 </div>
+                }
                 <!-- /.navbar-static-side -->
             </nav>
 

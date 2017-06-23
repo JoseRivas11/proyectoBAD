@@ -1,0 +1,139 @@
+﻿@model proyectoBAD.ViewModels.UsuarioViewModel
+
+@{
+    ViewBag.Title = "Admon. Usuarios";
+    ViewBag.PageHeader = "Usuario";
+}
+@section customStyles{
+    @Styles.Render("~/bundles/switchStyle")
+}
+
+<div class="col-md-12">
+    @using (Html.BeginForm("Edit", "Usuario", FormMethod.Post, htmlAttributes: new { role = "form", @class = "form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Usuario</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <p class="form-control-static">
+                        @Html.DisplayFor(model => model.email)
+                        @Html.HiddenFor(model => model.email)
+                    </p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.nombre_completo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DisplayFor(model => model.nombre_completo)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.estado, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.RadioButtonFor(model => model.estado, 1, htmlAttributes: new { @class = "form-control switchButton" })
+                    @Html.ValidationMessageFor(model => model.estado, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Institución</label>
+                <div class="col-md-10">
+                    @Html.DropDownList("cualquierCosa", Model.listInstituciones, "Seleccionar...", 
+                   htmlAttributes : new { @class = "form-control", id = "ddlInstitucion" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.departamento, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.intDepartamento, Model.listDepartamentos , "Seleccionar...",
+                            htmlAttributes: new { @class = "form-control", id = "ddlDepartamento" })
+                   
+                    
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.empresa, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.intEmpresa, Model.listEmpresa, "Seleccionar...",
+                   htmlAttributes: new { @class = "form-control"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.perfil, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.perfil.perfil, Model.perfiles, "Seleccioanr...",
+                   htmlAttributes : new { @class = "form-control"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Editar" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        <a href="@Url.Action("Index", "Usuario")" class="btn btn-default">
+            <i class="fa fa-fw fa-arrow-left"></i>Volver a la lista de usuarios
+        </a>
+    </div>
+</div>
+@section customScripts
+{
+    @Scripts.Render("~/bundles/formValidationScripts")
+    @Scripts.Render("~/bundles/switch")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".action").tooltip({
+                container: "body"
+            });
+
+             $(".switchButton").bootstrapSwitch({
+                onText: "Activo",
+                offText : "Inactivo"
+            });
+
+             $("#ddlInstitucion").change(function  ()  {
+                 $("#ddlDepartamento").empty();
+                            $.ajax({
+                                    type:  'POST',
+                                    url:  '@Url.Action("getDepartamentos")', // we are calling json method  
+
+                                    dataType:  'json',
+
+                                    data: { institucion: $("#ddlInstitucion").val()  },
+                                   // here we are get value of selected country and passing same value  
+                                   //   as input to json method GetStates.  
+
+                                    success:  function  (data)  {
+                                            // states contains the JSON formatted list  
+                                            // of states passed from the controller  
+                                        $("#ddlDepartamento").append($('<option></option>').val("").text("Seleccionar..."));
+                                        $.each(data, function (i, item) {
+                                            $("#ddlDepartamento").append($('<option></option>').val(item.Value).text(item.Text));
+                                                // here we are adding option for States  
+
+                                            });
+                                    },
+                                    error:  function  (ex)  {
+                                            alert('Failed to retrieve states.'  +  ex);
+                                    }
+                            });
+                            return  false;
+            });
+
+        });
+    </script>
+}

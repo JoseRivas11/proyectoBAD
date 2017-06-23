@@ -11,16 +11,16 @@ namespace proyectoBAD.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class empresas
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public empresas()
         {
             this.usuarios = new HashSet<usuarios>();
+            this.esp_equipos = new HashSet<esp_equipos>();
         }
-
+    
         public int id { get; set; }
         public int tipo { get; set; }
         public string nombre { get; set; }
@@ -33,8 +33,8 @@ namespace proyectoBAD.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<usuarios> usuarios { get; set; }
-
-        [Display(Name = "Tipo Empresa")]
         public virtual tipos_empresa tipos_empresa { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<esp_equipos> esp_equipos { get; set; }
     }
 }

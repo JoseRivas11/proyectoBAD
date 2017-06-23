@@ -1,0 +1,88 @@
+﻿@model proyectoBAD.ViewModels.DepartamentoViewModel
+
+@{
+    ViewBag.Title = "Admon. de Departamentos-Detalles";
+    ViewBag.PageHeader = "Detalle Departamento";
+}
+
+
+<div>
+    <h4>Departamento</h4>
+    <hr />
+    <dl>
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email_contacto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email_contacto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.telefono)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.telefono)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.institucion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.institucion.nombre)
+        </dd>
+
+        <dt>
+            Empleados Bloqueados
+        </dt>
+
+        <dd>
+@if (Model.empleados.Count > 0)
+{
+            <table class="table table-striped table-bordered table-hover table-condesed">
+                <thead>
+                    <tr role="row">
+                        <th>Nombre Empleado</th>
+                        <th>Empresa</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   @foreach (var item in Model.empleados)
+                   {
+                            <tr role="row">
+                                <td>@Html.DisplayFor(modelItem => item.nombre_completo)</td>
+                                <td>@Html.DisplayFor(modelItem => item.empresas.nombre)</td>
+                            </tr>
+                   }
+
+                    
+                </tbody>
+            </table>
+}
+else
+{
+            <h5 id="message">No existen empleados bloqueados</h5>
+}
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <a href="@Url.Action("Index", "Departamento")" class="btn btn-default">
+        <i class="fa fa-fw fa-arrow-left"></i>Volver a la lista de departamentos
+    </a>
+    <a href="@Url.Action("Edit", "Departamento", new { id = Model.id})" class="btn btn-default">
+        <i class="fa fa-fw fa-edit"></i>Editar Departamento
+    </a>
+    
+</p>

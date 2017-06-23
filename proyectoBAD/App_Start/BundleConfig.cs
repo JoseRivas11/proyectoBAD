@@ -44,6 +44,30 @@ namespace proyectoBAD
                 "~/Scripts/jquery.unobtrusive-ajax.min.js"
                 ));
 
+            bundles.Add(new ScriptBundle("~/bundles/datepicker").Include(
+                "~/Scripts/bootstrap-datepicker.min.js",
+                "~/Scripts/locales/bootstrap-datepicker.es.min.js"
+                ));
+
+            bundles.Add(new StyleBundle("~/bundles/datepickerStyle").Include(
+                "~/Content/css/bootstrap-datepicker3.min.css"
+                ));
+
+            bundles.Add(new StyleBundle("~/bundles/switchStyle").Include(
+                "~/Content/css/bootstrap-switch.min.css"
+                ));
+
+            bundles.Add(new ScriptBundle("~/bundles/switch").Include(
+                "~/Scripts/bootstrap-switch.min.js"
+                ));
+
+            bundles.Add(new StyleBundle("~/bundles/checkboxStyle").Include(
+                "~/Content/css/checkbox-x.min.css"
+                ));
+
+            bundles.Add(new ScriptBundle("~/bundles/checkbox").Include(
+                "~/Scripts/checkbox-x.min.js"));
+
             //bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
             //            "~/Scripts/jquery-{version}.js"));
 

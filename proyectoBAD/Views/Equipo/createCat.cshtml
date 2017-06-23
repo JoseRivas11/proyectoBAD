@@ -1,0 +1,63 @@
+﻿@model proyectoBAD.ViewModels.EquipoViewModel
+
+@{
+    ViewBag.Title = "_createCat";
+}
+
+<h2>_createCat</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>CategoriaViewModel</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.IDCATEQ, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CATEQUIPO.categoria, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.IDCATEQ, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" id="btnCat" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Create")
+</div>
+@section customScripts{
+@Scripts.Render("~/bundles/ajax")
+<script type="text/javascript">
+        $(document).ready(function () {
+            $("#btnCat").click(function () {
+                //Creating Javascript array to post it as json data
+                $.ajax({
+                    data: {cat:$(".datoCat").val()},
+                    type: 'POST',
+                    url: '@Url.Action("createCat")',
+                    error: function(response){
+                        alert(response.responseText);
+                    },
+                    //After successfully inserting records
+                    success: function (response) {
+                        //Reload DropDownList view to fetch latest added records
+                        //$('#.lista').val(result);
+                        $('#DivEmpList').load("/Create/_createCat");
+                        alert(response);
+                    }
+
+                });
+            });
+
+        });
+
+</script>
+}

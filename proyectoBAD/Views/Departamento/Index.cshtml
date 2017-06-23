@@ -74,6 +74,10 @@
                                data-original-title="Editar" data-toggle="tooltip" data-placement="top">
                                 <i class="fa fa-fw fa-edit"></i>
                             </a>
+                            <a href="@Url.Action("Detail", "Departamento", new { id = item.id })" title="" class="btn btn-primary btn-xs action"
+                               data-original-title="Detalles" data-toggle="tooltip" data-placement="top">
+                                <i class="fa fa-fw fa-file"></i>
+                            </a>
                             @*
                             @Html.ActionLink("Details", "Details", new { id = item.id }) |
                             @Html.ActionLink("Delete", "Delete", new { id = item.id })

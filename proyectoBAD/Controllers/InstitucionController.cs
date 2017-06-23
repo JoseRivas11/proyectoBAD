@@ -95,7 +95,7 @@ namespace proyectoBAD.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            ViewBag.Button = "Agregar";
+            ViewBag.Button = "Crear";
             ViewBag.Action = "Create";
 
             return View();

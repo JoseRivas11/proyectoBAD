@@ -114,12 +114,12 @@ namespace proyectoBAD.Controllers
                 Text = t.tipo,
                 Value = t.id.ToString()
             });
-            EmpresaViewModel viewModel = new EmpresaViewModel
+            EmpresaViewModel viewModel = new EmpresaViewModel ()
             {
-                tiposEmpresa = list,
+                tiposEmpresa = list
             };
 
-            ViewBag.Button = "Agregar";
+            ViewBag.Button = "Crear";
             ViewBag.Action = "Create";
 
             return View(viewModel);

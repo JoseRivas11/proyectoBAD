@@ -1,0 +1,412 @@
+﻿@model proyectoBAD.ViewModels.ComprasViewModel
+
+@{
+    ViewBag.Title = "Admon. Compras";
+}
+
+@section customStyles{
+    @Styles.Render("~/bundles/dataTableStyles")
+    @Styles.Render("~/bundles/datepickerStyle")
+}
+
+<div class="col-md-12">
+    @using (Html.BeginForm((String)ViewBag.Action, "Compra", FormMethod.Post, htmlAttributes: new { role = "form", @class = "form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Compras</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+            @if (ViewBag.Button == "Editar")
+            {
+                <div class="form-group">
+                    @Html.LabelFor(model => model.id, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-6">
+                        <p class="form-control-static">
+                            @Html.DisplayFor(model => model.id)
+                            @Html.HiddenFor(model => model.id)
+                        </p>
+                    </div>
+                </div>
+            }
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.fecha, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-7">
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar">
+                            </i>
+                        </div>
+                        @Html.TextBoxFor(model => model.fecha,
+                       htmlAttributes: new
+                       {
+                           @class = "form-control dPicker",
+                           placeholder = "dd/mm/yyyy"
+                       }, format: "{0:d}"
+
+                        )
+                    </div>
+                    @Html.ValidationMessageFor(model => model.fecha, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.tipo_contratacion, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-7">
+                    @Html.DropDownListFor(model => model.tipo_contratacion, Model.tipos_compra, "Seleccionar...",
+                        htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.tipo_contratacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.idInstitucion, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-7">
+                    @Html.DropDownListFor(model => model.idInstitucion, Model.instituciones, "Seleccionar...",
+                        htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.idInstitucion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="row">
+                    <h3>Detalles de Compra</h3>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 col-md-offset-9">
+                        <a class="btn btn-primary pull-right" data-toggle="modal" data-target="#modalEquipo">
+                            <i class="fa fa-fw fa-plus"></i> Agregar
+                        </a>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+
+                    <table class="table table-striped table-bordered table-hover table-condesed" id="tableLineasCompra">
+                        <thead>
+                            <tr role="row">
+                                <th>Equipo</th>
+                                <th>Empresa proveedora</th>
+                                <th>Categoria Equipo</th>
+                                <th>Marca</th>
+                                <th>Modelo</th>
+                                <th>Precio</th>
+                                <th>Cantidad</th>
+                                <th>Subtotal</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.lineas_compra.Count > 0)
+                            { 
+
+                                for (int i = 0; i < Model.lineas_compra.Count; i++)
+                                {
+                                    
+                                    <tr role="row">
+                                        @{ decimal sub_total = Model.lineas_compra[i].cantidad * Model.lineas_compra[i].esp_equipos.precio;}
+                                        <td>@Html.DisplayFor(item => Model.lineas_compra[i].esp_equipos.equipos.nombre)</td>
+                                        <td>@Html.DisplayFor(item => Model.lineas_compra[i].esp_equipos.empresas.nombre)</td>
+                                        <td>@Html.DisplayFor(item => Model.lineas_compra[i].esp_equipos.equipos.categorias_equipo.categoria)</td>
+                                        <td>@Html.DisplayFor(item => Model.lineas_compra[i].esp_equipos.marca)</td>
+                                        <td>@Html.DisplayFor(item => Model.lineas_compra[i].esp_equipos.modelo)</td>
+                                        <td class="precioUni">@Html.DisplayFor(item => Model.lineas_compra[i].esp_equipos.precio)</td>
+                                        <td class="cantEquipos">@Html.DisplayFor(item => Model.lineas_compra[i].cantidad)</td>
+                                        <td class="subtotalLinea">@Html.DisplayFor(item => sub_total)</td>
+                                        <td>
+                                            <div class="btn-toolbar">
+                                                <a title="" class="btn btn-primary btn-xs action editLink"
+                                                   data-original-title="Editar" data-toggle="tooltip" data-placement="top">
+                                                    <i class="fa fa-fw fa-edit"></i>
+                                                </a>
+                                                <a title="" class="btn btn-primary btn-xs action deleteLink"
+                                                   data-original-title="Borrar" data-toggle="tooltip" data-placement="top">
+                                                    <i class="fa fa-fw fa-trash"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                        @Html.Hidden("lineas_compra.Index", i)
+                                        @Html.HiddenFor(item => Model.lineas_compra[i].id)
+                                        @Html.HiddenFor(item => Model.lineas_compra[i].esp_equipos.id)
+                                        @Html.HiddenFor(item => Model.lineas_compra[i].cantidad)
+                                    </tr>
+                                }
+
+                            }
+                        </tbody>
+                    </table>
+                    <h5 id="message">No existen Detalles de Compra</h5>
+
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="@ViewBag.Button" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        <a href="@Url.Action("Index", "Compra")" class="btn btn-default">
+            <i class="fa fa-fw fa-arrow-left"></i>Volver a la lista de compras
+        </a>
+    </div>
+    <div id="modalEquipo" class="modal fade" role="dialog" aria-hidden="true" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form role="form" class="form-horizontal" id="form-equipo">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Equipo</h4>
+                    </div>
+
+                    @{ string idProveedor = "", idCatEquipo = "", idEquipo = "";}
+
+                    <div class="modal-body">
+                        <div class="col-md-12">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label">Empresa: </label>
+                                    <div class="col-md-12">
+                                        @Html.DropDownListFor(x => idProveedor, Model.proveedores,
+                                htmlAttributes: new { @class = "form-control", id = "ddProveedores" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label">Categoria Equipo: </label>
+                                    <div class="col-md-12">
+                                        @Html.DropDownListFor(x => idCatEquipo, Model.tipos_equipo,
+                                htmlAttributes: new { @class = "form-control", id = "ddCatEquipos" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label">Equipo: </label>
+                                    <div class="col-md-12">
+                                        @Html.DropDownListFor(x => idEquipo, new SelectList(String.Empty, "Value", "Text"), "Seleccionar...",
+                                htmlAttributes: new { @class = "form-control", id = "ddEquipos" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="col-md-2">Marca: </label>
+                                <div class="col-md-10">
+                                    <p class="form-control-static" id="marca"></p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2">Modelo: </label>
+                                <div class="col-md-10">
+                                    <p class="form-control-static" id="modelo"></p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2">Precio($): </label>
+                                <div class="col-md-10">
+                                    <p class="form-control-static" id="precio"></p>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="modal-footer">
+                        <input id="btnAddCantidad" type="button" class="btn btn-primary" value="Agregar Cantidad"/>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <div id="cantidad" class="modal fade" role="dialog" aria-hidden="true" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form role="form" class="form-horizontal" id="form-cantidad">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Cantidad Comprada</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label col-md-2">Cantidad: </label>
+                                <div class="col-md-10">
+                                    <input type="text" name="cantidad" id="cant" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input id="btnAddEquipo" type="button" class="btn btn-primary" value="Agregar" data-dismiss="modal" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section customScripts{
+    @Scripts.Render("~/bundles/formValidationScripts")
+    @Scripts.Render("~/bundles/datepicker")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            if ($("#tableLineasCompra tbody tr").length <= 0) {
+                $("#tableLineasCompra thead").hide();
+            }
+            else {
+                $("#message").hide();
+            }
+
+            $(".action").tooltip({
+                container: "body"
+            });
+
+            $(".dPicker").datepicker({
+                language: "es",
+                format: "dd/mm/yyyy"
+            });
+
+            $("#btnAddCantidad").click(function () {
+                $("#modalEquipo").modal("hide");
+                $("#cantidad").modal("show");
+            });
+
+            $("#ddProveedores, #ddCatEquipos").change(function () {
+                if ($(this).val() != "") {
+                    $("#ddEquipos").empty();
+                    $.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("getEquipos")', // we are calling json method  
+
+                        dataType: 'json',
+
+                        data: { idEmpresa: $("#ddProveedores").val(), idCat : $("#ddCatEquipos").val() },
+                        // here we are get value of selected country and passing same value  
+                        //   as input to json method GetStates.  
+
+                        success: function (data) {
+                            // states contains the JSON formatted list  
+                            // of states passed from the controller  
+                            $("#ddEquipos").append($('<option></option>').val("").text("Seleccionar..."));
+                            $.each(data, function (i, item) {
+                                $("#ddEquipos").append($('<option></option>').val(item.Value).text(item.Text));
+                                // here we are adding option for States
+                            });
+                        }
+                    });
+                }
+                return  false;
+            });
+
+            $("#ddEquipos").change(function () {
+                $.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("getInfoEquipo")', // we are calling json method  
+
+                        dataType: 'json',
+
+                        data: { idEquipo : $("#ddEquipos").val() },
+                        // here we are get value of selected country and passing same value  
+                        //   as input to json method GetStates.  
+
+                        success: function (data) {
+                            $("#marca").text(data[0].marca);
+                            $("#modelo").text(data[0].modelo);
+                            $("#precio").text(data[0].precio);
+                            }
+                });
+                return false;
+            });
+
+            $("#btnAddEquipo").click(function () {
+
+                var row = $("#tableLineasCompra tr.row-selected");
+                var form_cantidad = $(this).parents("form");
+                if (row.length == 0) {
+                    var form_equipo = $("#form-equipo");
+                   
+
+                    var equipo = form_equipo.find("#ddEquipos");
+                    var nom_equipo = equipo.find(":selected").text();
+                    var id_equipo = equipo.val();
+                    var marca = form_equipo.find("#marca").text();
+                    var modelo = form_equipo.find("#modelo").text();
+                    var precio = Number(form_equipo.find("#precio").text());
+                    var cantidad = Number(form_cantidad.find("input#cant").val());
+                    var nom_empresa = form_equipo.find("#ddProveedores :selected").text();
+                    var categoria = form_equipo.find("#ddCatEquipos :selected").text();
+                    var subtotal = cantidad * precio;
+
+                    var table = $("#tableLineasCompra");
+                    var count = table.find("tbody tr").length;
+                    var lastIndex = 1;
+                    if (count > 0) {
+                        lastIndex = table.find("tr:last input[name = 'lineas_compra.Index']").val() + 1;
+                    }
+                    else {
+                        $("#message").hide();
+                        table.find("thead").show();
+                    }
+
+                    var tableRow = "<tr role='row'>";
+                    tableRow += "<td>" + nom_equipo + "</td>";
+                    tableRow += "<td>" + nom_empresa + "</td>";
+                    tableRow += "<td>" + categoria + "</td>";
+                    tableRow += "<td>" + marca + "</td>";
+                    tableRow += "<td>" + modelo + "</td>";
+                    tableRow += "<td class='precioUni'>" + precio.toFixed(2) + "</td>";
+                    tableRow += "<td class='cantEquipos'>" + cantidad + "</td>";
+                    tableRow += "<td class='subtotalLinea'>" + subtotal.toFixed(2) + "</td>";
+                    tableRow += "<td><div class='btn-toolbar'><a title='' class='btn btn-primary btn-xs action editLink' data-original-title='Editar'"
+                        + "data-toggle='tooltip' data-placement='top' >" +
+                        "<i class='fa fa-fw fa-edit'></i></a>" +
+                        "<a title='' class='btn btn-primary btn-xs action deleteLink'" +
+                        "data-original-title='Borrar' data-toggle='tooltip' data-placement='top'>" +
+                        "<i class='fa fa-fw fa-trash'></i>" +
+                        "</a></td>";
+                    tableRow += "<input type='hidden' name='lineas_compra.Index' value = '" + lastIndex + "' />";
+                    tableRow += "<input type='hidden' name='lineas_compra[" + lastIndex + "].esp_equipos.id' value='" + id_equipo + "' />";
+                    tableRow += "<input type='hidden' name='lineas_compra[" + lastIndex + "].cantidad' value = '" + cantidad + "' />";
+                    tableRow += "</div></tr>";
+
+                    table.append(tableRow);
+                } else {
+                    var cantidad = form_cantidad.find("input#cantidad").val();
+                    var precio = row.find(".precioUni").text();
+                    var subtotal = cantidad * precio;
+                    row.find(".subtotal").text(subtotal.toFixed(2));
+                    row.removeClass("row-selected");
+                }
+                form_equipo.find("#marca").text("");
+                form_equipo.find("#modelo").text("");
+                form_equipo.find("#precio").text("");
+                form_cantidad.find("input#cant").val("");
+
+            });
+
+            $("body").on("click", ".deleteLink", function () {
+                $(this).tooltip('hide');
+            
+                $(this).parents("tr").remove();
+                var count = $(this).parents("table").find("tbody tr").length;
+                if (count <= 0) {
+                    $("#message").show();
+                    $("#tableLineasCompra thead").hide();
+                }
+            });
+
+            $("body").on("click", ".editLink", function () {
+                $(this).parents("tr").addClass("row-selected");
+                var cantidad = $(this).parents("tr").find(".cantEquipos").val();
+                $("input#cant").val(cantidad);
+                $("#cantidad").modal("show");
+            });
+
+        });
+    </script>
+}
